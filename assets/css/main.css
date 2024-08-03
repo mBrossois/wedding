@@ -1,6 +1,6 @@
 @import url('./colors.css');
 @import url('./fonts.css');
-@import url('./padding.css');
+@import url('./spacing.css');
 @import url('./layouts.css');
 @import url('./positions.css');
 
@@ -8,4 +8,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+
+    --width-mobile: 316px;
 }

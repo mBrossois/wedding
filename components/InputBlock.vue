@@ -2,11 +2,11 @@
     <div class="input-container">
         <label class="kurale-regular font-20">{{ label }}</label>
         <input v-model="inputValue" class="input-field kurale-regular font-20" :type="inputType" :placeholder="placeholder" @input="onInput"/>
+        <ErrorLabel class="mt-0_5" :error="error" />
     </div>
 </template>
 
 <script setup lang="ts">
-import type { InputHTMLAttributes } from 'vue';
 import type { Input } from '~/types/input';
 
 defineProps<Input>()
@@ -29,10 +29,8 @@ function onInput() {
     width: 316px;
     height: 47px;
 
-    background-color: var(--gray-lightest);
-    -webkit-box-shadow: 1px 2px 5px 0px #0000003b;
-    box-shadow: 1px 2px 5px 0px #0000003b;
-    border: none;
+    background-color: transparent;
+    border: 1px solid var(--gray-darkest);
 
     margin-top  : 10px;
     padding: 0 10px;

@@ -1,0 +1,20 @@
+.px-1 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.mt-0_5 {
+    margin-top: .5rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.gap-1 {
+    gap: 1rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}

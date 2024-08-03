@@ -1,5 +1,5 @@
 <template>
-    <div class="relative">
+    <div class="image-container relative">
         <div class="altar-border absolute"></div>
         <div class="altar-overlay absolute"></div>
         <ImageBlock :img="img" />
@@ -13,11 +13,15 @@ defineProps<{img: Img}>()
 </script>
 
 <style scoped>
+.image-container {
+    height: 483px;
+}
+
 .altar-border {
     border: 1px solid var(--gray-medium);
     width: 358px;
     height: 402px;
-    top: -16px;
+    top: 8px;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 250px;

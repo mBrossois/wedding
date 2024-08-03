@@ -23,11 +23,10 @@ const imgSrc = (images[props.img.src] as {default: string, type: string}).defaul
 
 .img-container {
     width: 326px;
-    height: 488px;
+    height: 450px;
 
     border-radius: 200px;
-    -webkit-box-shadow: 1px 2px 5px 0px #0000003b;
-    box-shadow: 1px 2px 5px 0px #0000003b;
+    border: 1px solid var(--gray-darkest);
 
     overflow: hidden;
 }
