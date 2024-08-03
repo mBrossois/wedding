@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Title } from '~/types/title';
+import type { Title } from '~/types/loginPage.js';
 
 const props = defineProps<Title>()
 

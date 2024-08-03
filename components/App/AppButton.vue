@@ -1,17 +1,24 @@
 <template>
-    <div class="btn-container">
+    <component :is="component" :to="to" class="btn-container">
         <div class="btn-container__hover" @click="onClick"></div>
         <div class="btn-overlay horizontal" />
         <div class="btn-overlay vertical" />
-        <button class="btn kurale-regular font-20">{{ text }}</button>
-    </div>
+        <div class="btn kurale-regular font-20">{{ text }}</div>
+    </component>
 </template>
 
 <script setup lang="ts">
-defineProps<{text: string}>()
+
+const props = defineProps<{
+    text: string,
+    to?: string
+}>()
+
 const emits = defineEmits<{
   (e: 'click'): void
 }>()
+
+const component = props.to ? resolveComponent('NuxtLink') : 'button'
 
 function onClick() {
     emits('click')
@@ -50,8 +57,15 @@ function onClick() {
 }
 
 .btn-container {
+    display: block;
+    width: fit-content;
+    
     position: relative;
     margin: 10px 0;
+
+    border: none;
+    background-color: transparent;
+    text-decoration: none;
 }
 
 .btn-overlay {

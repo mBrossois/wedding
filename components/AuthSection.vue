@@ -71,7 +71,7 @@ function onSubmit() {
 
 <style scoped>
 .login-section {
-    width: var(--width-mobile);
+    width: var(--page-width);
 }
 
 .button {

@@ -15,7 +15,7 @@ const title = {
 async function submit(email: string) {
     const { data, error } = await supabase.auth.resetPasswordForEmail(email)
     if(!error) {
-        navigateTo('/authentication/reset-confirmation')
+        navigateTo('/authentication/confirmation')
     } 
 }
 

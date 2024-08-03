@@ -21,6 +21,7 @@ async function submit(email: string, password: string) {
             method: 'GET'
         })
 
+        // Have to set up https://resend.com with domain on netlify
         if(response === 'create_account') {
             const { data, error } = await supabase.auth.signUp({
                 email: email,

@@ -1,5 +1,3 @@
-import { defineStore } from "pinia"
-
 export const useUsersStore = defineStore('users', () => {
     const lettercode = ref('')
     const getLettercode = computed(() => lettercode.value)

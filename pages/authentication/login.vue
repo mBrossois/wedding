@@ -8,12 +8,14 @@
 </template>
 
 <script setup lang="ts">
-import AuthSection from '~/components/AuthSection.vue';
+import { useToasterStore } from '~/store/toaster';
 
 const title = {
     title: 'Login',
     heading: 'h1'
 }
+
+const toastStore = useToasterStore()
 
 const errorMessage = ref()
 async function submit(email: string, password: string) {
@@ -25,7 +27,7 @@ async function submit(email: string, password: string) {
     })
 
     if(error) {
-        errorMessage.value = 'Could not log you in'
+        toastStore.addToast({type: 'error', message: 'Could not log you in'})
     } else {
         navigateTo('/')
     }
@@ -34,6 +36,6 @@ async function submit(email: string, password: string) {
 
 <style scoped>
 .bottom-section {
-    width: var(--width-mobile);
+    width: var(--page-width);
 }
 </style>
