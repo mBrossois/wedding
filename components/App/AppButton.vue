@@ -3,11 +3,12 @@
         <div class="btn-container__hover" @click="onClick"></div>
         <div class="btn-overlay horizontal" />
         <div class="btn-overlay vertical" />
-        <div class="btn kurale-regular font-20">{{ text }}</div>
+        <AppParagraph :text=text size="big" class="btn kurale-regular font-20" />
     </component>
 </template>
 
 <script setup lang="ts">
+import AppParagraph from './AppParagraph.vue';
 
 const props = defineProps<{
     text: string,
@@ -45,9 +46,12 @@ function onClick() {
     border-radius: 10px;
 
     cursor: pointer;
-    text-transform: capitalize;
 
     transition: all 300ms ease-in-out;
+}
+
+.btn::first-letter {
+    text-transform: capitalize;
 }
 
 .btn-container__hover:hover ~ .btn {

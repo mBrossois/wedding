@@ -15,6 +15,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToasterStore } from '~/store/toaster';
 import { useUsersStore } from '~/store/users';
 
 const img = {
@@ -30,8 +31,8 @@ function setLetterkeyValue(value: string) {
         error.value = undefined
     }
 }
-
 const store = useUsersStore()
+const toastStore = useToasterStore()
 const error = ref()
 async function onLetterEntered() {
     if(lettercode.value) {
@@ -46,10 +47,10 @@ async function onLetterEntered() {
             } else if(response === 'login') {
                 await navigateTo('/authentication/login')
             } else {
-                error.value = response;
+                toastStore.addToast({type: 'error', message: 'Could not log you in'})
             }
         } catch(e) {
-            error.value = 'Could not find the code'
+            toastStore.addToast({type: 'error', message: 'Could not log you in'})
         }
         
     } else {
