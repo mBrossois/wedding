@@ -1,5 +1,3 @@
-import type { Confirmation } from "~/types/users"
-
 export const useUsersStore = defineStore('users', () => {
     const lettercode = ref('')
     const getLettercode = computed(() => lettercode.value)
@@ -7,11 +5,5 @@ export const useUsersStore = defineStore('users', () => {
       lettercode.value = value
     }
 
-    const confirmation: Ref<Confirmation> = ref()
-    const getConfirmation = computed(() => confirmation.value)
-    function setConfirmation(value: Confirmation) {
-      confirmation.value = value
-    }
-
-    return { getLettercode, setLettercode, getConfirmation, setConfirmation }
+    return { getLettercode, setLettercode }
   })

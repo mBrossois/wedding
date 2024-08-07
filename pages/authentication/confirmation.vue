@@ -12,17 +12,15 @@
 </template>
 
 <script setup lang="ts">
-import { useUsersStore } from '~/store/users';
+const page = useRoute().query.page
 
-const userStore = useUsersStore()
-const { getConfirmation } = storeToRefs(userStore)
-
-const textItems = {
-    creation: 'We send and email to confirm your account.',
-    forgotten: 'We send an email with a reset link.'
+const textItems: {[key: string]: string} = {
+    'activation-link': 'We send and email to confirm your account.',
+    'reset-link': 'We send an email with a reset link.',
+    'password-reset': 'We have reset your password.'
 }
 
-const text = getConfirmation.value ? 'Succesfully activated your account.' : textItems[getConfirmation.value!]
+const text = !page ? 'Succesfully activated your account.' : textItems[page as string]
 
 const title = {
     title: 'Confirmed',
