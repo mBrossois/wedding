@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{error?: string}>()
+defineProps<{error?: string}>()
 </script>
 
 <style scoped>

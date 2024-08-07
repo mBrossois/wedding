@@ -1,5 +1,5 @@
 import { serverSupabaseClient } from '#supabase/server'
-import { GetLetterCode } from '~/types/lettercode'
+import { GetLetterCode } from '~/types/users'
 
 export default defineEventHandler(async (event) => {
     const lettercode = getRouterParam(event, 'lettercode')

@@ -4,6 +4,6 @@ export const useUsersStore = defineStore('users', () => {
     function setLettercode(value: string) {
       lettercode.value = value
     }
-  
+
     return { getLettercode, setLettercode }
   })
