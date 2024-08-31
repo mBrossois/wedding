@@ -16,7 +16,7 @@
 import ErrorLabel from '~/components/ErrorLabel.vue';
 import { useToasterStore } from '~/store/toaster';
 
-const supabase = useSupabaseClient()
+// const supabase = useSupabaseClient()
 const toastStore = useToasterStore()
 
 const title = {
@@ -56,17 +56,17 @@ function validateFields() {
 
 async function onSubmit() {
     if(validateFields()) {
-        const { error } = await supabase.auth.updateUser({
-            password: password.new
-        })
-        if(!error) {
-            navigateTo({
-            path: '/authentication/confirmation',
-            query: { page: 'password-reset'}
-        })
-        } else {
-            toastStore.addToast({type: 'error', message: 'Could not reset your password'})
-        }
+        // const { error } = await supabase.auth.updateUser({
+        //     password: password.new
+        // })
+        // if(!error) {
+        //     navigateTo({
+        //     path: '/authentication/confirmation',
+        //     query: { page: 'password-reset'}
+        // })
+        // } else {
+        //     toastStore.addToast({type: 'error', message: 'Could not reset your password'})
+        // }
         
     }
 }

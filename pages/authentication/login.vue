@@ -19,18 +19,18 @@ const toastStore = useToasterStore()
 
 const errorMessage = ref()
 async function submit(email: string, password: string) {
-    const supabase = useSupabaseClient()
+    // const supabase = useSupabaseClient()
 
-    const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-    })
+    // const { data, error } = await supabase.auth.signInWithPassword({
+    //     email,
+    //     password,
+    // })
 
-    if(error) {
-        toastStore.addToast({type: 'error', message: 'Could not log you in'})
-    } else {
-        navigateTo('/')
-    }
+    // if(error) {
+    //     toastStore.addToast({type: 'error', message: 'Could not log you in'})
+    // } else {
+    //     navigateTo('/')
+    // }
 }
 </script>
 
