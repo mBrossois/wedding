@@ -16,12 +16,12 @@ const userStore = useUsersStore()
 const { getRole } = storeToRefs(userStore)
 
 onMounted(() => {
-    const user = useSupabaseUser()
-    if(user.value) {
-        console.log(user.value)
+    // const user = useSupabaseUser()
+    // if(user.value) {
+    //     console.log(user.value)
 
-        userStore.setRole(RoleEnum.loggedIn)
-    }
+    //     userStore.setRole(RoleEnum.loggedIn)
+    // }
 })
 </script>
 
