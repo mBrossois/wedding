@@ -34,24 +34,26 @@ function setLetterkeyValue(value: string) {
 const store = useUsersStore()
 const toastStore = useToasterStore()
 const error = ref()
-async function onLetterEntered() {
+function onLetterEntered() {
     if(lettercode.value) {
-        try {
-            const response = await $fetch(`/api/lettercode/${lettercode.value}`, { 
-                method: 'GET'
-            })
+        store.setLettercode(lettercode.value)
+        navigateTo('/login')
+        // try {
+        //     const response = await $fetch(`/api/lettercode/${lettercode.value}`, { 
+        //         method: 'GET'
+        //     })
 
-            if(response === 'create_account') {
-                store.setLettercode(lettercode.value)
-                await navigateTo('/authentication/create-account')
-            } else if(response === 'login') {
-                await navigateTo('/authentication/login')
-            } else {
-                toastStore.addToast({type: 'error', message: 'Could not log you in'})
-            }
-        } catch(e) {
-            toastStore.addToast({type: 'error', message: 'Could not log you in'})
-        }
+        //     if(response === 'create_account') {
+        //         store.setLettercode(lettercode.value)
+        //         await navigateTo('/authentication/create-account')
+        //     } else if(response === 'login') {
+        //         await navigateTo('/authentication/login')
+        //     } else {
+        //         toastStore.addToast({type: 'error', message: 'Could not log you in'})
+        //     }
+        // } catch(e) {
+        //     toastStore.addToast({type: 'error', message: 'Could not log you in'})
+        // }
         
     } else {
         error.value = 'You need to fill something in!'

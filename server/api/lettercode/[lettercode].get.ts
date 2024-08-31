@@ -5,6 +5,9 @@ export default defineEventHandler(async (event) => {
     const lettercode = getRouterParam(event, 'lettercode')
 
     if(lettercode) {
+        const db = hubDatabase()
+
+        
         // const client = await serverSupabaseClient(event)
 
         // const {data, status} = await client
