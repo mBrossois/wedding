@@ -4,8 +4,26 @@
             <p class="lavishly-yours-regular logo">Mark & Emma's wedding</p>
         </div>
         <div class="line"></div>
+        <div v-if="getRole">hamburger</div>
     </header>
 </template>
+
+<script setup lang="ts">
+import { useUsersStore } from '~/store/users'
+import { RoleEnum } from '~/types/users';
+
+const userStore = useUsersStore()
+const { getRole } = storeToRefs(userStore)
+
+onMounted(() => {
+    const user = useSupabaseUser()
+    if(user.value) {
+        console.log(user.value)
+
+        userStore.setRole(RoleEnum.loggedIn)
+    }
+})
+</script>
 
 <style scoped>
 .logo {

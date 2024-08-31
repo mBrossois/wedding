@@ -26,7 +26,7 @@ const imgSrc = (images[props.img.src] as {default: string, type: string}).defaul
     height: 450px;
 
     border-radius: 200px;
-    border: 1px solid var(--gray-darkest);
+    border: 1px solid var(--gray-medium);
 
     overflow: hidden;
 }

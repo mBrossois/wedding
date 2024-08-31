@@ -38,7 +38,6 @@ async function submit(email: string, password: string) {
               if (error) {
                 toastStore.addToast({type: 'error', message: 'Could not create your account'})
               } else {
-                userStore.setConfirmation('creation')
                 navigateTo({
                     path: '/authentication/confirmation',
                     query: {
