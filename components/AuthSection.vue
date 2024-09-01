@@ -3,10 +3,10 @@
         <div class="login-section flex flex-column gap-2">
             <TitleDynamic :title="title.title" :heading="title.heading" />
             <div class="flex flex-column items-center gap-1">
-                <InputBlock label="Email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
-                <InputBlock v-if="!hidePasswordField" label="Password" input-type="password" placeholder="*****" :error="passwordError" @input="setPassword" />
+                <InputBlock id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
+                <!-- <InputBlock v-if="!hidePasswordField" label="Password" input-type="password" placeholder="*****" :error="passwordError" @input="setPassword" /> -->
                 <AppButton :text="activeText" @click="onSubmit"/>
-                <AppLink v-if="showPasswordForgotten" to="/authentication/forgot-password" text="Forgot password" />
+                <!-- <AppLink v-if="showPasswordForgotten" to="/authentication/forgot-password" text="Forgot password" /> -->
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@ import type { Login } from '~/types/loginPage';
 const props = defineProps<Login>()
 
 const emits = defineEmits<{
-  (e: 'submit', email: string, password: string): void
+  (e: 'submit', email: string): void
 }>()
 
 const hidePasswordField = props.page === 'passwordForgotten'
@@ -40,19 +40,19 @@ function setEmail(emailInput: string) {
     emailError.value = undefined
 }
 
-const password = ref()
-const passwordError = ref()
-function setPassword(passwordInput: string) {
-    password.value = passwordInput
-    passwordError.value = undefined
-}
+// const password = ref()
+// const passwordError = ref()
+// function setPassword(passwordInput: string) {
+//     password.value = passwordInput
+//     passwordError.value = undefined
+// }
 
 function validateFields() {
     let hasError = false
-    if((!password.value || password.value.length <= 6) && props.page !== 'passwordForgotten') {
-        passwordError.value = 'The password should be at least 6 characters long!'
-        hasError = true
-    }
+    // if((!password.value || password.value.length <= 6) && props.page !== 'passwordForgotten') {
+    //     passwordError.value = 'The password should be at least 6 characters long!'
+    //     hasError = true
+    // }
 
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
     if(!email.value || !email.value.match(emailRegex)) {
@@ -64,7 +64,7 @@ function validateFields() {
 
 function onSubmit() {
     if(!validateFields()) {
-        emits('submit', email.value, password.value)
+        emits('submit', email.value)
     }
 }
 </script>

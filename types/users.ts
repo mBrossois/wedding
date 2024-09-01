@@ -1,6 +1,5 @@
 export interface GetLetterCode {
-    auth_id: string,
-    letter_code: string
+    email: string,
 }
 
 export type Roles = undefined | RoleEnum.loggedIn | RoleEnum.admin

@@ -5,7 +5,7 @@
         </div>
         <div class="input-section">
             <div class="flex flex-centered">
-                <InputBlock label="Fill in the code found in the letter" input-type="text" placeholder="2102912823" :error="error" @input="setLetterkeyValue" />
+                <InputBlock id="lettercode" label="Fill in the code found in the letter" input-type="text" placeholder="2102912823" :error="error" @input="setLetterkeyValue" />
             </div>
         </div>
         <div class="button-section flex flex-centered">
@@ -15,7 +15,6 @@
 </template>
 
 <script setup lang="ts">
-import { useToasterStore } from '~/store/toaster';
 import { useUsersStore } from '~/store/users';
 
 const img = {
@@ -32,27 +31,11 @@ function setLetterkeyValue(value: string) {
     }
 }
 const store = useUsersStore()
-const toastStore = useToasterStore()
 const error = ref()
-async function onLetterEntered() {
+function onLetterEntered() {
     if(lettercode.value) {
-        try {
-            const response = await $fetch(`/api/lettercode/${lettercode.value}`, { 
-                method: 'GET'
-            })
-
-            if(response === 'create_account') {
-                store.setLettercode(lettercode.value)
-                await navigateTo('/authentication/create-account')
-            } else if(response === 'login') {
-                await navigateTo('/authentication/login')
-            } else {
-                toastStore.addToast({type: 'error', message: 'Could not log you in'})
-            }
-        } catch(e) {
-            toastStore.addToast({type: 'error', message: 'Could not log you in'})
-        }
-        
+        store.setLettercode(lettercode.value)
+        navigateTo('/login')
     } else {
         error.value = 'You need to fill something in!'
     }
