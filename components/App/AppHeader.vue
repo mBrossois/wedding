@@ -1,10 +1,10 @@
 <template>
     <header class="header px-1">
-        <div class="header-body">
+        <div class="header-body flex">
             <p class="lavishly-yours-regular logo">Mark & Emma's wedding</p>
+            <div v-if="getRole">hamburger</div>
         </div>
         <div class="line"></div>
-        <div v-if="getRole">hamburger</div>
     </header>
 </template>
 
@@ -16,12 +16,12 @@ const userStore = useUsersStore()
 const { getRole } = storeToRefs(userStore)
 
 onMounted(() => {
-    // const user = useSupabaseUser()
-    // if(user.value) {
-    //     console.log(user.value)
+    const user = useSupabaseUser()
+    if(user.value) {
+        console.log(user.value)
 
-    //     userStore.setRole(RoleEnum.loggedIn)
-    // }
+        userStore.setRole(RoleEnum.loggedIn)
+    }
 })
 </script>
 

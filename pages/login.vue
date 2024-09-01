@@ -16,6 +16,9 @@ const title = {
     heading: 'h1'
 }
 
+const user = useSupabaseUser()
+console.log(user.value)
+
 const toastStore = useToasterStore()
 const store = useUsersStore()
 
@@ -30,26 +33,30 @@ async function submit(email: string) {
             }
         })
 
-        // if(response.status === 200) {
-        //     await navigateTo('/authentication/create-account')
-        // } else {
-        //     toastStore.addToast({type: 'error', message: 'Could not log you in'})
-        // }
+        if(response !== 'Something went wrong') {
+            const supabase = useSupabaseClient()
+
+            const { data, error } = await supabase.auth.signInWithOtp({
+                email: email as string,
+                options: {
+                    emailRedirectTo: `http://localhost:3000/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
+                }
+            })
+            
+            if(data) {
+                navigateTo({
+                    path: '/confirmation',
+                    query: {
+                        page: response === 'New user' ? 'activation-link' : 'login'
+                    }
+                })
+            }
+            
+        }
+
     } catch(e) {
         toastStore.addToast({type: 'error', message: 'Could not log you in'})
     }
-    // const supabase = useSupabaseClient()
-
-    // const { data, error } = await supabase.auth.signInWithPassword({
-    //     email,
-    //     password,
-    // })
-
-    // if(error) {
-    //     toastStore.addToast({type: 'error', message: 'Could not log you in'})
-    // } else {
-    //     navigateTo('/')
-    // }
 }
 </script>
 

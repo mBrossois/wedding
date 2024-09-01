@@ -1,31 +1,45 @@
-import { GetLetterCode } from '~/types/users'
+import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
     const {letterCode, email} = getQuery(event)
-    const db = hubDatabase()
+    const client = await serverSupabaseClient(event)
+
     let newUser = false
     
-    if(letterCode) {
-        const stmtLetterCode = await db
-            .prepare('SELECT Email FROM Users WHERE LetterCode = ?1')
-            .bind(letterCode)
-            .all()
-        
-        if(stmtLetterCode.results.length === 1) {
-            newUser = !stmtLetterCode.results[0].Email    
+    if(letterCode && email) {
+
+        const {data, status} = await client
+            .from('Authentication')
+            .select('email')
+            .eq('letter_code', letterCode)
+
+        if(status === 200 && data && data.length === 1 && !data[0].email) {
+            newUser = !data[0].email
+            const { data: emailResponse, error } = await client
+                .from('Authentication')
+                .update({ email: email})
+                .eq('letter_code', letterCode)
+                .select()
+
+            if(emailResponse) {
+                setResponseStatus(event, 200)
+                return 'New user'    
+            }
+        }
+    }
+    
+    if(email && !newUser) {
+        const {data: response, status} = await client
+            .from('Authentication')
+            .select('email')
+            .eq('email', email)
+
+        if(response && response.length !== 1 ) {
+            setResponseStatus(event, 500)
+            return 'Something went wrong'
         }
     }
 
-    if(newUser) {
-        const result = await db
-            .prepare('UPDATE Users SET Email = ?1 WHERE LetterCode = ?2 ')
-            .bind(email, letterCode)
-            .run()
-    }
-
     setResponseStatus(event, 200)
-    return ''
-
-    // setResponseStatus(event, 500)
-    // return 'Something went wrong'
+    return 'Login'
   })

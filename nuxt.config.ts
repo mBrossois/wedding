@@ -5,13 +5,14 @@ export default defineNuxtConfig({
   css: [
     "@/assets/css/main.css"
   ],
-  modules: ['@pinia/nuxt', "@nuxthub/core"],
-  hub: {
-    database: true,
-  },
-  $development: {
-    hub: {
-      remote: true
+  modules: ['@pinia/nuxt',  "@nuxtjs/supabase"],
+  supabase: {
+    redirectOptions: {
+      login: '/login',
+      callback: '/confirmation',
+      include: undefined,
+      exclude: ['/lettercode', '/login', '/confirmation'],
+      cookieRedirect: false,
     }
   },
   runtimeConfig: {
