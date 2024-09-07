@@ -15,14 +15,10 @@ import { RoleEnum } from '~/types/users';
 const userStore = useUsersStore()
 const { getRole } = storeToRefs(userStore)
 
-onMounted(() => {
-    const user = useSupabaseUser()
-    if(user.value) {
-        console.log(user.value)
-
-        userStore.setRole(RoleEnum.loggedIn)
-    }
-})
+const user = useSupabaseUser()
+if(user.value) {
+    userStore.setRole(RoleEnum.loggedIn)
+}
 </script>
 
 <style scoped>

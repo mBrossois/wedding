@@ -23,7 +23,7 @@ const imgSrc = (images[props.img.src] as {default: string, type: string}).defaul
 
 .img-container {
     width: 326px;
-    height: 450px;
+    height: 476px;
 
     border-radius: 200px;
     border: 1px solid var(--gray-medium);
