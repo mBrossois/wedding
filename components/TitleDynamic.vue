@@ -8,7 +8,8 @@ import type { Title } from '~/types/loginPage.js';
 const props = defineProps<Title>()
 
 const headingFonts: {[key: string]: string} = {
-    h1: 'font-32'
+    h1: 'font-32',
+    h2: 'font-20'
 }
 
 const classes = computed(() => headingFonts[props.heading])

@@ -11,6 +11,10 @@
     margin-top: 2rem;
 }
 
+.gap-0_5 {
+    gap: .5rem;
+}
+
 .gap-1 {
     gap: 1rem;
 }

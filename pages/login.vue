@@ -17,7 +17,6 @@ const title = {
 }
 
 const user = useSupabaseUser()
-console.log(user.value)
 
 const toastStore = useToasterStore()
 const store = useUsersStore()
