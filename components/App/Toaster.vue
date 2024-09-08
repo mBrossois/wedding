@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { useToasterStore } from '~/store/toaster';
-import AppToast from './AppToast.vue';
+import AppToast from './Toast.vue';
 
 const toasterStore = useToasterStore()
 const { getToaster } = storeToRefs(toasterStore)

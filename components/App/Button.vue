@@ -3,12 +3,12 @@
         <div class="btn-container__hover" @click="onClick"></div>
         <div class="btn-overlay horizontal" />
         <div class="btn-overlay vertical" />
-        <AppParagraph :text=text size="big" class="btn kurale-regular font-20" />
+        <AppParagraph :text=text size="big" class="btn rounded-medium kurale-regular font-20" />
     </component>
 </template>
 
 <script setup lang="ts">
-import AppParagraph from './AppParagraph.vue';
+import AppParagraph from './Paragraph.vue';
 
 const props = defineProps<{
     text: string,
@@ -43,7 +43,6 @@ function onClick() {
     border: 1px solid var(--gray-darkest);
 
     padding: 8px 24px;
-    border-radius: 10px;
 
     cursor: pointer;
 

@@ -1,0 +1,11 @@
+.rounded-small {
+    border-radius: 5px;
+}
+
+.rounded-medium {
+    border-radius: 10px;
+}
+
+.rounded-large {
+    border-radius: 15px;
+}
