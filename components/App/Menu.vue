@@ -2,9 +2,10 @@
     <div class="menu absolute rounded-large mt-0_5" :class="{open: open}">
         <div v-for="(menuSection, index) in menuItems" class="flex flex-column gap-1">
             <div v-for="menuItem in menuSection.sections" class="flex flex-column gap-1">
-                <div class="menu-item flex gap-2 items-center">
-                    <AppLink :to="menuItem.to" :text="menuItem.title" size="large" />
-                    <IconsFlagSelector v-if="menuItem.isLanguage" @click="setLanguage" />
+                <div class="flex items-center justify-between">
+                    <AppLink v-if="menuItem.to || menuItem.isBtn" :to="menuItem.to" :text="$t(menuItem.title)" class="menu-item" size="large" />
+                    <AppParagraph v-else :text="$t(menuItem.title)" size="large" />
+                    <div><IconsFlagSelector v-if="menuItem.isLanguage" /></div>
                 </div>
             </div>
             <hr v-if="index !== menuItems.length - 1" class="section-line mb-1" />
@@ -15,7 +16,6 @@
 <script setup lang="ts">
 import { useUsersStore } from '~/store/users'
 import { RoleEnum } from '~/types/users';
-const { locale, setLocale } = useI18n()
 
 defineProps<{
     open: Boolean
@@ -32,51 +32,48 @@ if(user.value) {
 const menuItems = computed(() => getRole.value ? [
     {
         sections: [{
-            title: 'My info',
+            title: 'MY_INFO',
             to: '/my-info'
         }]
     },
     {
         sections: [
             {
-                title: 'Rooms',
+                title: 'ROOMS',
                 to: '/rooms'
             },
             {
-                title: 'Schedule',
+                title: 'SCHEDULE',
                 to: '/schedule'
             },
             {
-                title: 'Location',
+                title: 'LOCATION',
                 to: '/location'
             },
             {
-                title: 'Present tips',
+                title: 'PRESENT_TIPS',
                 to: '/present-tips'
             },
         ]
     }, {
         sections: [{
-            title: 'Language',
+            title: 'LANGUAGE',
             isLanguage: true
         }]
     },
     {
         sections: [{
-            title: 'Log out',
+            title: 'LOG_OUT',
+            isBtn: true
         }]
     },
 ] : [{
         sections: [{
-            title: 'Language',
+            title: 'LANGUAGE',
             isLanguage: true
         }]
     }]
 )
-
-function setLanguage(language: string) {
-    setLocale(language)
-}
 </script>
 
 <style scoped>

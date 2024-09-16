@@ -16,7 +16,14 @@ export default defineNuxtConfig({
     }
   },
   i18n: {
-    vueI18n: './i18n.config.ts' // if you are using custom path, default
+    vueI18n: './i18n.config.ts', // if you are using custom path, default
+    strategy: 'prefix',
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', name: 'English',}, 
+      { code: 'fr', name: 'French'}, 
+      { code: 'nl', name: 'Dutch'}],
+    detectBrowserLanguage: false
   },
   runtimeConfig: {
     public: {

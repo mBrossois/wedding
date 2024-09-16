@@ -1,7 +1,7 @@
 <template>
     <component :is="to ? NuxtLink : 'button'" :class="fontSize" class="link kurale-regular" :to="to" @click="onClick">
         {{ text }} 
-        <IconsArrow v-if="to" />
+        <IconsArrow />
     </component>
 </template>
 
@@ -28,7 +28,6 @@ function onClick() {
 .link {
     color: var(--gray-darkest);
     text-decoration: none;
-    overflow: hidden;
     background-color: transparent;
     border: none;
     text-align: left;

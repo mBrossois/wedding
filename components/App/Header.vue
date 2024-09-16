@@ -5,6 +5,7 @@
             <IconsHamburger :open="open" @click="toggleOpen" />
         </div>
         <AppMenu :open="open" />
+        <div v-if="open" class="absolute overlay" @click="toggleOpen"></div>
         <hr class="section-line rounded-large" />
     </header>
 </template>
@@ -26,5 +27,14 @@ function toggleOpen() {
     align-items: center;
     justify-content: space-between;
     height: 68px;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    cursor: pointer;
 }
 </style>
