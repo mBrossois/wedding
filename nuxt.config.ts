@@ -8,10 +8,14 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', "@nuxtjs/supabase", '@nuxtjs/i18n'],
   supabase: {
     redirectOptions: {
-      login: '/login',
-      callback: '/confirmation',
+      login: '/en/login',
+      callback: '/en/confirmation',
       include: undefined,
-      exclude: ['/lettercode', '/login', '/confirmation'],
+      exclude: [
+        '/en/lettercode', '/fr/lettercode', '/nl/lettercode',
+        '/en/login', '/fr/login', '/nl/login', 
+        '/en/confirmation','/fr/confirmation','/nl/confirmation',
+      ],
       cookieRedirect: false,
     }
   },

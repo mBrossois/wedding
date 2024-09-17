@@ -3,7 +3,7 @@
         <div v-for="(menuSection, index) in menuItems" class="flex flex-column gap-1">
             <div v-for="menuItem in menuSection.sections" class="flex flex-column gap-1">
                 <div class="flex items-center justify-between">
-                    <AppLink v-if="menuItem.to || menuItem.isBtn" :to="menuItem.to" :text="$t(menuItem.title)" class="menu-item" size="large" />
+                    <AppLink v-if="menuItem.to || menuItem.isBtn" :to="setTo(menuItem.to)" :text="$t(menuItem.title)" class="menu-item" size="large" @on-click="click(menuItem.title)"/>
                     <AppParagraph v-else :text="$t(menuItem.title)" size="large" />
                     <div><IconsFlagSelector v-if="menuItem.isLanguage" /></div>
                 </div>
@@ -14,6 +14,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToasterStore } from '~/store/toaster';
 import { useUsersStore } from '~/store/users'
 import { RoleEnum } from '~/types/users';
 
@@ -23,6 +24,11 @@ defineProps<{
 
 const userStore = useUsersStore()
 const { getRole } = storeToRefs(userStore)
+
+const localePath = useLocalePath()
+function setTo(route: string) {
+    return route ? localePath(route) : undefined
+}
 
 const user = useSupabaseUser()
 if(user.value) {
@@ -74,6 +80,23 @@ const menuItems = computed(() => getRole.value ? [
         }]
     }]
 )
+
+async function click(menuItem: string) {
+    if(menuItem === 'LOG_OUT') {
+        const { data } = await useFetch('/api/logout', {
+            method: 'post',
+            headers: useRequestHeaders(['cookie'])
+        })
+
+        if(data.value === 'Logged out') {
+            const localePath = useLocalePath()
+            navigateTo({ path: localePath('/login')})
+        } else {
+            const toastStore = useToasterStore()
+            toastStore.addToast({type: 'error', message: 'Could not log you out'})
+        }
+    }
+}
 </script>
 
 <style scoped>

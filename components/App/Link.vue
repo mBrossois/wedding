@@ -16,11 +16,11 @@ const props = defineProps<{
 const fontSize = props.size === 'large' ? 'font-20' : 'font-16'
 
 const emits = defineEmits<{
-  (e: 'click'): void
+  (e: 'onClick'): void
 }>()
 
 function onClick() {
-    emits('click')
+    emits('onClick')
 }
 </script>
 

@@ -1,7 +1,7 @@
 <template>
     <header class="header px-1">
         <div class="header-body flex">
-            <p class="lavishly-yours-regular logo">Mark & Emma's wedding</p>
+            <NuxtLink class="lavishly-yours-regular logo" :to="localePath('/')">Mark & Emma's wedding</NuxtLink>
             <IconsHamburger :open="open" @click="toggleOpen" />
         </div>
         <AppMenu :open="open" />
@@ -11,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const open = ref(false);
 function toggleOpen() {
     open.value = !open.value;
@@ -20,6 +22,8 @@ function toggleOpen() {
 <style scoped>
 .logo {
     font-size: 32px;
+    text-decoration: none;
+    color: black;
 }
 
 .header-body {

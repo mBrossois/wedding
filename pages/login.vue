@@ -16,8 +16,6 @@ const title = {
     heading: 'h1'
 }
 
-const user = useSupabaseUser()
-
 const toastStore = useToasterStore()
 const store = useUsersStore()
 
@@ -34,17 +32,19 @@ async function submit(email: string) {
 
         if(response !== 'Something went wrong') {
             const supabase = useSupabaseClient()
+            const { locale } = useI18n()
 
             const { data, error } = await supabase.auth.signInWithOtp({
                 email: email as string,
                 options: {
-                    emailRedirectTo: `http://localhost:3000/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
+                    emailRedirectTo: `http://localhost:3000/${locale}/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
                 }
             })
             
             if(data) {
+                const localePath = useLocalePath()
                 navigateTo({
-                    path: '/confirmation',
+                    path: localePath('/confirmation'),
                     query: {
                         page: response === 'New user' ? 'activation-link' : 'login'
                     }
