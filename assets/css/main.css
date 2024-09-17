@@ -3,6 +3,7 @@
 @import url('./spacing.css');
 @import url('./layouts.css');
 @import url('./positions.css');
+@import url('./border.css');
 
 * {
     padding: 0;
@@ -15,4 +16,10 @@
 
 .page-width {
     width: var(--page-width);
+}
+
+.section-line {
+    height: 1px;
+    width: 100%;
+    border: 1px solid var(--gray-medium);
 }

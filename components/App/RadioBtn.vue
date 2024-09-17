@@ -1,6 +1,6 @@
 <template>
     <label class="radio-btn flex gap-0_5 items-center">
-        <input type="radio" :name="name" :value="value">
+        <input type="radio" class="rounded-small" :name="name" :value="value">
         <IconsCheckmark class="checkmark" />
 
         {{ label }}
@@ -34,7 +34,6 @@ input[type="radio"] {
     width: 18px;
     height: 18px;
     border: 2px solid black;
-    border-radius: 5px;
     cursor: pointer;
 }
 
