@@ -4,7 +4,7 @@
             <TitleDynamic :title="title.title" :heading="title.heading" />
             <AppParagraph :text="text" />
             <div class="m-auto">
-                <AppButton :text="button.text" :to="button.to"/>
+                <AppButton :text="button.text" :to="localePath(button.to)"/>
             </div>
         </div>
             
@@ -12,6 +12,7 @@
 </template>
 
 <script setup lang="ts">
+const localePath = useLocalePath()
 const page = useRoute().query.page
 
 const textItems: {[key: string]: string} = {

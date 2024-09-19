@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import { useToasterStore } from '~/store/toaster';
 import { useUsersStore } from '~/store/users';
+const { locale } = useI18n()
 
 const title = {
     title: 'Login',
@@ -32,12 +33,11 @@ async function submit(email: string) {
 
         if(response !== 'Something went wrong') {
             const supabase = useSupabaseClient()
-            const { locale } = useI18n()
 
             const { data, error } = await supabase.auth.signInWithOtp({
                 email: email as string,
                 options: {
-                    emailRedirectTo: `http://localhost:3000/${locale}/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
+                    emailRedirectTo: `http://localhost:3000/${locale.value}/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
                 }
             })
             
