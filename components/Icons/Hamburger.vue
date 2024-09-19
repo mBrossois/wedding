@@ -16,6 +16,9 @@ defineProps<{
 .hamburger {
     cursor: pointer;
     overflow: visible;
+
+    padding: .75rem;
+    box-sizing: content-box;
 }
 
 .path {

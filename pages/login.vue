@@ -10,13 +10,12 @@
 <script setup lang="ts">
 import { useToasterStore } from '~/store/toaster';
 import { useUsersStore } from '~/store/users';
+const { locale } = useI18n()
 
 const title = {
     title: 'Login',
     heading: 'h1'
 }
-
-const user = useSupabaseUser()
 
 const toastStore = useToasterStore()
 const store = useUsersStore()
@@ -38,13 +37,14 @@ async function submit(email: string) {
             const { data, error } = await supabase.auth.signInWithOtp({
                 email: email as string,
                 options: {
-                    emailRedirectTo: `http://localhost:3000/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
+                    emailRedirectTo: `http://localhost:3000/${locale.value}/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
                 }
             })
             
             if(data) {
+                const localePath = useLocalePath()
                 navigateTo({
-                    path: '/confirmation',
+                    path: localePath('/confirmation'),
                     query: {
                         page: response === 'New user' ? 'activation-link' : 'login'
                     }

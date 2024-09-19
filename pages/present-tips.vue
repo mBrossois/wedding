@@ -1,0 +1,3 @@
+<template>
+    present tips
+</template>

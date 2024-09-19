@@ -35,7 +35,8 @@ const error = ref()
 function onLetterEntered() {
     if(lettercode.value) {
         store.setLettercode(lettercode.value)
-        navigateTo('/login')
+        const localePath = useLocalePath()
+        navigateTo(localePath('/login'))
     } else {
         error.value = 'You need to fill something in!'
     }

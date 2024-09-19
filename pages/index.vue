@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-// const { locale, setLocale } = useI18n()
 const user = useSupabaseUser()
 
 if(user.value?.email) {

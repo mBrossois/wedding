@@ -9,16 +9,20 @@ import DutchFlag from '~/assets/img/Dutch-flag.svg'
 import EnglishFlag from '~/assets/img/English-flag.svg'
 import FrenchFlag from '~/assets/img/French-flag.svg'
 
+defineProps<{open: boolean}>()
+const emits = defineEmits<{
+  (e: 'onClick'): void
+}>()
+
 const switchLocalePath = useSwitchLocalePath()
 
 const { locale, locales } = useI18n()
 
-const open = ref(false);
 function localeClicked(item: string) {
   if(item !== locale.value) {
     updateLocalePosition(item)
   }
-  open.value = !open.value
+  emits('onClick')
 }
 
 const localeFlags: Ref<{[key: string]: {flag: string, position: number}}> = ref({ nl: {flag: DutchFlag, position: 1}, en: {flag: EnglishFlag, position: 0}, fr: {flag: FrenchFlag, position: 2}})
