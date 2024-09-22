@@ -2,26 +2,41 @@
     <div class="flex flex-column gap-2 mt-2 px-2">
         <TitleDynamic title="Welcome All & Nick!" heading="h1" />
         <AppParagraph :text="$t('WEDDING_INVITATION')" />
-        <div class="flex flex-column gap-1">
-            <TitleDynamic title="Will you be attending our wedding?" heading="h2" />
+        <fieldset class="attendance-field flex flex-column gap-1" @input="updateAttendance">
+            <legend><TitleDynamic title="Will you be attending our wedding?" heading="h2" /></legend>
             <div class="flex justify-center gap-1">
                 <AppRadioBtn value="yes" label="yes" name="attend_wedding" />
                 <AppRadioBtn value="no" label="no" name="attend_wedding" />
             </div>
-        </div>
+        </fieldset>
     </div>
 </template>
 
 <script setup lang="ts">
+import { useGuestsStore } from '~/store/guests';
+
 const user = useSupabaseUser()
+const guestsStore = useGuestsStore()
 
 if(user.value?.email) {
-    const { data } = await useFetch('/api/guests', {
-        method: 'get',
-        query: {
-            email: user.value.email
+    await guestsStore.setInitialGuestsBook(user.value.email)
+}
+
+async function updateAttendance(value: any) {
+    console.log('value: changed', value.originalTarget.value)
+    const response = await $fetch('/api/attendance', {
+        method: 'patch',
+        body: {
+            attendance: value.originalTarget.value,
+            email: user.value?.email
         },
         headers: useRequestHeaders(['cookie'])
     })
 }
 </script>
+
+<style scoped>
+.attendance-field {
+    border: unset;
+}
+</style>
