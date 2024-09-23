@@ -9,6 +9,9 @@
                 <AppRadioBtn value="no" label="no" name="attend_wedding" />
             </div>
         </fieldset>
+        <div id="love-bottle">
+            <AppTresLoveBottle />
+        </div>
     </div>
 </template>
 
@@ -23,7 +26,6 @@ if(user.value?.email) {
 }
 
 async function updateAttendance(value: any) {
-    console.log('value: changed', value.originalTarget.value)
     const response = await $fetch('/api/attendance', {
         method: 'patch',
         body: {
@@ -38,5 +40,10 @@ async function updateAttendance(value: any) {
 <style scoped>
 .attendance-field {
     border: unset;
+}
+
+#love-bottle {
+    height: 500px;
+    width: 500px;
 }
 </style>
