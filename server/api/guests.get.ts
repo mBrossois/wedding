@@ -5,22 +5,55 @@ export default defineEventHandler(async (event) => {
     const client = await serverSupabaseClient(event)
     
     if(email) {
-
-        const {data, status} = await client
-            .from('Guests')
+        console.log('you called?')
+        const {data: guestBook} = await client
+            .from('Guest_book')
             .select(`
-                first_name, 
-                last_name,
+                id,
+                is_coming,
+                adults,
+                children,
                 Authentication!inner (email)
             `)
-            .eq('Authentication.email', 'mark.dnb@live.nl')
-                
-        if(status === 200 && data && data.length > 0) {
+            .eq('Authentication.email', email)
+             
+        if(guestBook) {
+            const {data: guests, status} = await client
+            .from('Guests')
+            .select(`
+                id,
+                first_name,
+                last_name,
+                is_adult
+            `)
+            .eq('guest_id', guestBook[0].id)
+            
             setResponseStatus(event, 200)
-            return data.map(guest => {
-                return {firstName: guest.first_name, lastName: guest.last_name}
+
+            const formattedGuests = guests?.map(guest => {
+                return {
+                    id: guest.id, firstName: guest.first_name, lastName: guest.last_name, isAdult: guest.is_adult
+                }
             })
+
+            const formattedGuestBook = guestBook.map(guestBook => {
+                return {
+                    id: guestBook.id,
+                    isComing: guestBook.is_coming,
+                    guestAmounts: {
+                        adults: guestBook.adults,
+                        children: guestBook.children,
+                        total: guestBook.children + guestBook.adults
+                    },
+                    guests: formattedGuests
+                }
+            })
+
+            setResponseStatus(event, 200)
+            return formattedGuestBook[0]
         }
+
+        
     }
 
     setResponseStatus(event, 500)

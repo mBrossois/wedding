@@ -1,5 +1,5 @@
 <template>
-    <navigation class="menu absolute rounded-large mt-0_5" :class="{open: open}">
+    <nav class="menu absolute rounded-large mt-0_5" :class="{open: open}">
         <div v-for="(menuSection, index) in menuItems" class="flex flex-column gap-1">
             <div v-for="menuItem in menuSection.sections" class="flex flex-column gap-1">
                 <div class="flex items-center justify-between">
@@ -9,7 +9,7 @@
             </div>
             <hr v-if="index !== menuItems.length - 1" class="section-line mb-1" />
         </div>
-    </navigation>
+    </nav>
 </template>
 
 <script setup lang="ts">

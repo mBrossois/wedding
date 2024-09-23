@@ -1,8 +1,7 @@
 <template>
     <label class="radio-btn flex gap-0_5 items-center">
-        <input type="radio" class="rounded-small" :name="name" :value="value">
+        <input type="radio" class="rounded-small" :name="name" :value="value" @input="sendClick">
         <IconsCheckmark class="checkmark" />
-
         {{ label }}
     </label>
 </template>
@@ -14,6 +13,13 @@ const props = defineProps<{
     name: string
 }>()
 
+const emits = defineEmits<{
+    (e: 'onclick', value: string): void
+}>()
+
+function sendClick() {
+    emits('onclick', props.value)
+}
 </script>
 
 <style scoped>
