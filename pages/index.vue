@@ -10,7 +10,9 @@
             </div>
         </fieldset>
         <div id="love-bottle">
-            <AppTresLoveBottle />
+            <Suspense>
+                <AppTresLoveBottle />
+            </Suspense>
         </div>
     </div>
 </template>
@@ -43,7 +45,8 @@ async function updateAttendance(value: any) {
 }
 
 #love-bottle {
-    height: 500px;
-    width: 500px;
+    height: 320px;
+    width: 320px;
+    border: 1px solid black;
 }
 </style>

@@ -1,17 +1,38 @@
 <template>
-    <TresCanvas>
+  <ClientOnly >
+      <AppTweakPane v-if="isDev" :state="state" @onUpdate="setReactiveState"/>
+  </ClientOnly>
+  <TresCanvas preset="realistic">
+    <Stats v-if="isDev" />
     <TresPerspectiveCamera
-      :position="[3, 3, 3]"
+      :position="[state.cameraPosition.x, state.cameraPosition.y, state.cameraPosition.z]"
       :fov="45"
       :look-at="[0, 0, 0]"
     />
     <Suspense>
-      <AppLoveBottlePrimitive />
+      <AppLoveBottlePrimitive :modelRotation="state.modelRotation" />
     </Suspense>
-    <!-- <TresPrimitive :object="scene"></TresPrimitive> -->
-    <TresAmbientLight :intensity="1" />
+    <TresAmbientLight :intensity=".3" />
+    <TresDirectionalLight :intensity="2.5" />
   </TresCanvas>
 </template>
 
 <script setup lang="ts">
+const isDev = import.meta.env.DEV
+const state = reactive({
+  cameraPosition: {
+    x: 0,
+    y: -.1,
+    z: 1.26
+  },
+  modelRotation: {
+    x: .2,
+    y: 1.6,
+    z: 0
+  }
+})
+
+function setReactiveState(state: any) {
+  state.value = state
+}
 </script>
