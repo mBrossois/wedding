@@ -5,7 +5,6 @@ export default defineEventHandler(async (event) => {
     const client = await serverSupabaseClient(event)
     
     if(email) {
-        console.log('you called?')
         const {data: guestBook} = await client
             .from('Guest_book')
             .select(`

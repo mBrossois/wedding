@@ -1,18 +1,19 @@
 import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
-    const { email, attendance } = await readBody(event)
+    const { id, attendance } = await readBody(event)
     const client = await serverSupabaseClient(event)
 
-    if(email) {
-
+    if(id) {
         const {data, status} = await client
             .from('Guest_book')
-            .update({ is_coming: attendance })
-            .eq('Authentication.email', email)
+            .update({ is_coming: attendance === 'yes' ? true : false })
+            .eq('id', id)
             .select()
 
-            if(data) {
+            console.log(data)
+
+            if(data?.length) {
                 setResponseStatus(event, 200)
                 return 'Updated attendance'
             }
