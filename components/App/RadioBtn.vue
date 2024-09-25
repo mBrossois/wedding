@@ -1,6 +1,6 @@
 <template>
     <label class="radio-btn flex gap-0_5 items-center">
-        <input type="radio" class="rounded-small" :name="name" :value="value" @input="sendClick">
+        <input type="radio" class="rounded-small" :checked="checked" :name="name" :value="value" @input="sendClick">
         <IconsCheckmark class="checkmark" />
         {{ label }}
     </label>
@@ -10,7 +10,8 @@
 const props = defineProps<{
     value: string,
     label: string,
-    name: string
+    name: string,
+    checked: boolean
 }>()
 
 const emits = defineEmits<{

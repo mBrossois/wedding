@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { useGLTF, useAnimations } from '@tresjs/cientos'
+import { useGuestsStore } from '~/store/guests';
 
 const props = defineProps<{
     modelRotation: {
@@ -25,5 +26,16 @@ const { actions, mixer } = useAnimations(animations, scene)
 
 const currentAction = actions['Take 001']
 
-currentAction.play()
+const guestsStore = useGuestsStore()
+
+if(guestsStore.getIsComing) {
+  currentAction.play()
+}
+watch(() => guestsStore.getIsComing, (isComing) => {
+  if(isComing) {
+    currentAction.play()
+  } else {
+    currentAction.stop()
+  }
+})
 </script>

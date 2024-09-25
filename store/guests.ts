@@ -4,6 +4,11 @@ export const useGuestsStore = defineStore('guests', () => {
     const guestsBook: Ref<GuestList|undefined> = ref()
     const getGuestBookId = computed(() => guestsBook.value?.id)
     const getIsComing = computed(() => guestsBook.value?.isComing)
+    function setGuestComing(isComing: boolean) {
+        if(guestsBook.value) {
+            guestsBook.value.isComing = isComing
+        }
+    }
     const getGuests = computed(() => guestsBook.value?.guests)
     const getGuestAmount = computed(() => guestsBook.value?.amounts)
     async function setInitialGuestsBook(email: string) {
@@ -22,5 +27,5 @@ export const useGuestsStore = defineStore('guests', () => {
         }
     }
 
-    return { getIsComing, getGuestBookId, getGuests, getGuestAmount, setInitialGuestsBook }
+    return { getIsComing, getGuestBookId, getGuests, getGuestAmount, setInitialGuestsBook, setGuestComing }
   })

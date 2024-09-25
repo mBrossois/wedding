@@ -1,6 +1,6 @@
 <template>
   <ClientOnly >
-      <AppTweakPane v-if="isDev" :state="state" @onUpdate="setReactiveState"/>
+      <ThreeTweakPane v-if="isDev" :state="state" @onUpdate="setReactiveState"/>
   </ClientOnly>
   <TresCanvas preset="realistic">
     <Stats v-if="isDev" />
@@ -10,7 +10,7 @@
       :look-at="[0, 0, 0]"
     />
     <Suspense>
-      <AppLoveBottlePrimitive :modelRotation="state.modelRotation" />
+      <ThreeLoveBottlePrimitive :modelRotation="state.modelRotation" />
     </Suspense>
     <TresAmbientLight :intensity=".3" />
     <TresDirectionalLight :intensity="2.5" />
@@ -22,13 +22,13 @@ const isDev = import.meta.env.DEV
 const state = reactive({
   cameraPosition: {
     x: 0,
-    y: -.1,
-    z: 1.26
+    y: -0.2,
+    z: 1.8
   },
   modelRotation: {
     x: .2,
-    y: 1.6,
-    z: 0
+    y: 1.26,
+    z: 0.06
   }
 })
 
