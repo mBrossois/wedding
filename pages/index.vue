@@ -55,8 +55,6 @@ async function updateAttendance(value: any) {
 <style scoped>
 .attendance-field {
     border: unset;
-    position: relative;
-    z-index: 1000;
 }
 
 #love-bottle {

@@ -1,5 +1,5 @@
 <template>
-    <component :is="component" :to="to" class="btn-container">
+    <component :is="component" :to="to" class="btn-container" :class="{dark: isDark}">
         <div class="btn-container__hover" @click="onClick"></div>
         <div class="btn-overlay horizontal" />
         <div class="btn-overlay vertical" />
@@ -8,11 +8,11 @@
 </template>
 
 <script setup lang="ts">
-import AppParagraph from './Paragraph.vue';
 
 const props = defineProps<{
     text: string,
-    to?: string
+    to?: string,
+    isDark?: boolean
 }>()
 
 const emits = defineEmits<{
@@ -37,6 +37,16 @@ function onClick() {
     cursor: pointer;
 }
 
+.btn-container.dark .btn {
+    color: var(--gray-lightest);
+    border: 1px solid var(--gray-lightest);
+}
+
+.btn-container.dark .btn-overlay,
+.btn-container.dark .btn-container__hover:hover ~ .btn-overlay {
+    border-color: var(--gray-lightest);
+}
+
 .btn {
     background-color: transparent;
     color: var(--gray-darkest);
@@ -51,6 +61,11 @@ function onClick() {
 
 .btn::first-letter {
     text-transform: capitalize;
+}
+
+.btn-container.dark .btn-container__hover:hover ~ .btn {
+    background-color: var(--gray-lightest);
+    color: var(--gray-darkest);
 }
 
 .btn-container__hover:hover ~ .btn {
