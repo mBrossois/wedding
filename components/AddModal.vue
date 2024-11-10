@@ -9,14 +9,14 @@
                 <div class="flex flex-column gap-1">
                     <TitleDynamic title="Adults" heading="h2" />
                     <div v-for="adult in adults" :key="adult" class="flex gap-1">
-                        <InputBlock class="input" id="first-name" label="First name" inputType="text" placeholder="Emma"/>
-                        <InputBlock class="input" id="last-name" label="Last name" inputType="text" placeholder="Bierdel"/>
+                        <InputBlock class="input" id="first-name" label="First name" inputType="text" placeholder="Emma" @input="setName($event, 'adults', 'firstName', adult - 1)"/>
+                        <InputBlock class="input" id="last-name" label="Last name" inputType="text" placeholder="Bierdel" @input="setName($event, 'adults', 'lastName', adult - 1)"/>
                     </div>
                     <hr />
                     <TitleDynamic title="Under 12" heading="h2" />
                     <div v-for="child in children" :key="child" class="flex gap-1">
-                        <InputBlock class="input" id="first-name" label="First name" inputType="text" placeholder="Mark"/>
-                        <InputBlock class="input" id="last-name" label="Last name" inputType="text" placeholder="de Neut Brossois"/>
+                        <InputBlock class="input" id="first-name" label="First name" inputType="text" placeholder="Mark" @input="setName($event, 'children', 'firstName', child - 1)"/>
+                        <InputBlock class="input" id="last-name" label="Last name" inputType="text" placeholder="de Neut Brossois" @input="setName($event, 'children', 'lastName', child - 1)"/>
                     </div>
                     <hr />
                 </div>
@@ -28,8 +28,8 @@
                     <AppSelect label="Rooms" :options="amounts" @onChange="updateRooms" />
                 </div>
                 <div class="buttons flex justify-between gap-1 mt-2">
-                    <AppButton text="Save & close" isDark/>
-                    <AppButton text="Save & add another" isDark />
+                    <AppButton text="Save & close" isDark @click="saveAndClose"/>
+                    <AppButton text="Save & add another" isDark @click="saveAndAnother"/>
                 </div>
             </div>
         </div>
@@ -55,19 +55,69 @@ for(let i = 0; i <= 5; i++) {
     amounts.push(i) 
 }
 
+const form: {adults: Array<object>, children: Array<object>, rooms: Array<number>} = {
+    adults: [],
+    children: [],
+    rooms: []
+}
+
+function setName(value: string, lifeHood: string, type: string, id: number) {
+    form[lifeHood][id][type] = value;
+}
+
 const adults = ref(0)
 function updateAdults(value: number) {
     adults.value = value
+    if(value > form.adults.length) {
+        const endLoop = (value - form.adults.length - 1)
+        for(let i = 0; i <= endLoop; i++ ) {
+            form.adults.push({firstName: '', lastName: ''})
+        }
+    }
+    if(value < form.adults.length) {
+        form.adults.splice(value)
+    }
 }
 
 const children = ref(0)
 function updateChildren(value: number) {
     children.value = value
+    if(value > form.children.length) {
+        const endLoop = (value - form.children.length - 1)
+        for(let i = 0; i <= endLoop; i++ ) {
+            form.children.push({firstName: '', lastName: ''})
+        }
+    }
+    if(value < form.children.length) {
+        form.children.splice(value)
+    }
 }
 
 let rooms = 0
 function updateRooms(value: number) {
     rooms = value
+}
+
+async function saveGuests() {
+    const supabase = useSupabaseClient()
+    await $fetch('/api/guests', {
+        method: 'post',
+        body: {
+            adults: adults.value,
+            children: children.value,
+            rooms,
+            form
+        },
+        headers: useRequestHeaders(['cookie'])
+    })
+}
+
+function saveAndAnother() {
+    saveGuests()
+}
+
+function saveAndClose() {
+    saveGuests()
 }
 </script>
 

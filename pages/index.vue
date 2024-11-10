@@ -10,11 +10,7 @@
                     <AppRadioBtn :checked="!guestsStore.getIsComing" value="no" label="no" name="attend_wedding" />
                 </div>
             </fieldset>
-            <div id="love-bottle">
-                <Suspense>
-                    <ThreeLoveBottle />
-                </Suspense>
-            </div>
+
         </div>
     </div>
 </template>

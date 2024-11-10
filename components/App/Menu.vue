@@ -31,13 +31,6 @@ function setTo(route?: string) {
     return route ? localePath(route) : undefined
 }
 
-const user = useSupabaseUser()
-if(user.value && user.value.role === 'authenticated') {
-    userStore.setRole(RoleEnum.loggedIn)
-} else if(user.value?.role === 'supabase_admin') {
-    userStore.setRole(RoleEnum.admin)
-}
-
 const menuItems: ComputedRef<Array<{sections: 
     Array<{title: string, to?: string, isLanguage?: boolean, isBtn?: boolean}>
 }>> = computed(() => getRole.value ? [

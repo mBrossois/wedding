@@ -41,6 +41,8 @@ async function submit(email: string) {
                 }
             })
             
+            console.log(error)
+
             if(data) {
                 const localePath = useLocalePath()
                 navigateTo({

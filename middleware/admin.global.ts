@@ -1,13 +1,21 @@
 import { useUsersStore } from "~/store/users"
 import { RoleEnum } from "~/types/users"
 
-export default defineNuxtRouteMiddleware((to, from) => {
-  // In a real app you would probably not redirect every route to `/`
-  // however it is important to check `to.path` before redirecting or you
-  // might get an infinite redirect loop
-  const user = useSupabaseUser()
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  const usersStore = useUsersStore()
 
-  if (to.path.includes('/admin') && user.value?.role !== 'supabase_admin') {
+  if(!usersStore.getRole) {
+    const { data: role } = await useFetch('/api/role', {
+      method: 'get'
+    })
+  
+    if(role.value && role.value === 'guest') {
+        usersStore.setRole(RoleEnum.loggedIn)
+    } else if(role.value === 'admin') {
+        usersStore.setRole(RoleEnum.admin)
+    }
+  }
+  if (to.path.includes('/admin') && usersStore.getRole !== 'admin') {
     return navigateTo('/')
   }
 })

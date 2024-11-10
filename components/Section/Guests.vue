@@ -17,8 +17,8 @@
                     </button>
                 </td>
             </tr>
-            <tr class="align-left">
-                <td title="Mark de Neut Brossois" class="name">Mark de Neut Brossois</td>
+            <tr v-for="guest in guests" class="align-left">
+                <td :title="guest.name" class="name">{{ guest.name }}</td>
                 <td>2</td>
                 <td>0</td>
                 <td>I X</td>
@@ -29,6 +29,11 @@
 </template>
 
 <script setup lang="ts">
+const { data: guests, status } = await useFetch('/api/all-guests', {
+    method: 'get',
+    headers: useRequestHeaders(['cookie'])
+})
+
 const isAddModalOpen = ref(false)
 
 function openAddModal() {

@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   css: [
     "@/assets/css/main.css"
   ],
-  modules: ['@pinia/nuxt', "@nuxtjs/supabase", '@nuxtjs/i18n', '@tresjs/nuxt'],
+  modules: ['@pinia/nuxt', "@nuxtjs/supabase", '@nuxtjs/i18n'],
   supabase: {
     redirectOptions: {
       login: '/en/login',
@@ -28,9 +28,6 @@ export default defineNuxtConfig({
       { code: 'fr', name: 'French'}, 
       { code: 'nl', name: 'Dutch'}],
     detectBrowserLanguage: false
-  },
-  tres: {
-    devtools: true,
   },
   runtimeConfig: {
     public: {

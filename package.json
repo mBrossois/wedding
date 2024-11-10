@@ -13,11 +13,8 @@
     "@nuxtjs/i18n": "^8.5.2",
     "@nuxtjs/supabase": "^1.4.0",
     "@pinia/nuxt": "^0.5.1",
-    "@tresjs/cientos": "^4.0.2",
-    "@tresjs/nuxt": "^3.0.7",
     "nuxt": "^3.12.3",
     "pinia": "^2.1.7",
-    "three": "^0.168.0",
     "tweakpane": "^4.0.4",
     "typescript": "^5.5.3",
     "vue": "latest"
