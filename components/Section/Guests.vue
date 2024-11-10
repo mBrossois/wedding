@@ -17,10 +17,10 @@
                     </button>
                 </td>
             </tr>
-            <tr v-for="guest in guests" class="align-left">
+            <tr v-for="guest in guests" :key="guest.name" class="align-left" :class="{ 'coming': guest.attendanceData.is_coming }" >
                 <td :title="guest.name" class="name">{{ guest.name }}</td>
-                <td>2</td>
-                <td>0</td>
+                <td>{{ guest.attendanceData.adults + guest.attendanceData.children }}</td>
+                <td>{{ guest.attendanceData.rooms }}</td>
                 <td>I X</td>
             </tr>
         </tbody>
@@ -93,5 +93,13 @@ td {
     overflow: hidden;
     text-wrap: nowrap;
     text-overflow: ellipsis;
+}
+
+.coming {
+    background-color: green;
+
+    td {
+        color: white;
+    }
 }
 </style>
