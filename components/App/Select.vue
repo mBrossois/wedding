@@ -19,9 +19,18 @@ const emits = defineEmits<{
 
 const selectValue = ref('0')
 
+function resetValue() {
+    selectValue.value = '0'
+}
+
 function emitChange() {
     emits('onChange', Number(selectValue.value))
 }
+
+defineExpose({
+    resetValue
+}
+)
 </script>
 
 <style scoped>

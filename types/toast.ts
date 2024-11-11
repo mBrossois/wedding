@@ -1,5 +1,5 @@
 export interface Toast {
-    type: 'error' | 'info',
+    type: 'error' | 'info' | 'success',
     message: string
 }
 

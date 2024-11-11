@@ -1,12 +1,14 @@
 import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
+    const {page = 0} = getQuery(event)
+
     const client = await serverSupabaseClient(event)
     const allGuests = []
     const {data: guestBook} = await client
         .from('Guest_book')
         .select('*')
-        .range(0, 9)
+        .range(20 * page, 20 * page + 19)
             
     if(guestBook) {
         for(const guestGroup of guestBook) {
@@ -18,8 +20,6 @@ export default defineEventHandler(async (event) => {
             `)
             .eq('guest_id', guestGroup.id)
             .limit(1)
-
-            console.log(guest)
 
             allGuests.push({attendanceData: guestGroup, name: guest[0].first_name + ' ' + guest[0].last_name})
         }

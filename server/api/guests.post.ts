@@ -11,8 +11,6 @@ export default defineEventHandler(async (event) => {
         .insert([{}])
         .select()
 
-        console.log(auth![0])
-
         const {data: guestBook, status: guestBookStatus} = await client
         .from('Guest_book')
         .insert([

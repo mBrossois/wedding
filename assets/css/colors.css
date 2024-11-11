@@ -6,6 +6,8 @@
     --gray-darkest: #494949;
     --error: #c30101;
     --error-background: #7E5D5D;
+    --success: #04b104;
+    --success-background: #018201;
 }
 
 html {

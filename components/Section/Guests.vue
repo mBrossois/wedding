@@ -23,14 +23,29 @@
                 <td>{{ guest.attendanceData.rooms }}</td>
                 <td>I X</td>
             </tr>
+            <tr>
+                <td class="full-cell" colspan="4">
+                    <TableNavigation :pages="pages" :activePage="activePage" @onClick="changePage" />
+                </td>
+            </tr>
         </tbody>
     </table>
     <AddModal :isOpen="isAddModalOpen" @onClose="closeAddModal"/>
 </template>
 
 <script setup lang="ts">
-const { data: guests, status } = await useFetch('/api/all-guests', {
+let activePage = 0;
+
+const { data: pages, refresh: refresPage } = await useFetch('/api/guest-pages', {
     method: 'get',
+    headers: useRequestHeaders(['cookie'])
+})
+
+const { data: guests, status, refresh: refresGuests } = await useFetch('/api/guests-on-page', {
+    method: 'get',
+    query: {
+        page: activePage
+    },
     headers: useRequestHeaders(['cookie'])
 })
 
@@ -42,6 +57,11 @@ function openAddModal() {
 
 function closeAddModal() {
     isAddModalOpen.value = false
+}
+
+function changePage(page: number) {
+    activePage = page
+    refresGuests()
 }
 </script>
 
@@ -96,7 +116,7 @@ td {
 }
 
 .coming {
-    background-color: green;
+    background-color: var(--success-background);
 
     td {
         color: white;

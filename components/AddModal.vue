@@ -23,9 +23,9 @@
             </div>
             <div class="bottom-section">
                 <div class="amounts flex gap-1 mt-2 justify-between">
-                    <AppSelect label="Adults" :options="amounts" @onChange="updateAdults"/>
-                    <AppSelect label="Under 12" :options="amounts" @onChange="updateChildren"/>
-                    <AppSelect label="Rooms" :options="amounts" @onChange="updateRooms" />
+                    <AppSelect ref="selectAdult" label="Adults" :options="amounts" @onChange="updateAdults"/>
+                    <AppSelect ref="selectChild" label="Under 12" :options="amounts" @onChange="updateChildren"/>
+                    <AppSelect ref="selectRoom" label="Rooms" :options="amounts" @onChange="updateRooms" />
                 </div>
                 <div class="buttons flex justify-between gap-1 mt-2">
                     <AppButton text="Save & close" isDark @click="saveAndClose"/>
@@ -38,6 +38,8 @@
 </template>
 
 <script setup lang="ts">
+import { useToasterStore } from '~/store/toaster';
+
 defineProps<{
     isOpen: boolean
 }>()
@@ -45,8 +47,25 @@ const emits = defineEmits<{
     (e: 'onClose'): void
 }>()
 
+const selectChild = ref()
+const selectAdult = ref()
+const selectRoom = ref()
+
 function closeModal() {
     emits('onClose')
+    resetFields()
+}
+
+function resetFields () {
+    form.adults = []
+    form.children = []
+    form.rooms = []
+    adults.value = 0
+    children.value = 0
+    rooms = 0
+    selectAdult.value.resetValue()
+    selectChild.value.resetValue()
+    selectRoom.value.resetValue()
 }
 
 const amounts: Array<number> = []
@@ -98,9 +117,11 @@ function updateRooms(value: number) {
     rooms = value
 }
 
+const toasterStore = useToasterStore()
+
 async function saveGuests() {
     const supabase = useSupabaseClient()
-    await $fetch('/api/guests', {
+    const result = await $fetch('/api/guests', {
         method: 'post',
         body: {
             adults: adults.value,
@@ -110,14 +131,21 @@ async function saveGuests() {
         },
         headers: useRequestHeaders(['cookie'])
     })
+
+    if(result === 'Added guests') {
+        toasterStore.addToast({type: 'success', message: `We successfully added ${form.adults[0].firstName}`})
+        return 'success'
+    }
 }
 
 function saveAndAnother() {
     saveGuests()
+    resetFields()
 }
 
-function saveAndClose() {
+async function saveAndClose() {
     saveGuests()
+    closeModal()
 }
 </script>
 
@@ -168,6 +196,6 @@ function saveAndClose() {
 
 .middle-section {
     overflow-y: auto;
-    height: 450px;
+    height: 400px;
 }
 </style>
