@@ -10,11 +10,7 @@
                     <AppRadioBtn :checked="!guestsStore.getIsComing" value="no" label="no" name="attend_wedding" />
                 </div>
             </fieldset>
-            <div id="love-bottle">
-                <Suspense>
-                    <ThreeLoveBottle />
-                </Suspense>
-            </div>
+
         </div>
     </div>
 </template>
@@ -55,8 +51,6 @@ async function updateAttendance(value: any) {
 <style scoped>
 .attendance-field {
     border: unset;
-    position: relative;
-    z-index: 1000;
 }
 
 #love-bottle {

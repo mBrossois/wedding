@@ -4,7 +4,7 @@
             <NuxtLink class="lavishly-yours-regular logo" :to="localePath('/')">Mark & Emma's wedding</NuxtLink>
             <IconsHamburger :open="open" @click="toggleOpen" />
         </div>
-        <AppMenu :open="open" />
+        <AppMenu :open="open" @on-close="toggleOpen"/>
         <div v-if="open" class="absolute overlay" @click="toggleOpen"></div>
         <hr class="section-line rounded-large" />
     </header>

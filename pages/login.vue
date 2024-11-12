@@ -32,12 +32,13 @@ async function submit(email: string) {
         })
 
         if(response !== 'Something went wrong') {
+            const runtimeConfig = useRuntimeConfig()
             const supabase = useSupabaseClient()
 
             const { data, error } = await supabase.auth.signInWithOtp({
                 email: email as string,
                 options: {
-                    emailRedirectTo: `http://localhost:3000/${locale.value}/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
+                    emailRedirectTo: `${runtimeConfig.public.url}/${locale.value}/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
                 }
             })
             

@@ -12,7 +12,8 @@ const props = defineProps<Toast>()
 
 const typeTitels = {
     error: 'Error',
-    info: 'Info'
+    info: 'Info',
+    success: 'Success'
 }
 
 const title = typeTitels[props.type]
@@ -36,5 +37,10 @@ const title = typeTitels[props.type]
 .error {
     border-left: 8px solid var(--error);
     background-color: var(--error-background);
+}
+
+.success {
+    border-left: 8px solid var(--success);
+    background-color: var(--success-background);
 }
 </style>

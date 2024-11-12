@@ -18,6 +18,10 @@
     width: var(--page-width);
 }
 
+.full-width {
+    width: 100%;
+}
+
 .section-line {
     height: 1px;
     width: 100%;

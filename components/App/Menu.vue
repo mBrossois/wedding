@@ -21,17 +21,14 @@ defineProps<{
     open: Boolean
 }>()
 
+const emits = defineEmits<{(e: 'onClose'): void}>()
+
 const userStore = useUsersStore()
 const { getRole } = storeToRefs(userStore)
 
 const localePath = useLocalePath()
 function setTo(route?: string) {
     return route ? localePath(route) : undefined
-}
-
-const user = useSupabaseUser()
-if(user.value) {
-    userStore.setRole(RoleEnum.loggedIn)
 }
 
 const menuItems: ComputedRef<Array<{sections: 
@@ -90,14 +87,16 @@ function toggleOpen() {
 const flagSelector = ref()
 async function click(menuItem: string) {
     if(menuItem === 'LOG_OUT') {
-        const { data } = await useFetch('/api/logout', {
+        const response = await $fetch('/api/logout', {
             method: 'post',
             headers: useRequestHeaders(['cookie'])
         })
 
-        if(data.value === 'Logged out') {
+        if(response === 'Logged out') {
+            userStore.setRole(undefined)
             const localePath = useLocalePath()
-            navigateTo({ path: localePath('/login')})
+            navigateTo(localePath('/login'))
+            emits('onClose')
         } else {
             const toastStore = useToasterStore()
             toastStore.addToast({type: 'error', message: 'Could not log you out'})
