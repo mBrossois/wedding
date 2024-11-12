@@ -12,7 +12,6 @@
         </div>
         <div class="stats section">
             <TitleDynamic title="Rooms" heading="h1" />
-
         </div>
     </div>
 </template>
@@ -23,7 +22,6 @@
 }
 
 .section {
-    height: 100vh;
-    padding: 0 calc((100vw - var(--page-width)) / 2);
+    padding: 1rem calc((100vw - var(--page-width)) / 2);
 }
 </style>
