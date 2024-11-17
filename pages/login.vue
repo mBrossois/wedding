@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-column items-center gap-1">
-        <AuthSection page="login" :title="title" @submit="submit" />
+        <AuthSection :page="page === 'account-creation' ? 'create' : 'login'" :title="title" @submit="submit" />
         <div class="bottom-section flex flex-column items-center">
             <ErrorLabel :error="errorMessage" />
         </div>
@@ -12,8 +12,11 @@ import { useToasterStore } from '~/store/toaster';
 import { useUsersStore } from '~/store/users';
 const { locale } = useI18n()
 
+const localePath = useLocalePath()
+const page = useRoute().query.type
+
 const title = {
-    title: 'Login',
+    title: page === 'account-creation' ? 'Create account' : 'Login',
     heading: 'h1'
 }
 

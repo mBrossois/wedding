@@ -1,6 +1,6 @@
 export interface Login {
     title: Title,
-    page: 'login' | 'create' | 'passwordForgotten' | 'passwordReset'
+    page: 'login' | 'create'
 }
 
 export interface Title {
