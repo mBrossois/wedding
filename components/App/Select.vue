@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-column gap-1">
         <label class="kurale-regular font-16">{{ label }}</label>
-        <select v-model="selectValue" class="select rounded-medium p-1" @change="emitChange">
-            <option v-for="option in options" :key="option" :value=option>{{option}}</option>
+        <select class="select rounded-medium p-1">
+            <option v-for="option of options" :key="option.value" :value=option.value :selected="option.isActive" @click="emitChange(option.value)">{{option.title}}</option>
         </select>
     </div>
 </template>
@@ -10,27 +10,20 @@
 <script setup lang="ts">
 defineProps<{
     label: string,
-    options: Array<string|number>
+    options: Array<{
+        value: string|number
+        title: string,
+        isActive: boolean
+    }>
 }>()
 
 const emits = defineEmits<{
     (e: 'onChange', value: number): void
 }>()
 
-const selectValue = ref('0')
-
-function resetValue() {
-    selectValue.value = '0'
+function emitChange(value: string|number) {
+    emits('onChange', Number(value))
 }
-
-function emitChange() {
-    emits('onChange', Number(selectValue.value))
-}
-
-defineExpose({
-    resetValue
-}
-)
 </script>
 
 <style scoped>

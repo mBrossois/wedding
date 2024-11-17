@@ -9,12 +9,12 @@
 <script setup lang="ts">
 import type { Input } from '~/types/input';
 
-defineProps<Input>()
+const props = defineProps<Input>()
 const emits = defineEmits<{
   (e: 'input', value: string): void
 }>()
 
-const inputValue = ref()
+const inputValue = ref(props.value)
 function onInput() {
     emits('input', inputValue.value)
 }

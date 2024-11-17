@@ -17,11 +17,13 @@
                     </button>
                 </td>
             </tr>
-            <tr v-for="guest in guests" :key="guest.name" class="align-left" :class="{ 'coming': guest.attendanceData.is_coming }" >
+            <tr v-for="guest in guests" :key="guest.name" class="table-row align-left" :class="{ 'coming': guest.attendanceData.is_coming }" >
                 <td :title="guest.name" class="name">{{ guest.name }}</td>
                 <td>{{ guest.attendanceData.adults + guest.attendanceData.children }}</td>
                 <td>{{ guest.attendanceData.rooms }}</td>
-                <td>I X</td>
+                <td class="justify-between">
+                    <IconsEdit class="icon" @click="openEditModal(guest.attendanceData.id)"/>
+                    <IconsDelete class="icon" @click="openDeleteModal(guest.attendanceData.id, guest.attendanceData.auth_id, guest.name)"/></td>
             </tr>
             <tr>
                 <td class="full-cell" colspan="4">
@@ -30,10 +32,24 @@
             </tr>
         </tbody>
     </table>
-    <AddModal :isOpen="isAddModalOpen" @onClose="closeAddModal"/>
+    <AppModal :isOpen="modal.isOpen" :title="modal.title" :buttons="modal.buttons" :size="modal.type === 'guests' ? 'full' : 'small'" @onClose="closeGuestModal" @btnClick="actionClick">
+        <GuestModal v-if="modal.type === 'guests'" 
+            :amounts="amounts" 
+            :form="form"
+            @update-amounts="updateAmounts"
+            @update-form="updateForm"
+            >
+        </GuestModal>
+        <AppParagraph v-else :text="`Are you sure you want to permanantly delete ${deleteName}?` " />
+    </AppModal>
 </template>
 
 <script setup lang="ts">
+import type { Guest, selectAmounts } from '~/types/guests';
+import type { Ref } from 'vue';
+import { ref } from 'vue';
+import { useToasterStore } from '~/store/toaster';
+
 let activePage = 0;
 
 const { data: pages, refresh: refresPage } = await useFetch('/api/guest-pages', {
@@ -49,20 +65,259 @@ const { data: guests, status, refresh: refresGuests } = await useFetch('/api/gue
     headers: useRequestHeaders(['cookie'])
 })
 
-const isAddModalOpen = ref(false)
-
-function openAddModal() {
-    isAddModalOpen.value = true
-}
-
-function closeAddModal() {
-    isAddModalOpen.value = false
-}
-
 function changePage(page: number) {
     activePage = page
     refresGuests()
 }
+
+const defaultModalValue = {
+    type: 'guests',
+    isOpen: false,
+    title: 'Add guests',
+    buttons: [
+        {title: 'save & close', action: 'save_close'},
+        {title: 'save & add another', action: 'save_another'}
+    ]
+}
+
+const modal = ref(defaultModalValue)
+
+function openAddModal() {
+    modal.value = defaultModalValue
+    modal.value.isOpen = true;
+}
+
+function closeGuestModal() {
+    modal.value.isOpen = false
+    resetFields()
+}
+
+function resetFields () {
+    form.value.adults = []
+    form.value.children = []
+    form.value.rooms = []
+    guestBookId = 0
+    authId = 0
+    deleteName.value = ''
+    setEmptyAmounts()
+}
+
+let guestBookId = 0
+async function openEditModal(id: number) {
+    modal.value = { 
+        type: 'guests',
+        isOpen: true,
+        title: 'Edit guests',
+        buttons: [
+            {title: 'cancel', action: 'close'},
+            {title: 'update', action: 'patch'}
+        ]
+    }
+
+    guestBookId = id
+
+    interface Guest {
+        id: number,
+        first_name: string,
+        last_name: string,
+        is_adult: boolean
+    }
+
+    const response = await $fetch<Array<Guest>>('/api/guest-by-id', {
+            method: 'get',
+            query: {
+                guest_book_id: id
+            },
+            headers: useRequestHeaders(['cookie'])
+        })
+
+    let adults = 0
+    let children = 0
+    for(const guest of response) {
+        if(guest.is_adult) {
+            adults++
+            form.value.adults.push({
+                firstName: guest.first_name,
+                lastName: guest.last_name,
+            })
+        } else {
+            children++
+            form.value.children.push({
+                firstName: guest.first_name,
+                lastName: guest.last_name,
+            })
+        }
+    }
+
+    
+    amounts.value.adults.find(amount => amount.isActive === true)!.isActive = false
+    amounts.value.adults[adults].isActive = true
+
+    amounts.value.children.find(amount => amount.isActive === true)!.isActive = false
+    amounts.value.children[children].isActive = true
+}
+
+let authId = 0
+const deleteName = ref('')
+
+function openDeleteModal(guestId: number, authIdValue: number, name: string) {
+    modal.value = { 
+        type: 'delete',
+        isOpen: true,
+        title: 'Delete guests',
+        buttons: [
+            {title: 'cancel', action: 'close'},
+            {title: 'delete', action: 'delete'}
+        ]
+    }
+
+    guestBookId = guestId
+    authId = authIdValue
+    deleteName.value = name
+}
+
+const form: Ref<{adults: Array<Guest>, children: Array<Guest>, rooms: Array<number>}> = ref({
+    adults: [],
+    children: [],
+    rooms: []
+})
+
+function updateForm(lifeHood: string, value: Array<Guest>) {
+    form.value[lifeHood] = value
+}
+
+const amounts: Ref<{
+    adults: selectAmounts
+    children: selectAmounts
+    rooms: selectAmounts
+}> = ref({
+    adults: [],
+    children: [],
+    rooms: []
+})
+
+function setEmptyAmounts() {
+    amounts.value = {
+        adults: [],
+        children: [],
+        rooms: []
+    }
+
+    for(let i = 0; i <= 5; i++) {
+        amounts.value.adults.push({
+            value: i,
+            title: i.toString(),
+            isActive: i === 0
+        }) 
+        amounts.value.children.push({
+            value: i,
+            title: i.toString(),
+            isActive: i === 0
+        }) 
+        amounts.value.rooms.push({
+            value: i,
+            title: i.toString(),
+            isActive: i === 0
+        }) 
+    }
+}
+
+setEmptyAmounts()
+
+function updateAmounts(lifeHood: string, value: selectAmounts) {
+    amounts.value[lifeHood] = value
+}
+
+function actionClick(action: string) {
+    switch(action) {
+        case 'save_close':
+            saveGuests()
+            closeGuestModal()
+            break;
+        case 'save_another':
+            saveGuests()
+            resetFields()
+            break;
+        case 'patch':
+            updateGuests()
+            resetFields()
+            closeGuestModal()
+            break;
+        case 'delete':
+            deleteGuests()
+            resetFields()
+        default: {
+            closeGuestModal()
+            break;
+        }
+    }
+}
+const toasterStore = useToasterStore()
+
+async function saveGuests() {
+    if(form.value.adults.length > 0 || form.value.children.length > 0) {
+        const name = form.value.adults[0].firstName + ' ' + form.value.adults[0].lastName
+        const result = await $fetch('/api/guests', {
+            method: 'post',
+            body: {
+                adults: form.value.adults.length,
+                children: form.value.children.length,
+                rooms: form.value.rooms.length,
+                form: form.value
+            },
+            headers: useRequestHeaders(['cookie'])
+        })
+
+        if(result === 'Added guests') {
+            refresGuests()
+            refresPage()
+            toasterStore.addToast({type: 'success', message: `We successfully added ${name}`})
+            return 'success'
+        }
+    }
+}
+
+async function updateGuests() {
+    if(form.value.adults.length > 0 || form.value.children.length > 0) {
+        const name = form.value.adults[0].firstName + ' ' + form.value.adults[0].lastName
+        const result = await $fetch('/api/guests', {
+            method: 'put',
+            body: {
+                form: form.value,
+                guest_book_id: guestBookId
+            },
+            headers: useRequestHeaders(['cookie'])
+        })
+
+        if(result === 'Updated guests') {
+            refresGuests()
+            refresPage()
+            
+            toasterStore.addToast({type: 'success', message: `We successfully updated ${name}`})
+            return 'success'
+        }
+    }
+}
+
+async function deleteGuests() {
+    const name = deleteName.value
+    const result = await $fetch('/api/guests', {
+        method: 'delete',
+        body: {
+            guest_book_id: guestBookId,
+            auth_id: authId
+        },
+        headers: useRequestHeaders(['cookie'])
+    })
+
+    if(result === 'Deleted guests') {
+        refresGuests()
+        refresPage()
+        toasterStore.addToast({type: 'success', message: `We successfully deleted ${name}`})
+        return 'success'
+    }
+}
+
 </script>
 
 <style scoped>
@@ -115,11 +370,25 @@ td {
     text-overflow: ellipsis;
 }
 
+.table-row .icon {
+    fill: var(--gray-darkest);
+    transition: fill ease-in-out 200ms;
+}
+
+.table-row .icon:hover {
+    fill: var(--gray-medium);
+    cursor: pointer;
+}
+
 .coming {
     background-color: var(--success-background);
 
     td {
         color: white;
+
+        .icon {
+            fill: white;
+        }
     }
 }
 </style>
