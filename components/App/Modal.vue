@@ -44,7 +44,7 @@ function emitClick(action: string) {
     width: var(--page-width);
     top: 1rem;
     bottom: 1rem;
-    z-index: 2000;
+    z-index: 1000;
     background-color: var(--gray-darkest);
     color: var(--gray-lightest)
 }

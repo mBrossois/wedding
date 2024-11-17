@@ -1,8 +1,8 @@
 <template>
     <div class="flex flex-column gap-1">
         <label class="kurale-regular font-16">{{ label }}</label>
-        <select class="select rounded-medium p-1">
-            <option v-for="option of options" :key="option.value" :value=option.value :selected="option.isActive" @click="emitChange(option.value)">{{option.title}}</option>
+        <select class="select rounded-medium p-1" @change="emitChange">
+            <option v-for="option of options" :key="option.value" :value=option.value :selected="option.isActive">{{option.title}}</option>
         </select>
     </div>
 </template>
@@ -21,8 +21,8 @@ const emits = defineEmits<{
     (e: 'onChange', value: number): void
 }>()
 
-function emitChange(value: string|number) {
-    emits('onChange', Number(value))
+function emitChange(event: any) {
+    emits('onChange', Number(event.target?.value))
 }
 </script>
 

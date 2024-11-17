@@ -25,6 +25,7 @@ const { getToaster } = storeToRefs(toasterStore)
     left: 50%;
     transform: translateX(-50%);
     padding-bottom: 1rem;
+    z-index: 10000;
 }
 
 .toaster .toast-container.appear {
