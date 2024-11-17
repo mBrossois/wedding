@@ -5,11 +5,15 @@ export interface GuestList {
     amounts?: Array<GuestsAmounts>
 }
 
+export interface Form {
+    adults: Array<Guest>,
+    children: Array<Guest>,
+    rooms: Array<number>
+}
+
 export interface Guest {
-    id: number,
     firstName: string,
     lastName: string,
-    isAdult: boolean
 }
 
 export interface GuestsAmounts{
@@ -17,3 +21,9 @@ export interface GuestsAmounts{
     children: number,
     total: number
 }
+
+export type selectAmounts = Array<{
+    value: string|number
+    title: string,
+    isActive: boolean
+}>

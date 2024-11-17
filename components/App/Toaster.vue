@@ -20,7 +20,7 @@ const { getToaster } = storeToRefs(toasterStore)
 <style scoped>
 .toaster {
     width: var(--page-width);
-    position: sticky;
+    position: fixed;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
