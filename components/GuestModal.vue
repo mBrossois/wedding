@@ -47,10 +47,8 @@ function setName(value: string, lifeHood: string, type: string, id: number) {
     nameForm[id][type] = value;
     emits('updateForm', lifeHood, nameForm)
 }
-const toasterStore = useToasterStore()
-function updateAdults(value: number) {
-    toasterStore.addToast({type: 'success', message: 'New amount value'})
 
+function updateAdults(value: number) {
     const adultAmounts = [...props.amounts.adults]
     adultAmounts.find(amount => amount.isActive === true)!.isActive = false
     adultAmounts[value].isActive = true
