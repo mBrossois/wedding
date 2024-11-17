@@ -40,7 +40,7 @@ function emitClick(action: string) {
 <style>
 .modal {
     position: fixed;
-    height: calc(100vh - 2rem);
+    height: calc(100svh - 2rem);
     width: var(--page-width);
     top: 1rem;
     bottom: 1rem;

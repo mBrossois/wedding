@@ -36,7 +36,7 @@ function onLetterEntered() {
     if(lettercode.value) {
         store.setLettercode(lettercode.value)
         const localePath = useLocalePath()
-        navigateTo(localePath('/login'))
+        navigateTo(localePath({path: '/login', query: {type: 'account-creation'}}))
     } else {
         error.value = 'You need to fill something in!'
     }
