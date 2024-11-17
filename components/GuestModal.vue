@@ -25,6 +25,7 @@
 </template>
 
 <script setup lang="ts">
+import { useToasterStore } from '~/store/toaster';
 import type { Guest, selectAmounts } from '~/types/guests';
 
 const props = defineProps<{
@@ -46,8 +47,10 @@ function setName(value: string, lifeHood: string, type: string, id: number) {
     nameForm[id][type] = value;
     emits('updateForm', lifeHood, nameForm)
 }
-
+const toasterStore = useToasterStore()
 function updateAdults(value: number) {
+    toasterStore.addToast({type: 'success', message: 'New amount value'})
+
     const adultAmounts = [...props.amounts.adults]
     adultAmounts.find(amount => amount.isActive === true)!.isActive = false
     adultAmounts[value].isActive = true
