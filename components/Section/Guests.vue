@@ -184,8 +184,6 @@ const form: Ref<{adults: Array<Guest>, children: Array<Guest>, rooms: Array<numb
 
 function updateForm(lifeHood: string, value: Array<Guest>) {
     form.value[lifeHood] = value
-    toasterStore.addToast({type: 'success', message: `form ${value}`})
-
 }
 
 const amounts: Ref<{
@@ -228,7 +226,6 @@ setEmptyAmounts()
 
 function updateAmounts(lifeHood: string, value: selectAmounts) {
     amounts.value[lifeHood] = value
-    toasterStore.addToast({type: 'success', message: `amount ${value}`})
 }
 
 function actionClick(action: string) {
