@@ -66,6 +66,13 @@ const menuItems: ComputedRef<Array<{sections:
         }]
     },
     {
+        sections: [
+            getRole.value === 'admin' ? {
+            title: 'ADMIN',
+            to: '/admin'
+        }: {}]
+    },
+    {
         sections: [{
             title: 'LOG_OUT',
             isBtn: true

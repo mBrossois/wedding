@@ -12,6 +12,7 @@
         </div>
         <div class="stats section">
             <TitleDynamic title="Rooms" heading="h1" />
+            <SectionRooms />
         </div>
     </div>
 </template>

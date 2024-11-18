@@ -1,7 +1,7 @@
 <template>
     <div class="input-container">
         <label class="kurale-regular font-20">{{ label }}</label>
-        <input v-model="inputValue" class="input-field rounded-medium kurale-regular font-20" :id="id" :autocomplete="autocomplete" :type="inputType" :placeholder="placeholder" @input="onInput"/>
+        <input v-model="inputValue" :value="value" class="input-field rounded-medium kurale-regular font-20" :id="id" :autocomplete="autocomplete" :type="inputType" :placeholder="placeholder" @input="onInput"/>
         <ErrorLabel class="mt-0_5" :error="error" />
     </div>
 </template>
@@ -16,7 +16,7 @@ const emits = defineEmits<{
 
 const inputValue = ref(props.value)
 function onInput() {
-    emits('input', inputValue.value)
+    emits('input', inputValue.value as string)
 }
 </script>
 

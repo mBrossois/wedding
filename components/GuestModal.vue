@@ -25,7 +25,6 @@
 </template>
 
 <script setup lang="ts">
-import { useToasterStore } from '~/store/toaster';
 import type { Guest, selectAmounts } from '~/types/guests';
 
 const props = defineProps<{

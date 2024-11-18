@@ -3,6 +3,7 @@ export default defineI18nConfig(() => ({
     locale: 'en',
     messages: {
       en: {
+        ADMIN: 'Admin',
         MY_INFO: 'My info',
         LOCATION: 'Location',
         ROOMS: 'Rooms',
@@ -13,6 +14,7 @@ export default defineI18nConfig(() => ({
         WEDDING_INVITATION: 'We will have our wedding on 7 Juli and like to invite you to join us on this beautiful day.'
       },
       fr: {
+        ADMIN: 'Admin',
         MY_INFO: 'My info',
         LOCATION: 'Location',
         ROOMS: 'Rooms',
@@ -23,6 +25,7 @@ export default defineI18nConfig(() => ({
         WEDDING_INVITATION: 'We will have our wedding on 7 Juli and like to invite you to join us on this beautiful day.'
       },
       nl: {
+        ADMIN: 'Admin',
         MY_INFO: 'Mijn info',
         LOCATION: 'Locatie',
         ROOMS: 'Kamers',

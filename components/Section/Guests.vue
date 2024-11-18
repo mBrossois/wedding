@@ -50,7 +50,7 @@ import type { Ref } from 'vue';
 import { ref } from 'vue';
 import { useToasterStore } from '~/store/toaster';
 
-let activePage = 0;
+const activePage = ref(0);
 
 const { data: pages, refresh: refresPage } = await useFetch('/api/guest-pages', {
     method: 'get',
@@ -66,7 +66,7 @@ const { data: guests, status, refresh: refresGuests } = await useFetch('/api/gue
 })
 
 function changePage(page: number) {
-    activePage = page
+    activePage.value = page
     refresGuests()
 }
 
