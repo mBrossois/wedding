@@ -12,9 +12,9 @@ export default defineEventHandler(async (event) => {
     if(rooms) {      
         const roomsFormatted = rooms.map(room => {
             return {
+                id: room.id,
                 name: room.room_title,
                 amountOfPeople: room.amount_people,
-                free: room.free,
                 bookedBy: room.booked_by
             }
         })
