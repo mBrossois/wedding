@@ -7,16 +7,16 @@ export default defineEventHandler(async (event) => {
 
     try {
         const {data: auth, status: authStatus} = await client
-        .from('Authentication')
-        .insert([{}])
-        .select()
+            .from('Authentication')
+            .insert([{}])
+            .select()
 
         const {data: guestBook, status: guestBookStatus} = await client
-        .from('Guest_book')
-        .insert([
-            { adults, children, rooms, auth_id: auth![0].id },
-        ])
-        .select()
+            .from('Guest_book')
+            .insert([
+                { adults, children, rooms, free_room: form.isFreeRoom, auth_id: auth![0].id },
+            ])
+            .select()
 
         const guestsLists = [
             form.adults.map(adult => {
@@ -28,9 +28,18 @@ export default defineEventHandler(async (event) => {
         ] 
 
         const {data: guests, status: guestsStatus} = await client
-        .from('Guests')
-        .insert(guestsLists.flat())
-        .select()
+            .from('Guests')
+            .insert(guestsLists.flat())
+            .select()
+
+        const roomList = form.rooms.filter((room: number) => room !== -1)
+        for(const roomId of roomList) {
+            const {data: roomy, status: roomStatus} = await client
+                .from('Rooms')
+                .update({ booked_by: auth![0].id })
+                .eq('id', roomId)
+                .select()
+        }
 
         setResponseStatus(event, 200)
         return 'Added guests'
