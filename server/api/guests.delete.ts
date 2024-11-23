@@ -21,6 +21,12 @@ export default defineEventHandler(async (event) => {
             .delete()
             .eq('id', auth_id)
         
+        await client
+            .from('Rooms')
+            .update({ booked_by: null })
+            .eq('booked_by', auth_id)
+            .select()
+
         setResponseStatus(event, 200)
         return 'Deleted guests'
     

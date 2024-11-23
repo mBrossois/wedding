@@ -22,7 +22,7 @@
                 <td>{{ guest.attendanceData.adults + guest.attendanceData.children }}</td>
                 <td>{{ guest.attendanceData.rooms }}</td>
                 <td class="justify-between">
-                    <IconsEdit class="icon" @click="openEditModal(guest.attendanceData.id)"/>
+                    <IconsEdit class="icon" @click="openEditModal(guest.attendanceData.id, guest.attendanceData.auth_id)"/>
                     <IconsDelete class="icon" @click="openDeleteModal(guest.attendanceData.id, guest.attendanceData.auth_id, guest.name)"/></td>
             </tr>
             <tr>
@@ -36,6 +36,8 @@
         <GuestModal v-if="modal.type === 'guests'" 
             :amounts="amounts" 
             :form="form"
+            :rooms-available="rooms"
+            :active-room-name="activeRoomName"
             @update-amounts="updateAmounts"
             @update-form="updateForm"
             >
@@ -50,7 +52,7 @@ import type { Ref } from 'vue';
 import { ref } from 'vue';
 import { useToasterStore } from '~/store/toaster';
 
-let activePage = 0;
+const activePage = ref(0);
 
 const { data: pages, refresh: refresPage } = await useFetch('/api/guest-pages', {
     method: 'get',
@@ -65,8 +67,13 @@ const { data: guests, status, refresh: refresGuests } = await useFetch('/api/gue
     headers: useRequestHeaders(['cookie'])
 })
 
+const { data: rooms, refresh: refreshRooms } = await useFetch('/api/rooms-available', {
+    method: 'get',
+    headers: useRequestHeaders(['cookie'])
+})
+
 function changePage(page: number) {
-    activePage = page
+    activePage.value = page
     refresGuests()
 }
 
@@ -96,14 +103,17 @@ function resetFields () {
     form.value.adults = []
     form.value.children = []
     form.value.rooms = []
+    form.value.isFreeRoom = false
+    activeRoomName.value = []
     guestBookId = 0
     authId = 0
     deleteName.value = ''
     setEmptyAmounts()
 }
 
+const activeRoomName = ref([])
 let guestBookId = 0
-async function openEditModal(id: number) {
+async function openEditModal(id: number, authId: number) {
     modal.value = { 
         type: 'guests',
         isOpen: true,
@@ -122,6 +132,24 @@ async function openEditModal(id: number) {
         last_name: string,
         is_adult: boolean
     }
+
+    const roomsResult = await $fetch<Array<number>>('/api/rooms-by-id', {
+        method: 'get',
+        query: {
+            auth_id: authId
+        },
+        headers: useRequestHeaders(['cookie'])
+    })
+
+    let rooms = 0
+    for(const room of roomsResult) {
+        rooms++
+        form.value.rooms.push(room.id)
+        activeRoomName.value.push(room.room_title)
+    }
+
+    amounts.value.rooms.find(amount => amount.isActive === true)!.isActive = false
+    amounts.value.rooms[rooms].isActive = true
 
     const response = await $fetch<Array<Guest>>('/api/guest-by-id', {
             method: 'get',
@@ -176,10 +204,11 @@ function openDeleteModal(guestId: number, authIdValue: number, name: string) {
     deleteName.value = name
 }
 
-const form: Ref<{adults: Array<Guest>, children: Array<Guest>, rooms: Array<number>}> = ref({
+const form: Ref<{adults: Array<Guest>, children: Array<Guest>, rooms: Array<number>, isFreeRoom: boolean}> = ref({
     adults: [],
     children: [],
-    rooms: []
+    rooms: [],
+    isFreeRoom: false
 })
 
 function updateForm(lifeHood: string, value: Array<Guest>) {

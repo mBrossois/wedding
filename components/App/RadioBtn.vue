@@ -1,7 +1,7 @@
 <template>
-    <label class="radio-btn flex gap-0_5 items-center">
-        <input type="radio" class="rounded-small" :checked="checked" :name="name" :value="value" @input="sendClick">
-        <IconsCheckmark class="checkmark" />
+    <label :class="{'is-light': isLight}" class="radio-btn flex gap-0_5 items-center">
+        <input type="radio" class="rounded-small" :checked="checked" :name="name" :value="value" @click="sendClick">
+        <IconsCheckmark :isLight="isLight" class="checkmark" />
         {{ label }}
     </label>
 </template>
@@ -11,7 +11,8 @@ const props = defineProps<{
     value: string,
     label: string,
     name: string,
-    checked: boolean
+    checked: boolean,
+    isLight: boolean
 }>()
 
 const emits = defineEmits<{
@@ -26,6 +27,10 @@ function sendClick() {
 <style scoped>
 .radio-btn {
     cursor: pointer;
+}
+
+.radio-btn.is-light input[type="radio"] {
+    border-color: white;
 }
 
 input[type="radio"] {
