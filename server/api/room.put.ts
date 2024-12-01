@@ -4,7 +4,6 @@ export default defineEventHandler(async (event) => {
     const { roomId, room_title, amount_people } = await readBody<{roomId: number, room_title: number, amount_people: number}>(event)
 
     const client = await serverSupabaseClient(event)
-    console.log('put m away')
     try {
         await client
             .from('Rooms')

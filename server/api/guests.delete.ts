@@ -10,6 +10,13 @@ export default defineEventHandler(async (event) => {
             .from('Guests')
             .delete()
             .eq('guest_id', guest_book_id)
+
+        await client
+            .from('Rooms')
+            .update({ booked_by: null, child_bed: null })
+            .eq('booked_by', auth_id)
+            .select()
+
         
         await client
             .from('Guest_book')
@@ -21,12 +28,6 @@ export default defineEventHandler(async (event) => {
             .delete()
             .eq('id', auth_id)
         
-        await client
-            .from('Rooms')
-            .update({ booked_by: null })
-            .eq('booked_by', auth_id)
-            .select()
-
         setResponseStatus(event, 200)
         return 'Deleted guests'
     

@@ -14,7 +14,7 @@ export default defineEventHandler(async (event) => {
         const {data: guestBook, status: guestBookStatus} = await client
             .from('Guest_book')
             .insert([
-                { adults, children, rooms, free_room: form.isFreeRoom, auth_id: auth![0].id },
+                { adults, children, rooms, free_room: form.isFreeRoom, is_coming: form.isComing, auth_id: auth![0].id },
             ])
             .select()
 
@@ -32,12 +32,12 @@ export default defineEventHandler(async (event) => {
             .insert(guestsLists.flat())
             .select()
 
-        const roomList = form.rooms.filter((room: number) => room !== -1)
-        for(const roomId of roomList) {
+        const roomList = form.rooms.filter((room: {id: number, childBed: boolean}) => room.id !== -1)
+        for(const room of roomList) {
             const {data: roomy, status: roomStatus} = await client
                 .from('Rooms')
-                .update({ booked_by: auth![0].id })
-                .eq('id', roomId)
+                .update({ booked_by: auth![0].id, child_bed: room.childBed })
+                .eq('id', room.id)
                 .select()
         }
 

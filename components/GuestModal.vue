@@ -15,13 +15,19 @@
             <hr />
             <TitleDynamic title="Rooms" heading="h2" />
             <div class="flex flex-column gap-2">
-                <AppSelect v-for="(room, index) in form.rooms" :key="index" label="room" :options="showRooms(index)" @onChange="setRoom($event, index)"/>
+                <div v-for="(room, index) in form.rooms" :key="index" class="flex flex-column gap-1">
+                    <AppSelect  label="room" :options="showRooms(index)" @onChange="setRoom($event, index)"/>
+                    <AppRadioBtn class="mt-0_5" isLight name="ChildBed" label="Add child bed" value="addChildBed" :checked="room.childBed || false" @onclick="updateChildBed(index)"></AppRadioBtn>
+                </div>
             </div>
             <hr />
         </div>
     </div>
     <div class="bottom-section">
-        <AppRadioBtn class="mt-0_5" isLight name="Free room" label="Get free room" value="isFreeRoom" :checked="form.isFreeRoom" @onclick="updateFreeRoom"></AppRadioBtn>
+        <div class="flex justify-between">
+            <AppRadioBtn class="mt-0_5" isLight name="Free room" label="Get free room" value="isFreeRoom" :checked="form.isFreeRoom || false" @onclick="updateFreeRoom"></AppRadioBtn>
+            <AppRadioBtn class="mt-0_5" isLight name="Coming" label="Coming" value="coming" :checked="form.isComing || false" @onclick="updateComing"></AppRadioBtn>
+        </div>
         <div class="amounts mt-0_5 flex gap-1 justify-between">
             <AppSelect label="Adults" :options="amounts.adults" @onChange="updateAdults"/>
             <AppSelect label="Under 12" :options="amounts.children" @onChange="updateChildren"/>
@@ -31,10 +37,10 @@
 </template>
 
 <script setup lang="ts">
-import type { Guest, selectAmounts } from '~/types/guests';
+import type { Guest, GuestRoom, selectAmounts } from '~/types/guests';
 
 const props = defineProps<{
-    form: {adults: Array<Guest>, children: Array<Guest>, rooms: Array<string>, isFreeRoom: boolean},
+    form: {adults: Array<Guest>, children: Array<Guest>, rooms: Array<GuestRoom>, isFreeRoom: boolean, isComing: boolean},
     amounts: {
         adults: selectAmounts
         children: selectAmounts
@@ -46,18 +52,29 @@ const props = defineProps<{
 
 const emits = defineEmits<{
     (e: 'updateAmounts', lifeHood: string, value: selectAmounts): void
-    (e: 'updateForm', lifeHood: string, form: Array<Guest | number> | boolean): void
+    (e: 'updateForm', lifeHood: string, form: Array<Guest | GuestRoom> | boolean): void
 }>()
 
 function updateFreeRoom() {
     emits('updateForm', 'isFreeRoom', !props.form.isFreeRoom)
 }
 
+function updateComing() {
+    emits('updateForm', 'isComing', !props.form.isComing)
+}
+
+function updateChildBed(index: number) {
+    const rooms = [...props.form.rooms]
+    rooms[index].childBed = !rooms[index].childBed
+    emits('updateForm', 'rooms', rooms)
+}
+
 function showRooms(index: number) {
     const rooms = props.roomsAvailable.filter(room => !(props.form.rooms.includes(room.value) && props.form.rooms[index] !== room.value) )
     rooms.unshift({title: 'None', value: -1, isActive: false})
-    if(props.activeRoomName.length) {
-        rooms.unshift({title: props.activeRoomName[index], value: props.form.rooms[index], isActive: true})
+
+    if(props.activeRoomName.length - 1 >= index) {
+        rooms.unshift({title: props.activeRoomName[index], value: props.form.rooms[index].id, isActive: true, childBed: props.form.rooms[index].childBed})
     }
     return rooms
 }
@@ -71,7 +88,7 @@ function setName(value: string, lifeHood: string, type: string, id: number) {
 
 function setRoom(value: number, roomSelect: number) {
     const nameForm = [...props.form.rooms]
-    nameForm[roomSelect] = value;
+    nameForm[roomSelect] = {id: value, childBed: nameForm[roomSelect].childBed};
     emits('updateForm', 'rooms', nameForm)
 }
 
