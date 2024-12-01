@@ -104,6 +104,7 @@ function resetFields () {
     form.value.children = []
     form.value.rooms = []
     form.value.isFreeRoom = false
+    form.value.isComing = false
     activeRoomName.value = []
     guestBookId = 0
     authId = 0
@@ -123,6 +124,10 @@ async function openEditModal(id: number, authId: number) {
             {title: 'update', action: 'patch'}
         ]
     }
+
+    const guestBook = guests.value?.find(guestBookEntry => guestBookEntry.attendanceData.id === id).attendanceData
+    form.value.isFreeRoom = guestBook.free_room
+    form.value.isComing = guestBook.is_coming
 
     guestBookId = id
 
@@ -144,24 +149,24 @@ async function openEditModal(id: number, authId: number) {
     let rooms = 0
     for(const room of roomsResult) {
         rooms++
-        form.value.rooms.push(room.id)
+        form.value.rooms.push({id: room.id, childBed: room.child_bed})
         activeRoomName.value.push(room.room_title)
     }
 
     amounts.value.rooms.find(amount => amount.isActive === true)!.isActive = false
     amounts.value.rooms[rooms].isActive = true
 
-    const response = await $fetch<Array<Guest>>('/api/guest-by-id', {
-            method: 'get',
-            query: {
-                guest_book_id: id
-            },
-            headers: useRequestHeaders(['cookie'])
-        })
+    const guestResponse = await $fetch<Array<Guest>>('/api/guest-by-id', {
+        method: 'get',
+        query: {
+            guest_book_id: id
+        },
+        headers: useRequestHeaders(['cookie'])
+    })
 
     let adults = 0
     let children = 0
-    for(const guest of response) {
+    for(const guest of guestResponse) {
         if(guest.is_adult) {
             adults++
             form.value.adults.push({
@@ -204,11 +209,12 @@ function openDeleteModal(guestId: number, authIdValue: number, name: string) {
     deleteName.value = name
 }
 
-const form: Ref<{adults: Array<Guest>, children: Array<Guest>, rooms: Array<number>, isFreeRoom: boolean}> = ref({
+const form: Ref<{adults: Array<Guest>, children: Array<Guest>, rooms: Array<number>, isFreeRoom: boolean, isComing: boolean}> = ref({
     adults: [],
     children: [],
     rooms: [],
-    isFreeRoom: false
+    isFreeRoom: false,
+    isComing: false
 })
 
 function updateForm(lifeHood: string, value: Array<Guest>) {

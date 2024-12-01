@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
     const {data: rooms} = await client
         .from('Rooms')
-        .select('id, room_title')
+        .select('id, room_title, child_bed')
         .eq('booked_by', auth_id)
             
     if(rooms) {              

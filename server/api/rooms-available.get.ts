@@ -7,9 +7,9 @@ export default defineEventHandler(async (event) => {
         .select('*')
         .is('booked_by', null)
             
-    if(rooms) {              
+    if(rooms) {           
         setResponseStatus(event, 200)
-        return rooms.map(room => {return {title: room.room_title, value: room.id}})
+        return rooms.map(room => {return {title: room.room_title, value: room.id, childBed: room.child_bed}})
     }
 
     setResponseStatus(event, 500)

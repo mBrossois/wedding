@@ -27,6 +27,7 @@ function sendClick() {
 <style scoped>
 .radio-btn {
     cursor: pointer;
+    position: relative;
 }
 
 .radio-btn.is-light input[type="radio"] {

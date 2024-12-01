@@ -8,12 +8,19 @@ export interface GuestList {
 export interface Form {
     adults: Array<Guest>,
     children: Array<Guest>,
-    rooms: Array<number>
+    rooms: Array<GuestRoom>
+    isComing: boolean,
+    isFreeRoom: boolean
 }
 
 export interface Guest {
     firstName: string,
     lastName: string,
+}
+
+export interface GuestRoom {
+    id: number,
+    childBed: boolean,
 }
 
 export interface GuestsAmounts{

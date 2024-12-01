@@ -124,10 +124,12 @@ async function openEditModal(roomId: number) {
         const result = await $fetch('/api/room-guest', {
             method: 'get',
             query: {
-                roomId: room.bookedBy,
+                authId: room.bookedBy,
             },
             headers: useRequestHeaders(['cookie'])
         })
+
+        console.log(result)
 
         if(result) {
             guest.bookedBy = result.bookedBy

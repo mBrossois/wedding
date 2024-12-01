@@ -1,23 +1,24 @@
 import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
-    const {guestId} = getQuery<{guestId: number}>(event)
+    const {authId} = getQuery<{guestId: number}>(event)
 
     try {
         const client = await serverSupabaseClient(event)
         const {data: guestBook} = await client
             .from('Guest_book')
-            .select('*')
-            .eq('id', guestId)
-                
+            .select('id, free_room')
+            .eq('auth_id', authId)
+            .single()
+
         const {data: guest} = await client
-            .from('Guest_book')
-            .select('first_name, second_name')
-            .eq('guest_id', guestId)
+            .from('Guests')
+            .select('first_name, last_name')
+            .eq('guest_id', guestBook?.id)
             .limit(1)
-    
+        
         setResponseStatus(event, 200)
-        return guest
+        return {bookedBy: guest[0].first_name + ' ' + guest[0].last_name, free: guestBook?.free_room}
         
     } catch(e) {
         setResponseStatus(event, 500)
