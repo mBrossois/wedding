@@ -129,8 +129,6 @@ async function openEditModal(roomId: number) {
             headers: useRequestHeaders(['cookie'])
         })
 
-        console.log(result)
-
         if(result) {
             guest.bookedBy = result.bookedBy
             guest.free = result.free
