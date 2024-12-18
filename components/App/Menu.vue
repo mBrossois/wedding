@@ -1,9 +1,9 @@
 <template>
     <nav class="menu absolute rounded-large mt-0_5" :class="{open: open}">
-        <div v-for="(menuSection, index) in menuItems" class="flex flex-column gap-1">
-            <div v-for="menuItem in menuSection.sections" class="flex flex-column gap-1">
+        <div v-for="(menuSection, index) in menuItems" :key="index" class="menu-block flex flex-column gap-1">
+            <div v-for="menuItem in menuSection.sections" :key="menuItem.title" :class="{hidden: menuItem.hidden}" class="flex flex-column gap-1">
                 <div class="flex items-center justify-between">
-                    <AppLink :to="setTo(menuItem.to)" :text="$t(menuItem.title)" :no-arrow="menuItem.isLanguage" class="menu-item" size="large" @on-click="click(menuItem.title)"/>
+                    <AppLink :to="setTo(menuItem.to)" :text="$t(menuItem.title)" :no-arrow="menuItem.isLanguage" class="menu-item" size="large" :has-underline="false" @on-click="click(menuItem.title)"/>
                     <div><IconsFlagSelector v-if="menuItem.isLanguage" :open="flagsOpen" @on-click="toggleOpen"/></div>
                 </div>
             </div>
@@ -24,6 +24,8 @@ const emits = defineEmits<{(e: 'onClose'): void}>()
 
 const userStore = useUsersStore()
 const { getRole } = storeToRefs(userStore)
+
+console.log(getRole.value)
 
 const localePath = useLocalePath()
 function setTo(route?: string) {
@@ -61,11 +63,11 @@ const menuItems: ComputedRef<Array<{sections:
         }]
     },
     {
-        sections: [
-            getRole.value === 'admin' ? {
+        sections: [{
             title: 'ADMIN',
-            to: '/admin'
-        }: {}]
+            to: '/admin',
+            hidden: getRole.value !== 'admin'
+        }]
     },
     {
         sections: [{
@@ -139,5 +141,9 @@ async function click(menuItem: string) {
 
 .menu-item .link {
     overflow: visible;
+}
+
+.menu-block:has(> .hidden) {
+    display: none;
 }
 </style>

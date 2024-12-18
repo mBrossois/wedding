@@ -8,10 +8,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const { data: role } = await useFetch('/api/role', {
       method: 'get'
     })
-  
     if(role.value && role.value === 'guest') {
         usersStore.setRole(RoleEnum.loggedIn)
-    } else if(role.value === 'admin') {
+    } 
+    else if(role.value === 'admin') {
         usersStore.setRole(RoleEnum.admin)
     }
   }
