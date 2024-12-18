@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   css: [
     "@/assets/css/main.css"
   ],
-  modules: ['@pinia/nuxt', "@nuxtjs/supabase", '@nuxtjs/i18n'],
+  modules: ['@pinia/nuxt', "@nuxtjs/supabase", '@nuxtjs/i18n', '@nuxtjs/leaflet'],
   supabase: {
     redirectOptions: {
       login: '/en/login',

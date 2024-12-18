@@ -1,7 +1,7 @@
 import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
-    const {authId} = getQuery<{guestId: number}>(event)
+    const {authId} = getQuery<{authId: number}>(event)
 
     try {
         const client = await serverSupabaseClient(event)
