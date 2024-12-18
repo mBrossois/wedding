@@ -3,7 +3,7 @@
         <div class="btn-container__hover" @click="onClick"></div>
         <div class="btn-overlay horizontal" />
         <div class="btn-overlay vertical" />
-        <AppParagraph :text=text size="big" class="btn rounded-medium kurale-regular font-20" />
+        <AppParagraph :class="textClasses" :text=text size="big" class="btn rounded-medium kurale-regular" />
     </component>
 </template>
 
@@ -12,6 +12,7 @@
 const props = defineProps<{
     text: string,
     to?: string,
+    smallText?: boolean,
     isDark?: boolean
 }>()
 
@@ -20,6 +21,10 @@ const emits = defineEmits<{
 }>()
 
 const component = props.to ? resolveComponent('NuxtLink') : 'button'
+
+const textClasses = [
+    `font-${props.smallText ? '16' : '20'}`
+]
 
 function onClick() {
     emits('click')

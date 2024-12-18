@@ -5,8 +5,10 @@ export const useGuestsStore = defineStore('guests', () => {
     const getGuestBookId = computed(() => guestsBook.value?.id)
     const getIsComing = computed(() => guestsBook.value?.isComing)
     function setGuestComing(isComing: boolean) {
+        console.log(guestsBook.value)
         if(guestsBook.value) {
             guestsBook.value.isComing = isComing
+            console.log(guestsBook.value.isComing)
         }
     }
     const getGuests = computed(() => guestsBook.value?.guests)

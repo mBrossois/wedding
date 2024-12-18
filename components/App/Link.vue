@@ -1,5 +1,5 @@
 <template>
-    <component :is="to ? NuxtLink : 'button'" :class="[fontSize, {'no-arrow': noArrow}]" class="link kurale-regular" :to="to" @click="onClick">
+    <component :is="to ? NuxtLink : 'button'" :class="[fontSize, {'no-arrow': noArrow}]" class="link kurale-regular" :to="to" :target="target" @click="onClick">
         {{ text }} 
         <IconsArrow />
     </component>
@@ -7,12 +7,17 @@
 
 <script setup lang="ts">
 import { NuxtLink } from '#components';
-const props = defineProps<{
+const props = withDefaults(defineProps<{
     to?: string,
     text: string,
+    target?: string
     size?: 'large' | 'medium',
     noArrow?: boolean
-}>()
+}>(),
+    {
+        target: '_self'
+    }
+)
 
 const fontSize = props.size === 'large' ? 'font-20' : 'font-16'
 
@@ -28,7 +33,7 @@ function onClick() {
 <style scoped>
 .link {
     color: var(--gray-darkest);
-    text-decoration: none;
+    text-decoration: underline;
     background-color: transparent;
     border: none;
     text-align: left;

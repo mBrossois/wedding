@@ -15,7 +15,6 @@
 <script setup lang="ts">
 import { useToasterStore } from '~/store/toaster';
 import { useUsersStore } from '~/store/users'
-import { RoleEnum } from '~/types/users';
 
 defineProps<{
     open: Boolean
@@ -53,10 +52,6 @@ const menuItems: ComputedRef<Array<{sections:
             {
                 title: 'LOCATION',
                 to: '/location'
-            },
-            {
-                title: 'PRESENT_TIPS',
-                to: '/present-tips'
             },
         ]
     }, {
