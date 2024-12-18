@@ -25,15 +25,13 @@ const emits = defineEmits<{(e: 'onClose'): void}>()
 const userStore = useUsersStore()
 const { getRole } = storeToRefs(userStore)
 
-console.log(getRole.value)
-
 const localePath = useLocalePath()
 function setTo(route?: string) {
     return route ? localePath(route) : undefined
 }
 
 const menuItems: ComputedRef<Array<{sections: 
-    Array<{title: string, to?: string, isLanguage?: boolean, isBtn?: boolean}>
+    Array<{title: string, to?: string, hidden?: boolean, isLanguage?: boolean, isBtn?: boolean}>
 }>> = computed(() => getRole.value ? [
     {
         sections: [{
