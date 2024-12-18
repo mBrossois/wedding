@@ -1,5 +1,5 @@
 <template>
-    <component :is="to ? NuxtLink : 'button'" :class="[fontSize, {'no-arrow': noArrow}]" class="link kurale-regular" :to="to" :target="target" @click="onClick">
+    <component :is="to ? NuxtLink : 'button'" :class="classes" class="link kurale-regular" :to="to" :target="target" @click="onClick">
         {{ text }} 
         <IconsArrow />
     </component>
@@ -13,13 +13,17 @@ const props = withDefaults(defineProps<{
     target?: string
     size?: 'large' | 'medium',
     noArrow?: boolean
+    hasUnderline?: boolean,
 }>(),
     {
-        target: '_self'
+        target: '_self',
+        hasUnderline: true
     }
 )
 
 const fontSize = props.size === 'large' ? 'font-20' : 'font-16'
+
+const classes = [fontSize, {'no-arrow': props.noArrow}, {underline: props.hasUnderline}]
 
 const emits = defineEmits<{
   (e: 'onClick'): void
@@ -33,12 +37,15 @@ function onClick() {
 <style scoped>
 .link {
     color: var(--gray-darkest);
-    text-decoration: underline;
     background-color: transparent;
     border: none;
     text-align: left;
 
     cursor: pointer;
+}
+
+.link.underline {
+    text-decoration: underline;
 }
 
 .link:hover .arrow {

@@ -3,7 +3,7 @@
         <div class="login-section flex flex-column gap-2">
             <TitleDynamic :title="title.title" :heading="title.heading" />
             <div class="flex flex-column items-center gap-1">
-                <InputBlock id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
+                <InputBlock :value="email" id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
                 <AppButton :text="activeText" @click="onSubmit"/>
             </div>
         </div>
