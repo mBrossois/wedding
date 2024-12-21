@@ -104,10 +104,6 @@ async function updateAttendance(value: string) {
 
     if(response === "Updated attendance") {
         guestsStore.setGuestComing(value === 'yes')
-        toasterStore.addToast({
-            type: 'success',
-            message: `Set attendance for ${guestsStore.getGuestBookId} to ${value}`
-        })
     } else {
         toasterStore.addToast({
             type: 'error',
