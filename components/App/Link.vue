@@ -40,6 +40,7 @@ function onClick() {
     background-color: transparent;
     border: none;
     text-align: left;
+    text-decoration: none;
 
     cursor: pointer;
 }

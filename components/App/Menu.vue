@@ -98,7 +98,6 @@ async function click(menuItem: string) {
             userStore.setRole(undefined)
             const localePath = useLocalePath()
             navigateTo(localePath('/login'))
-            emits('onClose')
         } else {
             const toastStore = useToasterStore()
             toastStore.addToast({type: 'error', message: 'Could not log you out'})
@@ -107,6 +106,8 @@ async function click(menuItem: string) {
 
     if(menuItem === 'LANGUAGE') {
         toggleOpen()
+    } else {
+        emits('onClose')
     }
 }
 </script>
