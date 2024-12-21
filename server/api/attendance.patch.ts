@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
             .eq('id', id)
             .select()
 
-            if(data?.length) {
+            if(status === 200) {
                 setResponseStatus(event, 200)
                 return 'Updated attendance'
             }
