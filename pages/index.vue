@@ -4,11 +4,11 @@
         <AppParagraph :text="$t('WEDDING_INVITATION')" />
 
         <div class="flex gap-1 flex-column">
-            <fieldset class="attendance-field flex flex-column gap-1" @input="updateAttendance">
+            <fieldset class="attendance-field flex flex-column gap-1">
                 <legend class="mb-1"><TitleDynamic title="Will you be attending our wedding?" heading="h2" /></legend>
                 <div class="flex justify-center gap-1">
-                    <AppRadioBtn :checked="!!getIsComing" :is-light="false" value="yes" label="yes" name="attend_wedding" />
-                    <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" label="no" name="attend_wedding" />
+                    <AppRadioBtn :checked="!!getIsComing" :is-light="false" value="yes" label="yes" name="attend_wedding" @onclick="updateAttendance" />
+                    <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" label="no" name="attend_wedding" @onclick="updateAttendance" />
                 </div>
             </fieldset>
             <AppLink class="transition-300 m-auto" :class="`opacity-${!!getIsComing ? 1 : 0}`" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/my-info')"/>
@@ -92,21 +92,21 @@ if(user.value?.email) {
     await guestsStore.setInitialGuestsBook(user.value.email)
 }
 
-async function updateAttendance(value: any) {
+async function updateAttendance(value: string) {
     const response = await $fetch('/api/attendance', {
         method: 'patch',
         body: {
-            attendance: value.originalTarget.value,
+            attendance: value,
             id: guestsStore.getGuestBookId
         },
         headers: useRequestHeaders(['cookie'])
     })
 
     if(response === "Updated attendance") {
-        guestsStore.setGuestComing(value.originalTarget.value === 'yes')
+        guestsStore.setGuestComing(value === 'yes')
         toasterStore.addToast({
             type: 'success',
-            message: `Set attendance for ${guestsStore.getGuestBookId} to ${value.originalTarget.value}`
+            message: `Set attendance for ${guestsStore.getGuestBookId} to ${value}`
         })
     } else {
         toasterStore.addToast({
