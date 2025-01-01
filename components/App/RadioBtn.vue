@@ -9,10 +9,10 @@
 <script setup lang="ts">
 const props = defineProps<{
     value: string,
-    label: string,
+    label?: string,
     name: string,
     checked: boolean,
-    isLight: boolean
+    isLight?: boolean
 }>()
 
 const emits = defineEmits<{

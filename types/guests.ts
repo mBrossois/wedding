@@ -2,7 +2,7 @@ export interface GuestList {
     id: number,
     isComing: boolean,
     guests?: Array<Guest>,
-    amounts?: Array<GuestsAmounts>
+    amounts?: GuestsAmounts
 }
 
 export interface Form {
@@ -14,8 +14,10 @@ export interface Form {
 }
 
 export interface Guest {
+    id?: number,
     firstName: string,
     lastName: string,
+    isAdult?: boolean
 }
 
 export interface GuestRoom {

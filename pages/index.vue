@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-column gap-2 mt-2 px-2">
+    <AppLayout>
         <TitleDynamic :title="`${$t('WELCOME')} ${firstNames}!`" heading="h1" />
         <AppParagraph :text="$t('WEDDING_INVITATION')" />
 
@@ -11,7 +11,7 @@
                     <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" label="no" name="attend_wedding" @onclick="updateAttendance" />
                 </div>
             </fieldset>
-            <AppLink class="transition-300 m-auto" :class="`opacity-${!!getIsComing ? 1 : 0}`" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/my-info')"/>
+            <AppLink class="transition-300 m-auto" :class="`opacity-${!!getIsComing ? 1 : 0}`" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/guests')"/>
         </div>
         
         <div class="flex gap-1 flex-column">
@@ -52,14 +52,13 @@
             <AppParagraph :text="`${$t('AVAILABLE')} - ${rooms.available} / ${rooms.total}`" />
             <AppButton small-text :text="$t('BOOK_ROOM')" :to="localePath('/rooms')" />
         </div>
-    </div>
+    </AppLayout>
 </template>
 
 <script setup lang="ts">
 import { useGuestsStore } from '~/store/guests';
 import { useToasterStore } from '~/store/toaster';
 
-const user = useSupabaseUser()
 const guestsStore = useGuestsStore()
 const toasterStore = useToasterStore()
 
@@ -87,10 +86,6 @@ const secondDay = [
     {time: '08:00', activity: 'BREAKFAST'},
     {time: '11:00', activity: 'CHECK_OUT'},
 ]
-
-if(user.value?.email) {
-    await guestsStore.setInitialGuestsBook(user.value.email)
-}
 
 async function updateAttendance(value: string) {
     const response = await $fetch('/api/attendance', {

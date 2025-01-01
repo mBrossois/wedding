@@ -1,5 +1,5 @@
 <template>
-    <div class="input-container">
+    <div :class="variant" class="input-container">
         <label class="kurale-regular font-20">{{ label }}</label>
         <input v-model="inputValue" :value="value" class="input-field rounded-medium kurale-regular font-20" :id="id" :autocomplete="autocomplete" :type="inputType" :placeholder="placeholder" @input="onInput"/>
         <ErrorLabel class="mt-0_5" :error="error" />
@@ -23,6 +23,17 @@ function onInput() {
 <style scoped>
 .input-container {
     width: min-content;
+}
+
+.input-container.secondary .input-field{
+  width: 94px;
+  border-color: transparent;
+}
+
+.input-container.secondary:hover .input-field,
+.input-container.secondary .input-field:focus-visible{
+  border-color: var(--gray-darkest);
+  outline: none;
 }
 
 .input-field {
