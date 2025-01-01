@@ -34,13 +34,11 @@ const menuItems: ComputedRef<Array<{sections:
     Array<{title: string, to?: string, hidden?: boolean, isLanguage?: boolean, isBtn?: boolean}>
 }>> = computed(() => getRole.value ? [
     {
-        sections: [{
-            title: 'MY_INFO',
-            to: '/my-info'
-        }]
-    },
-    {
         sections: [
+            {
+                title: 'Guests',
+                to: '/guests'
+            },
             {
                 title: 'ROOMS',
                 to: '/rooms'

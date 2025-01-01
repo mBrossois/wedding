@@ -1,4 +1,4 @@
-import type { GuestList } from "~/types/guests"
+import type { Guest, GuestList } from "~/types/guests"
 
 export const useGuestsStore = defineStore('guests', () => {
     const guestsBook: Ref<GuestList|undefined> = ref()
@@ -27,5 +27,40 @@ export const useGuestsStore = defineStore('guests', () => {
         }
     }
 
-    return { getIsComing, getGuestBookId, getGuests, getGuestAmount, setInitialGuestsBook, setGuestComing }
+    function addGuest() {
+        if(guestsBook.value && !guestsBook.value.guests) {
+            guestsBook.value.guests = []
+        } 
+
+        if(guestsBook.value && guestsBook.value.guests) {
+            const id = guestsBook.value.guests.length
+
+            guestsBook.value.guests!.push({id: id ,firstName: '', lastName: '', isAdult: true})
+            return id
+        }
+
+        return undefined
+    }
+
+    function updateGuestId(oldId: number, newId: number) {
+        const guest = guestsBook.value?.guests?.find(guest => guest.id === oldId)
+        if(guest) guest.id = newId
+    }
+
+    function updateGuest(value: string | boolean, variant: keyof Guest, id: number) {
+        const guest = guestsBook.value?.guests?.find(guest => guest.id === id)
+        if(guest && variant === 'isAdult') {
+            guest.isAdult = !guest.isAdult
+        }
+        else if(guest) {
+            guest[variant] = value
+        }
+        return guest
+    }
+
+    function deleteGuest(id: number) {
+        if(guestsBook.value) guestsBook.value.guests = guestsBook.value.guests?.filter(guest => guest.id !== id)
+    }
+
+    return { getIsComing, getGuestBookId, getGuests, getGuestAmount, setInitialGuestsBook, setGuestComing, addGuest, updateGuestId, updateGuest, deleteGuest }
   })

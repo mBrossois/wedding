@@ -20,6 +20,10 @@ ul {
     list-style: none;
 }
 
+table {
+    text-align: left;
+}
+
 .page-width {
     width: var(--page-width);
 }

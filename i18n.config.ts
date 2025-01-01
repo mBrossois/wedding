@@ -25,7 +25,12 @@ export default defineI18nConfig(() => ({
         MORE_INFO: "More info",
         BOOK_ROOM: "Book a room",
         AVAILABLE: "Available",
-        NETHERLAND: "Nederland"
+        NETHERLAND: "Nederland",
+        COMING: "Who is coming?",
+        ADD_GUEST: "Add guest",
+        FIRSTNAME: "First name",
+        LASTNAME: "Last name",
+        AGE: "Over 14",
       },
       fr: {
         ADMIN: '',
@@ -51,6 +56,11 @@ export default defineI18nConfig(() => ({
         BOOK_ROOM: "",
         AVAILABLE: "",
         NETHERLAND: "",
+        COMING: "",
+        ADD_GUEST: "",
+        FIRSTNAME: "",
+        LASTNAME: "",
+        AGE: "",
       },
       nl: {
         ADMIN: 'Admin',
@@ -76,6 +86,11 @@ export default defineI18nConfig(() => ({
         BOOK_ROOM: "Boek een kamer",
         AVAILABLE: "Beschikbaar",
         NETHERLAND: "Netherlands",
+        COMING: "Wie komen er?",
+        ADD_GUEST: "Gast toevoegen",
+        FIRSTNAME: "Voornaam",
+        LASTNAME: "Achternaam",
+        AGE: "Over 14",
       }
     }
   }))
