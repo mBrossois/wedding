@@ -23,3 +23,7 @@
 .flex-column {
     flex-direction: column;
 }
+
+.contents {
+    display: contents;
+}

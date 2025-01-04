@@ -1,6 +1,8 @@
 export interface GuestList {
     id: number,
+    authId: number,
     isComing: boolean,
+    isFreeRoom?: boolean
     guests?: Array<Guest>,
     amounts?: GuestsAmounts
 }
