@@ -5,7 +5,6 @@ export default defineEventHandler(async (event) => {
     const { newRoom, oldRoom, authId, amountRooms, bookedDate } = await readBody<{newRoom?: Room, oldRoom?: Room, authId: number, amountRooms: number, bookedDate: Date}>(event)
 
     const client = await serverSupabaseClient(event)
-    console.log(bookedDate)
     try {
         if(oldRoom) {
             await client
