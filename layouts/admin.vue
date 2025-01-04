@@ -1,9 +1,7 @@
 <template>
     <div>
         <AppHeader class="navbar" />
-        <AppLayout>
-            <slot />
-        </AppLayout>
+        <slot />
         <AppToaster />
     </div>
 </template>

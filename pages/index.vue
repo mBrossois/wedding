@@ -1,58 +1,56 @@
 <template>
-    <AppLayout>
-        <TitleDynamic :title="`${$t('WELCOME')} ${firstNames}!`" heading="h1" />
-        <AppParagraph :text="$t('WEDDING_INVITATION')" />
+    <TitleDynamic :title="`${$t('WELCOME')} ${firstNames}!`" heading="h1" />
+    <AppParagraph :text="$t('WEDDING_INVITATION')" />
 
-        <div class="flex gap-1 flex-column">
-            <fieldset class="attendance-field flex flex-column gap-1">
-                <legend class="mb-1"><TitleDynamic title="Will you be attending our wedding?" heading="h2" /></legend>
-                <div class="flex justify-center gap-1">
-                    <AppRadioBtn :checked="!!getIsComing" :is-light="false" value="yes" label="yes" name="attend_wedding" @onclick="updateAttendance" />
-                    <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" label="no" name="attend_wedding" @onclick="updateAttendance" />
-                </div>
-            </fieldset>
-            <AppLink class="transition-300 m-auto" :class="`opacity-${!!getIsComing ? 1 : 0}`" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/guests')"/>
-        </div>
-        
-        <div class="flex gap-1 flex-column">
-            <TitleDynamic :title="$t('SCHEDULE')" heading="h2" />
-            <ul class="ml-1">
-                <li class="mb-1">
-                    <AppParagraph class="mb-0_5" :text="'8 ' + $t('AUGUST')"/>
-                    <ul class="pl-1">
-                        <li v-for="item in firstDay" :key="item.time">
-                            <AppParagraph :text="item.time + ' - ' +$t(item.activity)"/>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <AppParagraph class="mb-0_5" :text="'9 ' + $t('AUGUST')"/>
-                    <ul class="pl-1">
-                        <li v-for="item in secondDay" :key="item.time">
-                            <AppParagraph :text="item.time + ' - ' +$t(item.activity)"/>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="ml-1">
-                <AppButton small-text :text="$t('MORE_INFO')" :to="localePath('/schedule')" />
+    <div class="flex gap-1 flex-column">
+        <fieldset class="attendance-field flex flex-column gap-1">
+            <legend class="mb-1"><TitleDynamic title="Will you be attending our wedding?" heading="h2" /></legend>
+            <div class="flex justify-center gap-1">
+                <AppRadioBtn :checked="!!getIsComing" :is-light="false" value="yes" label="yes" name="attend_wedding" @onclick="updateAttendance" />
+                <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" label="no" name="attend_wedding" @onclick="updateAttendance" />
             </div>
-        </div>
+        </fieldset>
+        <AppLink class="transition-300 m-auto" :class="`opacity-${!!getIsComing ? 1 : 0}`" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/guests')"/>
+    </div>
+    
+    <div class="flex gap-1 flex-column">
+        <TitleDynamic :title="$t('SCHEDULE')" heading="h2" />
+        <ul class="ml-1">
+            <li class="mb-1">
+                <AppParagraph class="mb-0_5" :text="'8 ' + $t('AUGUST')"/>
+                <ul class="pl-1">
+                    <li v-for="item in firstDay" :key="item.time">
+                        <AppParagraph :text="item.time + ' - ' +$t(item.activity)"/>
+                    </li>
+                </ul>
+            </li>
 
-        <div class="flex gap-1 flex-column">
-            <TitleDynamic :title="$t('LOCATION')" heading="h2" />
-            <SectionVaesharteltMap />
-            <AppButton small-text :text="$t('MORE_INFO')" :to="localePath('/location')" />
+            <li>
+                <AppParagraph class="mb-0_5" :text="'9 ' + $t('AUGUST')"/>
+                <ul class="pl-1">
+                    <li v-for="item in secondDay" :key="item.time">
+                        <AppParagraph :text="item.time + ' - ' +$t(item.activity)"/>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="ml-1">
+            <AppButton small-text :text="$t('MORE_INFO')" :to="localePath('/schedule')" />
         </div>
+    </div>
+
+    <div class="flex gap-1 flex-column">
+        <TitleDynamic :title="$t('LOCATION')" heading="h2" />
+        <SectionVaesharteltMap />
+        <AppButton small-text :text="$t('MORE_INFO')" :to="localePath('/location')" />
+    </div>
 
 
-        <div class="flex gap-1 flex-column">
-            <TitleDynamic :title="$t('ROOMS')" heading="h2" />
-            <AppParagraph :text="`${$t('AVAILABLE')} - ${rooms.available} / ${rooms.total}`" />
-            <AppButton small-text :text="$t('BOOK_ROOM')" :to="localePath('/rooms')" />
-        </div>
-    </AppLayout>
+    <div class="flex gap-1 flex-column">
+        <TitleDynamic :title="$t('ROOMS')" heading="h2" />
+        <AppParagraph :text="`${$t('AVAILABLE')} - ${rooms.available} / ${rooms.total}`" />
+        <AppButton small-text :text="$t('BOOK_ROOM')" :to="localePath('/rooms')" />
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -64,7 +62,7 @@ const toasterStore = useToasterStore()
 
 const { getIsComing, getGuests } = storeToRefs(guestsStore)
 
-const { data: rooms, refresh: refresPage } = await useFetch('/api/rooms-all', {
+const { data: rooms, refresh: refresPage } = await useFetch('/api/rooms-all-count', {
     method: 'get',
     headers: useRequestHeaders(['cookie'])
 })

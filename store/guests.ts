@@ -3,7 +3,9 @@ import type { Guest, GuestList } from "~/types/guests"
 export const useGuestsStore = defineStore('guests', () => {
     const guestsBook: Ref<GuestList|undefined> = ref()
     const getGuestBookId = computed(() => guestsBook.value?.id)
+    const getAuthId = computed(() => guestsBook.value?.authId || -1)
     const getIsComing = computed(() => guestsBook.value?.isComing)
+    const getIsFreeRoom = computed(() => guestsBook.value?.isFreeRoom)
     function setGuestComing(isComing: boolean) {
         if(guestsBook.value) {
             guestsBook.value.isComing = isComing
@@ -62,5 +64,5 @@ export const useGuestsStore = defineStore('guests', () => {
         if(guestsBook.value) guestsBook.value.guests = guestsBook.value.guests?.filter(guest => guest.id !== id)
     }
 
-    return { getIsComing, getGuestBookId, getGuests, getGuestAmount, setInitialGuestsBook, setGuestComing, addGuest, updateGuestId, updateGuest, deleteGuest }
+    return { getIsComing, getGuestBookId, getAuthId, getGuests, getGuestAmount, setInitialGuestsBook, setGuestComing, addGuest, updateGuestId, updateGuest, deleteGuest, getIsFreeRoom }
   })

@@ -12,6 +12,8 @@ export default defineEventHandler(async (event) => {
                 is_coming,
                 adults,
                 children,
+                free_room,
+                auth_id,
                 Authentication!inner (email)
             `)
             .eq('Authentication.email', email)
@@ -38,7 +40,9 @@ export default defineEventHandler(async (event) => {
             const formattedGuestBook = guestBook.map(guestBook => {
                 return {
                     id: guestBook.id,
+                    authId: guestBook.auth_id,
                     isComing: guestBook.is_coming,
+                    isFreeRoom: guestBook.free_room,
                     guestAmounts: {
                         adults: guestBook.adults,
                         children: guestBook.children,

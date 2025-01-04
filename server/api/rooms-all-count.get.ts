@@ -7,15 +7,13 @@ export default defineEventHandler(async (event) => {
         .select('*')
 
     if(rooms) {           
-        return rooms.map(room => { 
-            return {
-                id: room.id, 
-                bookedBy: room.booked_by, 
-                roomTitle: room.room_title, 
-                childBed: room.child_bed,
-                bookedDate: room.booked_date
-            }
-        })
+        setResponseStatus(event, 200)
+        const availableRooms = rooms.reduce((accumulator, currentValue) => 
+            accumulator += !currentValue.booked_by ? 1 : 0,
+            0
+        )
+        
+        return {total: rooms.length, available: availableRooms}
     }
 
     setResponseStatus(event, 500)
