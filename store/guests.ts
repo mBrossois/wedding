@@ -6,6 +6,8 @@ export const useGuestsStore = defineStore('guests', () => {
     const getAuthId = computed(() => guestsBook.value?.authId || -1)
     const getIsComing = computed(() => guestsBook.value?.isComing)
     const getIsFreeRoom = computed(() => guestsBook.value?.isFreeRoom)
+    const getImportantInformation = computed(() => guestsBook.value?.importantInformation)
+
     function setGuestComing(isComing: boolean) {
         if(guestsBook.value) {
             guestsBook.value.isComing = isComing
@@ -64,5 +66,11 @@ export const useGuestsStore = defineStore('guests', () => {
         if(guestsBook.value) guestsBook.value.guests = guestsBook.value.guests?.filter(guest => guest.id !== id)
     }
 
-    return { getIsComing, getGuestBookId, getAuthId, getGuests, getGuestAmount, setInitialGuestsBook, setGuestComing, addGuest, updateGuestId, updateGuest, deleteGuest, getIsFreeRoom }
+    function updateImportantInformation(value: string) {
+        if(guestsBook.value) {
+            guestsBook.value.importantInformation = value
+        }
+    }
+
+    return { getIsComing, getGuestBookId, getAuthId, getGuests, getGuestAmount, getImportantInformation, setInitialGuestsBook, setGuestComing, addGuest, updateGuestId, updateGuest, deleteGuest, updateImportantInformation, getIsFreeRoom }
   })

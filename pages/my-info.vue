@@ -1,5 +1,11 @@
 <template>
-    <TitleDynamic heading="h1" :title="$t('COMING')" />
+    <TitleDynamic heading="h1" :title="$t('MY_INFO')" />
+    <div>
+        <TitleDynamic class="mb-1" heading="h2" :is-large="true" :title="$t('IMPORTANT_INFO')" />
+        <AppTextArea :value="getImportantInformation || ''" :placeholder="$t('IMPORTANT_INFO_PLACEHOLDER')" @input="updateImportantInfo" />
+    </div>
+
+    <TitleDynamic heading="h2" :is-large="true" :title="$t('COMING')" />
     <AppButton :text="$t('ADD_GUEST')" @click="addGuest" />
     <table>
         <thead>
@@ -26,7 +32,7 @@ import { useGuestsStore } from '~/store/guests';
 import type { Guest } from '~/types/guests';
 
 const guestsStore = useGuestsStore()
-const { getGuests } = storeToRefs(guestsStore)
+const { getGuests, getImportantInformation } = storeToRefs(guestsStore)
 
 async function addGuest() {
     const id = guestsStore.addGuest()
@@ -58,6 +64,18 @@ async function deleteGuest(id: number) {
         method: 'delete',
         body: {
             id
+        },
+        headers: useRequestHeaders(['cookie'])
+    })
+}
+
+async function updateImportantInfo(value: string) {
+    guestsStore.updateImportantInformation(value)
+    await $fetch('/api/important-info', {
+        method: 'patch',
+        body: {
+            importantInfo: value,
+            guestBookId: guestsStore.getGuestBookId
         },
         headers: useRequestHeaders(['cookie'])
     })

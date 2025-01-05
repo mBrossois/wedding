@@ -6,4 +6,5 @@ export interface Login {
 export interface Title {
     title: string,
     heading: string
+    isLarge?: boolean
 }
