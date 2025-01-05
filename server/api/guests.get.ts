@@ -14,6 +14,7 @@ export default defineEventHandler(async (event) => {
                 children,
                 free_room,
                 auth_id,
+                important_information,
                 Authentication!inner (email)
             `)
             .eq('Authentication.email', email)
@@ -43,6 +44,7 @@ export default defineEventHandler(async (event) => {
                     authId: guestBook.auth_id,
                     isComing: guestBook.is_coming,
                     isFreeRoom: guestBook.free_room,
+                    importantInformation: guestBook.important_information,
                     guestAmounts: {
                         adults: guestBook.adults,
                         children: guestBook.children,

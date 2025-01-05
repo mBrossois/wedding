@@ -1,9 +1,10 @@
 export interface GuestList {
-    id: number,
-    authId: number,
-    isComing: boolean,
+    id: number
+    authId: number
+    isComing: boolean
+    importantInformation?: string
     isFreeRoom?: boolean
-    guests?: Array<Guest>,
+    guests?: Array<Guest>
     amounts?: GuestsAmounts
 }
 

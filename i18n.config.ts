@@ -37,7 +37,9 @@ export default defineI18nConfig(() => ({
         CHILDBED: "Childbed",
         AGE: "Over 14",
         EXTEND_STAY: "If you would like to stay longer then the one night, please contact Vaeshartelt on this phonenumber +31 43 369 02 00.",
-        NO_ROOMS_AVAILABE: "We have to sadly inform you there are no more rooms available to book for our wedding."
+        NO_ROOMS_AVAILABE: "We have to sadly inform you there are no more rooms available to book for our wedding.",
+        IMPORTANT_INFO: "Important information",
+        IMPORTANT_INFO_PLACEHOLDER: "Food alergies, who is it reletad too, etc...",
       },
       fr: {
         ADMIN: '',
@@ -74,7 +76,9 @@ export default defineI18nConfig(() => ({
         CHILDBED: "",
         AGE: "",
         EXTEND_STAY: "",
-        NO_ROOMS_AVAILABE: ""
+        NO_ROOMS_AVAILABE: "",
+        IMPORTANT_INFO: "",
+        IMPORTANT_INFO_PLACEHOLDER: "",
       },
       nl: {
         ADMIN: 'Admin',
@@ -111,7 +115,9 @@ export default defineI18nConfig(() => ({
         CHILDBED: "Kinderbed",
         AGE: "Over 14",
         EXTEND_STAY: "Wil je langer dan een nacht blijven, neem dan contact op met Vaeshartelt +31 43 369 02 00.",
-        NO_ROOMS_AVAILABE: "Helaas zijn er geen kamers meer beschikbaar om voor onze trouwerij te boeken."
+        NO_ROOMS_AVAILABE: "Helaas zijn er geen kamers meer beschikbaar om voor onze trouwerij te boeken.",
+        IMPORTANT_INFO: "Belangrijk informatie",
+        IMPORTANT_INFO_PLACEHOLDER: "",
       }
     }
   }))

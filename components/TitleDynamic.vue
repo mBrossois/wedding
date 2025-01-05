@@ -9,7 +9,7 @@ const props = defineProps<Title>()
 
 const headingFonts: {[key: string]: string} = {
     h1: 'font-32',
-    h2: 'font-20'
+    h2: props.isLarge ? 'font-24' : 'font-20'
 }
 
 const classes = computed(() => headingFonts[props.heading])

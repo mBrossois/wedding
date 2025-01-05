@@ -10,7 +10,7 @@
                 <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" label="no" name="attend_wedding" @onclick="updateAttendance" />
             </div>
         </fieldset>
-        <AppLink class="transition-300 m-auto" :class="`opacity-${!!getIsComing ? 1 : 0}`" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/guests')"/>
+        <AppLink class="transition-300 m-auto" :class="`opacity-${!!getIsComing ? 1 : 0}`" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/my-info')"/>
     </div>
     
     <div class="flex gap-1 flex-column">
