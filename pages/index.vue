@@ -72,9 +72,9 @@ const firstNames = computed(() => getGuests.value?.map(guest => { return guest.f
 const localePath = useLocalePath()
 
 const firstDay = [
-    {time: '15:00', activity: 'CHECK_IN'},
+    {time: '15:00', activity: 'WELCOMING'},
     {time: '16:00', activity: 'CEREMONY'},
-    {time: '17:00', activity: 'APERATIF'},
+    {time: '17:00', activity: 'RECEPTION'},
     {time: '19:00', activity: 'DINNER'},
     {time: '22:00', activity: 'PARTY'},
     {time: '03:00', activity: 'END_PARTY'},

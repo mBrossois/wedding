@@ -36,7 +36,7 @@ const menuItems: ComputedRef<Array<{sections:
     {
         sections: [
             {
-                title: 'My info',
+                title: 'MY_INFO',
                 to: '/my-info'
             },
             {
