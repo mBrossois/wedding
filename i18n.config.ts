@@ -52,6 +52,17 @@ export default defineI18nConfig(() => ({
         CHECKOUT: "Checkout",
         CHECKOUT_DESCRIPTION: "Make sure you checkout before 11:00!",
         BREAKFAST_DESCRIPTION: "Enjoy the breakfast, want to eat breakfast with us? We will be eating breakfast at 10:00.",
+        LOCATION_DESCRIPTION: "The wedding takes place at Vaeshartelt, a castle from the 10th century, near Maastricht. There is 23 Hectares of outdoor space with a lot of nice things to see.",
+        LOCATION_TO_SEE: "Next to the castle there are a few outside area’s we advice you to checkout.",
+        BUTTERFLY_GARDEN: "Butterfly garden",
+        VINEYARD: "The Vineyard",
+        TEA_DOME: "Tea dome",
+        STAR_FOREST: "Star forest",
+        OUTSIDER: "Outsider",
+        MAP_TERAIN: "Map of terrain",
+        ADDRESS: "Address",
+        DISTANCE: "The castle is a 10 minute drive away from Maastricht and it has 350 free parking spaces.",
+        ADRESS_SPECIFIC: "Weert 9, 6222 PG Maastricht, Netherlands"
       },
       fr: {
         ADMIN: '',
@@ -101,6 +112,17 @@ export default defineI18nConfig(() => ({
         DINNER_DESCRIPTION: "",
         CHECKOUT_DESCRIPTION: "",
         BREAKFAST_DESCRIPTION: "",
+        LOCATION_DESCRIPTION: "",
+        LOCATION_TO_SEE: "",
+        BUTTERFLY_GARDEN: "",
+        VINEYARD: "",
+        TEA_DOME: "",
+        STAR_FOREST: "",
+        OUTSIDER: "",
+        MAP_TERAIN: "",
+        ADDRESS: "",
+        DISTANCE: "",
+        ADRESS_SPECIFIC: ""
       },
       nl: {
         ADMIN: 'Admin',
@@ -144,6 +166,17 @@ export default defineI18nConfig(() => ({
         SCHEDULE_INTRO_FOUR: "Afhankelijk van het weer zullen de locaties op de trouwerij worden aangepast.",
         CHECKOUT_DESCRIPTION: "Zorg dat je voor 11:00 uitcheckt!",
         BREAKFAST_DESCRIPTION: "Geniet van het, wil je met ons ontbijten? Ons kan je rond 10:00 aan het ontbijt vinden.",
+        LOCATION_DESCRIPTION: "De trouwerij vindt plaats op Vaeshartelt, een kasteel van de 10e eeuw, in de buurt van Maastricht. Er is 23 hectare aan buitenruimte en een boel mooie dingen om te zien.",
+        LOCATION_TO_SEE: "Naast het kasteel zijn er een aantal buitenplaatsen die we je aandraden om te zien.",
+        BUTTERFLY_GARDEN: "Vlindertuin",
+        VINEYARD: "Wijngaard",
+        TEA_DOME: "Theehuisje",
+        STAR_FOREST: "Sterrenbos",
+        OUTSIDER: "Outsider",
+        MAP_TERAIN: "Kaart van locatie",
+        ADDRESS: "Adres",
+        DISTANCE: "Het kasteel is op 10 minutent rij afstand van Maastricht en heeft 350 gratis parkeerplaatsen.",
+        ADRESS_SPECIFIC: "Weert 9, 6222 PG Maastricht, Nederland"
       }
     }
   }))
