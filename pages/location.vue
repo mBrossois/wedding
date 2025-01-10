@@ -28,10 +28,17 @@
 </template>
 
 <script setup lang="ts">
-  const i18n = useI18n()
+import { useToasterStore } from '~/store/toaster';
+
+const i18n = useI18n()
+const toasterStore = useToasterStore()
 
 function copyToClipboard() {
   navigator.clipboard.writeText(i18n.messages.value[i18n.locale.value].ADRESS_SPECIFIC.toString());
+  toasterStore.addToast({
+    message: 'Added to clipboard',
+    type: 'info'
+  })
 }
 </script>
 
