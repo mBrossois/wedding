@@ -43,4 +43,9 @@ const title = typeTitels[props.type]
     border-left: 8px solid var(--success);
     background-color: var(--success-background);
 }
+
+.info {
+    border-left: 8px solid var(--info);
+    background-color: var(--info-background);
+}
 </style>

@@ -149,10 +149,11 @@ function updateRooms(value: number) {
             rooms.push(-1)
         }
     }
-    if(value < props.form.children.length) {
+    if(value < props.form.rooms.length) {
         rooms.splice(value)
     }
 
+    console.log(value > props.form.rooms.length)
     emits('updateForm', 'rooms', rooms)
 }
 </script>
