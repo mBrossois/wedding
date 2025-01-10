@@ -76,7 +76,7 @@ const timeTableDayTwo = [
         location: 'Ballroom'
     },
     {
-        time: '22:00 - 03:00',
+        time: '08:00 - 11:00',
         title: 'CHECKOUT',
         description: 'CHECKOUT_DESCRIPTION',
         location: 'Reception'
