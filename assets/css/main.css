@@ -20,6 +20,10 @@ ul {
     list-style: none;
 }
 
+.list-inside {
+    list-style: inside;
+}
+
 table {
     text-align: left;
 }
