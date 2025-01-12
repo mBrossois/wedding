@@ -7,7 +7,8 @@ definePageMeta({
 <template>
     <div class="page">
         <div class="stats section">
-            <TitleDynamic title="Statistics" heading="h1" />
+            <TitleDynamic title="Overview" heading="h1" />
+            <SectionOverview />
         </div>
         <div class="stats section">
             <TitleDynamic class="mb-1" title="Guests" heading="h1" />
