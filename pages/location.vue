@@ -1,10 +1,10 @@
 <template>
     <TitleDynamic :title="$t('LOCATION')" heading="h1" />
     <AppParagraph :text="$t('LOCATION_DESCRIPTION')" />
-    <img class="image castle" src="~/assets/img/vaeshartelt-castle.jpg" alt="Castle Vaeshartelt" height="677" width="1000"/>
+    <img class="image castle" loading="lazy" src="~/assets/img/vaeshartelt-castle.jpg" alt="Castle Vaeshartelt" height="677" width="1000"/>
     <div>
         <AppParagraph :text="$t('LOCATION_TO_SEE')" />
-        <ul>
+        <ul class="list-inside">
             <li><AppSpan :text="$t('BUTTERFLY_GARDEN')" /></li>
             <li><AppSpan :text="$t('VINEYARD')" /></li>
             <li><AppSpan :text="$t('TEA_DOME')" /></li>
@@ -14,7 +14,7 @@
     </div>
     
     <TitleDynamic :title="$t('MAP_TERAIN')" heading="h2" />
-    <img class="image terrain" src="~/assets/img/map-terrain.png" alt="Map terrain" height="723" width="1000"/>
+    <img class="image terrain" loading="lazy" src="~/assets/img/map-terrain.png" alt="Map terrain" height="723" width="1000"/>
     
     <TitleDynamic :title="$t('ADDRESS')" heading="h2" />
     <AppParagraph :text="$t('DISTANCE')" />
@@ -44,19 +44,15 @@ function copyToClipboard() {
 
 <style scoped>
 .image {
-    width: 316px;
+    width: 326px;
     border-radius: 50px;
 }
 .image.castle {
-    height: 211px;
+    height: 218px;
 }
 
 .image.terrain {
-    height: 230px;
-}
-
-ul {
-    list-style: inside;
+    height: 238px;
 }
 
 .btn {

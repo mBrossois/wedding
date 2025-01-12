@@ -52,7 +52,14 @@ const menuItems: ComputedRef<Array<{sections:
                 to: '/location'
             },
         ]
-    }, {
+    }, 
+    {
+        sections: [{
+            title: 'SIGHTSEEING',
+            to: '/sightseeing'
+        }]
+    },
+    {
         sections: [{
             title: 'LANGUAGE',
             isLanguage: true
