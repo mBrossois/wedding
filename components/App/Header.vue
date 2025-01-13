@@ -1,5 +1,5 @@
 <template>
-    <header class="header px-1">
+    <header :class="{'hide': hideHeader}" class="header px-1">
         <div class="header-body flex">
             <NuxtLink class="lavishly-yours-regular logo" :to="localePath('/')">Mark & Emma's wedding</NuxtLink>
             <IconsHamburger :open="open" @click="toggleOpen" />
@@ -17,9 +17,41 @@ const open = ref(false);
 function toggleOpen() {
     open.value = !open.value;
 }
+
+const currentPos = ref(0)
+const hideHeader = ref(false)
+
+function handleScroll() {
+        setTimeout(() => {
+            if(currentPos.value !== window.scrollY && open.value === false) {
+                hideHeader.value = currentPos.value < window.scrollY
+                currentPos.value = window.scrollY
+            }
+    }, 100)
+}
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+})
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+})
 </script>
 
 <style scoped>
+.header {
+    position: sticky;
+    top: 0;
+    background-color: var(--gray-light);
+    transform: translateY(0);
+    transition: transform 350ms ease-in-out;
+}
+
+.header.hide {
+    transform: translateY(-120px);
+}
+
 .logo {
     font-size: 32px;
     text-decoration: none;
