@@ -153,7 +153,6 @@ function updateRooms(value: number) {
         rooms.splice(value)
     }
 
-    console.log(value > props.form.rooms.length)
     emits('updateForm', 'rooms', rooms)
 }
 </script>

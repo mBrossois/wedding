@@ -43,6 +43,7 @@ onUnmounted(() => {
 .header {
     position: sticky;
     top: 0;
+    z-index: 10000;
     background-color: var(--gray-light);
     transform: translateY(0);
     transition: transform 350ms ease-in-out;
