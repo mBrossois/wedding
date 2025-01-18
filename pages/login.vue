@@ -1,6 +1,6 @@
 <template>
     <div class="flex flex-column items-center gap-1">
-        <AuthSection :page="page === 'account-creation' ? 'create' : 'login'" :title="title" @submit="submit" />
+        <AuthSection :page="page === 'account-creation' ? 'create' : 'login'" :title="title" :status="status" @submit="submit" />
         <div class="bottom-section flex flex-column items-center">
             <ErrorLabel :error="errorMessage" />
         </div>
@@ -12,7 +12,6 @@ import { useToasterStore } from '~/store/toaster';
 import { useUsersStore } from '~/store/users';
 const { locale } = useI18n()
 
-const localePath = useLocalePath()
 const page = useRoute().query.type
 
 const title = {
@@ -24,7 +23,10 @@ const toastStore = useToasterStore()
 const store = useUsersStore()
 
 const errorMessage = ref()
+
+const status: Ref<'success' | 'loading' > = ref('success')
 async function submit(email: string) {
+    status.value = 'loading'
     try {
         const response = await $fetch(`/api/login`, { 
             method: 'GET',
@@ -46,6 +48,7 @@ async function submit(email: string) {
             })
             
             if(data) {
+                status.value = 'success'
                 const localePath = useLocalePath()
                 navigateTo({
                     path: localePath('/confirmation'),

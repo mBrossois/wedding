@@ -1,4 +1,6 @@
 export interface Img {
     src: string,
-    alt: string
+    alt: string,
+    height?: string,
+    width?: string
 }

@@ -1,6 +1,7 @@
 export interface Login {
     title: Title,
     page: 'login' | 'create'
+    status: 'success' | 'loading' 
 }
 
 export interface Title {

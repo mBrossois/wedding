@@ -1,10 +1,13 @@
 <template>
-    <div class="flex justify-center mt-2">
+    <div class="flex justify-center">
         <div class="login-section flex flex-column gap-2">
-            <TitleDynamic :title="title.title" :heading="title.heading" />
+            <div class="img-section">
+                <TitleDynamic class="mb-1" :title="title.title" :heading="title.heading" />
+                <AppImageContainer :img="img" columns="full"/>
+            </div>
             <div class="flex flex-column items-center gap-1">
                 <InputBlock :value="email" id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
-                <AppButton :text="activeText" @click="onSubmit"/>
+                <AppButton :disabled="status === 'loading'" :text="activeText" @click="onSubmit"/>
             </div>
         </div>
     </div>
@@ -18,6 +21,13 @@ const props = defineProps<Login>()
 const emits = defineEmits<{
   (e: 'submit', email: string): void
 }>()
+
+const img = {
+    src: '/assets/img/PXL_20230610_230519215.jpg',
+    alt: 'Emma & Mark in NY',
+    width: '744',
+    height: '992'
+}
 
 const btnTxt = {
     login: 'login',
@@ -58,5 +68,11 @@ function onSubmit() {
 
 .button {
     align-self: center;
+}
+
+.img-section :deep(.img) {
+    width: 316px;
+    height: 421px;
+    top: -107px;
 }
 </style>

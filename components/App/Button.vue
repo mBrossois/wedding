@@ -1,5 +1,5 @@
 <template>
-    <component :is="component" :to="to" class="btn-container" :class="{dark: isDark}">
+    <component :is="component" :disabled="disabled" :to="to" class="btn-container" :class="{dark: isDark}">
         <div class="btn-container__hover" @click="onClick"></div>
         <div class="btn-overlay horizontal" />
         <div class="btn-overlay vertical" />
@@ -13,7 +13,8 @@ const props = defineProps<{
     text: string,
     to?: string,
     smallText?: boolean,
-    isDark?: boolean
+    isDark?: boolean,
+    disabled?: boolean
 }>()
 
 const emits = defineEmits<{
@@ -32,6 +33,10 @@ function onClick() {
 </script>
 
 <style scoped>
+.btn-container[disabled=""] .btn-container__hover {
+    display: none;
+}
+
 .btn-container__hover {
     position: absolute;
     top: -10px;
@@ -48,7 +53,7 @@ function onClick() {
 }
 
 .btn-container.dark .btn-overlay,
-.btn-container.dark .btn-container__hover:hover ~ .btn-overlay {
+.btn-container .btn-container__hover:hover ~ .btn-overlay {
     border-color: var(--gray-lightest);
 }
 
