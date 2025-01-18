@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-column gap-1_5">
+    <div class="flex flex-column items-center gap-1_5">
         <div>
             <TitleDynamic title="Amount coming" heading="h2" />
             <Doughnut :data="dataComing" :options="optionsDoughnut" />
@@ -14,6 +14,8 @@
             <TitleDynamic title="Rooms available" heading="h2" />
             <Doughnut :data="dataRooms" :options="optionsDoughnut" />
         </div>
+
+        <AppButton text="Download guestlist" @click="downloadExcel" />
     </div>
 </template>
 
@@ -93,9 +95,25 @@ const dataRooms = computed(() => {
     };
 })
 
-
-
 const optionsDoughnut = {
     responsive: true,
 };
+
+async function downloadExcel() {
+    const result = await $fetch('/api/booking-guests', {
+        method: 'GET'
+    })
+
+    let csv = 'First names,Last names,Adult,Room name,Add childbed,They get free room,Important info\n';
+    result.forEach((row) => {
+            csv += row.join(',');
+            csv += "\n";
+    });
+ 
+    const anchor = document.createElement('a');
+    anchor.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+    anchor.target = '_blank';
+    anchor.download = 'guest-list.csv';
+    anchor.click();
+}
 </script>

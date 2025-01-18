@@ -32,7 +32,11 @@
             </tr>
         </tbody>
     </table>
-    <AppModal :isOpen="modal.isOpen" :title="modal.title" :buttons="modal.buttons" :size="modal.type === 'guests' ? 'full' : 'small'" @onClose="closeGuestModal" @btnClick="actionClick">
+    <div class="flex justify-center mt-2">
+        <AppButton text="Show letter-codes" @click="showLettercodes" />
+    </div>
+
+    <AppModal :isOpen="modal.isOpen" :title="modal.title" :buttons="modal.buttons" :size="modal.size" @onClose="closeGuestModal" @btnClick="actionClick">
         <GuestModal v-if="modal.type === 'guests'" 
             :amounts="amounts" 
             :form="form"
@@ -42,6 +46,7 @@
             @update-form="updateForm"
             >
         </GuestModal>
+        <LettercodesList v-else-if="modal.type === 'letter-codes'" />
         <AppParagraph v-else :text="`Are you sure you want to permanantly delete ${deleteName}?` " />
     </AppModal>
 </template>
@@ -81,6 +86,7 @@ const defaultModalValue = {
     type: 'guests',
     isOpen: false,
     title: 'Add guests',
+    size: 'full',
     buttons: [
         {title: 'save & close', action: 'save_close'},
         {title: 'save & add another', action: 'save_another'}
@@ -119,6 +125,7 @@ async function openEditModal(id: number, authId: number) {
         type: 'guests',
         isOpen: true,
         title: 'Edit guests',
+        size: 'full',
         buttons: [
             {title: 'cancel', action: 'close'},
             {title: 'update', action: 'patch'}
@@ -198,6 +205,7 @@ function openDeleteModal(guestId: number, authIdValue: number, name: string) {
         type: 'delete',
         isOpen: true,
         title: 'Delete guests',
+        size: 'small',
         buttons: [
             {title: 'cancel', action: 'close'},
             {title: 'delete', action: 'delete'}
@@ -353,6 +361,17 @@ async function deleteGuests() {
     }
 }
 
+function showLettercodes() {
+    modal.value = { 
+        type: 'letter-codes',
+        isOpen: true,
+        title: 'Letter codes',
+        size: 'full',
+        buttons: [
+            {title: 'close', action: 'close'},
+        ]
+    }
+}
 </script>
 
 <style scoped>
