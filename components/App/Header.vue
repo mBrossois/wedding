@@ -16,6 +16,12 @@ const localePath = useLocalePath()
 const open = ref(false);
 function toggleOpen() {
     open.value = !open.value;
+
+    if(open.value) {
+        document.documentElement.style.overflow = 'hidden'
+        return
+    }
+    document.documentElement.style.overflow = 'auto'
 }
 
 const currentPos = ref(0)
@@ -68,7 +74,7 @@ onUnmounted(() => {
 
 .overlay {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     z-index: 100;
     top: 0;
     left: 0;
