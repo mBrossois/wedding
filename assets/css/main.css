@@ -6,6 +6,7 @@
 @import url('./border.css');
 @import url('./opacity.css');
 @import url('./transition.css');
+@import url('./sizes.css');
 
 * {
     padding: 0;
@@ -13,8 +14,8 @@
     box-sizing: border-box;
 
     --width-mobile: 316px;
-    --width-tablet: 704px;
-    --width-desktop: 980px;
+    --width-tablet: 768px;
+    --width-desktop: 1024px;
     --page-width: var(--width-mobile);
 }
 
@@ -22,11 +23,21 @@
     * {
         --page-width: var(--width-tablet);
     }
+
+    .responsive-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
 }
 
 @media screen and (min-width: 1024px){
     * {
         --page-width: var(--width-desktop);
+    }
+
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
@@ -54,4 +65,8 @@ table {
     height: 1px;
     width: 100%;
     border: 1px solid var(--gray-medium);
+}
+
+.no-events {
+    pointer-events: none;
 }
