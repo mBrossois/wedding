@@ -13,7 +13,21 @@
     box-sizing: border-box;
 
     --width-mobile: 316px;
+    --width-tablet: 704px;
+    --width-desktop: 980px;
     --page-width: var(--width-mobile);
+}
+
+@media screen and (min-width: 768px) {
+    * {
+        --page-width: var(--width-tablet);
+    }
+}
+
+@media screen and (min-width: 1024px){
+    * {
+        --page-width: var(--width-desktop);
+    }
 }
 
 ul {

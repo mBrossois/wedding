@@ -1,9 +1,6 @@
 <template>
     <div class="flex flex-column items-center gap-1">
         <AuthSection :page="page === 'account-creation' ? 'create' : 'login'" :title="title" :status="status" @submit="submit" />
-        <div class="bottom-section flex flex-column items-center">
-            <ErrorLabel :error="errorMessage" />
-        </div>
     </div>
 </template>
 
@@ -21,8 +18,6 @@ const title = {
 
 const toastStore = useToasterStore()
 const store = useUsersStore()
-
-const errorMessage = ref()
 
 const status: Ref<'success' | 'loading' > = ref('success')
 async function submit(email: string) {
@@ -57,7 +52,6 @@ async function submit(email: string) {
                     }
                 })
             }
-            
         }
 
     } catch(e) {

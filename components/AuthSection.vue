@@ -3,11 +3,11 @@
         <div class="login-section flex flex-column gap-2">
             <div class="img-section">
                 <TitleDynamic class="mb-1" :title="title.title" :heading="title.heading" />
-                <AppImageContainer :img="img" columns="full"/>
+                <AppImageContainer :img="img" columns="split"/>
             </div>
-            <div class="flex flex-column items-center gap-1">
+            <div class="input-container flex flex-column items-center gap-1">
                 <InputBlock :value="email" id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
-                <AppButton :disabled="status === 'loading'" :text="activeText" @click="onSubmit"/>
+                <AppButton :loading="status === 'loading'" :text="activeText" @click="onSubmit"/>
             </div>
         </div>
     </div>
@@ -62,10 +62,6 @@ function onSubmit() {
 </script>
 
 <style scoped>
-.login-section {
-    width: var(--page-width);
-}
-
 .button {
     align-self: center;
 }
@@ -74,5 +70,17 @@ function onSubmit() {
     width: 316px;
     height: 421px;
     top: -107px;
+}
+
+@media screen and (min-width: 768px) {
+    .input-container {
+        width: 316px;
+    }
+
+    .img-section :deep(.img) {
+        width: 344px;
+        height: 458px;
+        top: -130px;
+    }
 }
 </style>

@@ -20,28 +20,6 @@ const imgSrc = (images[props.img.src] as {default: string, type: string}).defaul
     width: 316px;
     height: 200px;
 }
-@media screen (min-width: 768px) {
-    .img-block.full {
-        width: 344px;
-    }
-
-    .img-block.split {
-        width: 578px;
-    }
-}
-
-
-@media screen (min-width: 1024px){
-    .img-block.full {
-        width: 992px;
-    }
-
-    .img-block.split {
-        width: 325px;
-    }
-}
-
-
 .img-container {
     width: 100%;
     height: 200px;
@@ -50,5 +28,31 @@ const imgSrc = (images[props.img.src] as {default: string, type: string}).defaul
     border: 1px solid var(--gray-medium);
 
     overflow: hidden;
+}
+
+@media screen and (min-width: 768px) {
+    .img-block.full {
+        width: 704px;
+        height: 500px;
+    }
+
+    .img-block.split {
+        width: 344px;
+    }
+
+    .img-block.full .img-container {
+        height: 500px;
+    }
+}
+
+
+@media screen and (min-width: 1024px){
+    .img-block.full {
+        width: 992px;
+    }
+
+    .img-block.split {
+        width: 325px;
+    }
 }
 </style>

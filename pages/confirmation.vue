@@ -1,6 +1,6 @@
 <template>
     <div class="confirmation flex justify-center mt-2">
-        <div class="page-width flex flex-column gap-1 ">
+        <div class="flex flex-column gap-1 ">
             <TitleDynamic :title="title.title" :heading="title.heading" />
             <AppParagraph :text="text" />
             <div class="m-auto">
