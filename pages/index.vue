@@ -1,8 +1,6 @@
 <template>
-    <div class="w-full">
-        <TitleDynamic :title="`${$t('WELCOME')} ${firstNames}!`" heading="h1" />
-        <AppParagraph :text="$t('WEDDING_INVITATION')" />
-    </div>
+    <TitleDynamic :title="`${$t('WELCOME')} ${firstNames}!`" heading="h1" />
+    <AppParagraph :text="$t('WEDDING_INVITATION')" />
 
     <div class="responsive-grid flex flex-column gap-2">
         <AppImageContainer :img="img" columns="split" />

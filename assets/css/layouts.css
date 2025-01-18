@@ -16,6 +16,10 @@
     justify-content: center;
 }
 
+.wrap {
+    flex-wrap: wrap;
+}
+
 .items-center {
     align-items: center;
 }

@@ -1,19 +1,24 @@
 <template>
     <TitleDynamic heading="h1" :title="$t('MY_INFO')" />
-    <div>
-        <TitleDynamic class="mb-1" heading="h2" :is-large="true" :title="$t('IMPORTANT_INFO')" />
-        <AppTextArea :value="getImportantInformation || ''" :placeholder="$t('IMPORTANT_INFO_PLACEHOLDER')" @input="updateImportantInfo" />
+
+    <div class="flex justify-between wrap gap-2">
+        <div>
+            <TitleDynamic class="mb-1" heading="h2" :is-large="true" :title="$t('IMPORTANT_INFO')" />
+            <AppTextArea :value="getImportantInformation || ''" :placeholder="$t('IMPORTANT_INFO_PLACEHOLDER')" @input="updateImportantInfo" />
+        </div>
+        <div>
+            <TitleDynamic heading="h2" :is-large="true" :title="$t('COMING')" />
+            <AppButton :text="$t('ADD_GUEST')" @click="addGuest" />
+        </div>
     </div>
 
-    <TitleDynamic heading="h2" :is-large="true" :title="$t('COMING')" />
-    <AppButton :text="$t('ADD_GUEST')" @click="addGuest" />
-    <table>
+    <table class="w-fit">
         <thead>
             <tr>
-                <th><AppParagraph size="large" :text="$t('FIRSTNAME')" /></th>
-                <th class="last-name"><AppParagraph size="large" :text="$t('LASTNAME')" /></th>
-                <th><AppParagraph size="large" :text="$t('AGE')" /></th>
-                <th></th>
+                <th class="tw-l" ><AppParagraph size="large" :text="$t('FIRSTNAME')" /></th>
+                <th class="tw-l"><AppParagraph size="large" :text="$t('LASTNAME')" /></th>
+                <th class="tw-s"><AppParagraph size="large" :text="$t('AGE')" /></th>
+                <th class="tw-s"></th>
             </tr>
         </thead>
         <tbody>

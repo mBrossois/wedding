@@ -13,10 +13,16 @@
     margin: 0;
     box-sizing: border-box;
 
-    --width-mobile: 316px;
+    --width-mobile: 390px;
     --width-tablet: 768px;
     --width-desktop: 1024px;
     --page-width: var(--width-mobile);
+}
+
+.tablet-double-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 @media screen and (min-width: 768px) {
@@ -27,7 +33,11 @@
     .responsive-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+    }
+
+    .tablet-double-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }
 
@@ -69,4 +79,14 @@ table {
 
 .no-events {
     pointer-events: none;
+}
+
+@media screen and (min-width: 768px) {
+    .tw-l {
+        width: 200px;
+    }
+
+    .tw-s {
+        width: 100px;
+    }
 }

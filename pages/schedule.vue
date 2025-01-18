@@ -13,21 +13,27 @@
         <AppSpan :text="$t('SCHEDULE_INTRO_FOUR')" />
     </div>
 
-    <div class="flex flex-column gap-1_5">
-        <div class="flex justify-between">
-            <TitleDynamic heading="h2" :title="`8 ${$t('AUGUST')} 2026`" />
-            <div class="flex items-center">
-                <IconsRain class="icon-rain" />
-                <AppToggle :checked="checked" @click="onClick" />
-                <IconsSun />
+    <div class="responsive-grid-custom flex flex-column gap-2">
+        <div class="flex flex-column gap-1_5">
+            <div class="flex justify-between">
+                <TitleDynamic heading="h2" :title="`8 ${$t('AUGUST')} 2026`" />
+                <div class="flex items-center">
+                    <IconsRain class="icon-rain" />
+                    <AppToggle :checked="checked" @click="onClick" />
+                    <IconsSun />
+                </div>
+            </div>
+            <div class="time-table flex flex-column gap-1">
+                <AppTimeTable v-for="event in timeTableDayOne" :key="event.title" v-bind="event" />
             </div>
         </div>
-        <AppTimeTable v-for="event in timeTableDayOne" :key="event.title" v-bind="event" />
-    </div>
 
-    <div class="flex flex-column gap-1_5">
-        <TitleDynamic heading="h2" :title="`9 ${$t('AUGUST')} 2026`" />
-        <AppTimeTable v-for="event in timeTableDayTwo" :key="event.title" v-bind="event" />
+        <hr>
+
+        <div class="flex flex-column gap-1_5">
+            <TitleDynamic class="title-second-day" heading="h2" :title="`9 ${$t('AUGUST')} 2026`" />
+            <AppTimeTable v-for="event in timeTableDayTwo" :key="event.title" v-bind="event" />
+        </div>
     </div>
 
 </template>
@@ -101,5 +107,29 @@ function onClick(value: boolean) {
 
 .icon-rain {
     transform: translateY(3px);
+}
+
+
+@media screen and (min-width: 768px) {
+    .responsive-grid-custom {
+        display: grid;
+        grid-template-columns: 1fr 1px 1fr;
+    }
+
+    .title-second-day {
+        height: 40px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .responsive-grid-custom {
+        display: grid;
+        grid-template-columns: 1fr 1px .5fr;
+    }
+
+    .time-table {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
 }
 </style>

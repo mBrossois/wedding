@@ -16,11 +16,11 @@
         <AppButton :text="$t('ADD_ROOM')" @click="addRoom" />
         <AppParagraph v-if="getRoomsAvailable.length == 0 " :text="$t('NO_ROOMS_AVAILABE')" />
 
-        <table class="mb-1">
+        <table class="mb-1 w-fit">
             <thead>
                 <tr>
                     <th class="primary-cell"><AppParagraph size="large" :text="$t('ROOM_NAME')" /></th>
-                    <th><AppParagraph size="large" :text="$t('CHILDBED')" /></th>
+                    <th class="tw-s"><AppParagraph size="large" :text="$t('CHILDBED')" /></th>
                     <th></th>
                 </tr>
             </thead>
