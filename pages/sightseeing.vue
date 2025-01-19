@@ -94,111 +94,86 @@
 </template>
 
 <script setup lang="ts">
-// Cities
-import maastrichtSrc from '~/assets/img/maastricht.jpeg'
-import valkenburgSrc from '~/assets/img/valkenburg.jpg'
-import denBoschSrc from '~/assets/img/den-bosch.jpg'
-import utrechtSrc from '~/assets/img/utrecht.jpg'
-//Food
-import breakfastSrc from '~/assets/img/hagelslag.jpg'
-import lunchSrc from '~/assets/img/bitterganituur.jpg'
-import dinnerSrc from '~/assets/img/satesaus.jpg'
-import snacksSrc from '~/assets/img/poffertjes.jpg'
+import type { Img } from '~/types/image';
 
-const cities = {
+const cities: Record<string, {title: string, img: Img, distance: string }> = {
     maastricht: {
         title: 'Maastricht',
         img: {
-            src: maastrichtSrc,
+            src: '/assets/img/maastricht.jpeg',
             alt: 'Maastricht city',
-            height: 4783,
-            width: 2559,
-            heightMobile: 174,
-            heightTablet: 500,
+            height: '270',
+            width: '505',
         },
         distance: 'MAASSTRICHT_DISTANCE'
     },
     valkenburg: {
         title: 'Valkenburg',
         img: {
-            src: valkenburgSrc,
+            src: '/assets/img/valkenburg.jpg',
             alt: 'Valkenburg city',
-            height: 1400,
-            width: 933,
-            heightMobile: 217,
-            heightTablet: 500,
+            height: '309',
+            width: '464',
         },
         distance: 'VALKENBURG_DISTANCE'
     },
     denBosch: {
         title: 'Den Bosch',
         img: {
-            src: denBoschSrc,
+            src: '/assets/img/den-bosch.jpg',
             alt: 'Den Bosch city',
-            height: 1456,
-            width: 971,
-            heightMobile: 217,
-            heightTablet: 500,
+            height: '309',
+            width: '464',
         },
         distance: 'DEN_BOSCH_DISTANCE'
     },
     utrecht: {
         title: 'Utrecht',
         img: {
-            src: utrechtSrc,
+            src: '/assets/img/utrecht.jpg',
             alt: 'Utrecht city',
-            height: 4928,
-            width: 3624,
-            heightMobile: 215,
-            heightTablet: 500,
+            height: '307',
+            width: '464',
         },
         distance: 'UTRECHT_DISTANCE'
     }
 }
 
-const food = {
+const food: Record<string, {title: string, img: Img }> = {
     breakfast: {
         title: 'BREAKFAST',
         img: {
-            src: breakfastSrc,
+            src: '/assets/img/hagelslag.jpg',
             alt: 'Chocolade hageslag op brood',
-            height: 4783,
-            width: 2559,
-            heightMobile: 217,
-            heightTablet: 500,
+            height: '309',
+            width: '464',
         },
     },
     lunch: {
         title: 'LUNCH',
         img: {
-            src: lunchSrc,
+            src: '/assets/img/bitterganituur.jpg',
             alt: 'Bittergarnituur',
-            height: 1400,
-            width: 933,
-            heightMobile: 183,
-            heightTablet: 500,
+            height: '270',
+            width: '480',
         },
     },
     dinner: {
         title: 'DINNER',
         img: {
-            src: dinnerSrc,
+            src: '/assets/img/satesaus.jpg',
             alt: 'Friet met satesaus',
-            height: 1456,
-            width: 971,
-            heightMobile: 183,
-            heightTablet: 500,
+            height: '270',
+            width: '479',
         },
     },
     snacks: {
         title: 'SNACKS',
         img: {
-            src: snacksSrc,
+            src: '/assets/img/poffertjes.jpg',
             alt: 'Poffertjes',
-            height: 4928,
-            width: 3624,
-            heightMobile: 217,
-            heightTablet: 500,
+            height: '309',
+            width: '464',
         },
     }
 }
