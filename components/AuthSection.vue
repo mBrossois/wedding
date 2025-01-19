@@ -1,10 +1,13 @@
 <template>
-    <div class="flex justify-center mt-2">
+    <div class="flex justify-center">
         <div class="login-section flex flex-column gap-2">
-            <TitleDynamic :title="title.title" :heading="title.heading" />
-            <div class="flex flex-column items-center gap-1">
+            <div class="img-section">
+                <TitleDynamic class="mb-1" :title="$t(title.title)" :heading="title.heading" />
+                <AppImageContainer :img="img" columns="split"/>
+            </div>
+            <div class="input-container flex flex-column items-center gap-1">
                 <InputBlock :value="email" id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
-                <AppButton :text="activeText" @click="onSubmit"/>
+                <AppButton :loading="status === 'loading'" :text="$t(activeText)" @click="onSubmit"/>
             </div>
         </div>
     </div>
@@ -19,9 +22,16 @@ const emits = defineEmits<{
   (e: 'submit', email: string): void
 }>()
 
+const img = {
+    src: '/assets/img/PXL_20230610_230519215.jpg',
+    alt: 'Emma & Mark in NY',
+    width: '744',
+    height: '992'
+}
+
 const btnTxt = {
-    login: 'login',
-    create: 'create',
+    login: 'LOGIN',
+    create: 'CREATE',
 }
 
 const activeText = btnTxt[props.page]
@@ -52,11 +62,25 @@ function onSubmit() {
 </script>
 
 <style scoped>
-.login-section {
-    width: var(--page-width);
-}
-
 .button {
     align-self: center;
+}
+
+.img-section :deep(.img) {
+    width: 316px;
+    height: 421px;
+    top: -107px;
+}
+
+@media screen and (min-width: 768px) {
+    .input-container {
+        width: 316px;
+    }
+
+    .img-section :deep(.img) {
+        width: 344px;
+        height: 458px;
+        top: -130px;
+    }
 }
 </style>

@@ -5,11 +5,11 @@
         </div>
         <div class="input-section">
             <div class="flex flex-centered">
-                <InputBlock id="lettercode" label="Fill in the code found in the letter" input-type="text" placeholder="2102912823" :error="error" @input="setLetterkeyValue" />
+                <InputBlock id="lettercode" :label="$t('FILL_LETTERCODE')" input-type="text" placeholder="2102912823" :error="error" @input="setLetterkeyValue" />
             </div>
         </div>
         <div class="button-section flex flex-centered">
-            <AppButton text="Enter" @click="onLetterEntered"/>
+            <AppButton :text="$t('CONTINUE')" @click="onLetterEntered"/>
         </div>
     </div>
 </template>

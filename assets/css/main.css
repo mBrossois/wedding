@@ -6,14 +6,49 @@
 @import url('./border.css');
 @import url('./opacity.css');
 @import url('./transition.css');
+@import url('./sizes.css');
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 
-    --width-mobile: 316px;
+    --width-mobile: 390px;
+    --width-tablet: 768px;
+    --width-desktop: 1024px;
     --page-width: var(--width-mobile);
+}
+
+.tablet-double-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+    * {
+        --page-width: var(--width-tablet);
+    }
+
+    .responsive-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tablet-double-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    * {
+        --page-width: var(--width-desktop);
+    }
+
+    .responsive-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 ul {
@@ -40,4 +75,18 @@ table {
     height: 1px;
     width: 100%;
     border: 1px solid var(--gray-medium);
+}
+
+.no-events {
+    pointer-events: none;
+}
+
+@media screen and (min-width: 768px) {
+    .tw-l {
+        width: 200px;
+    }
+
+    .tw-s {
+        width: 100px;
+    }
 }

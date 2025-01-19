@@ -1,9 +1,10 @@
 <template>
     <component :is="component" :to="to" class="btn-container" :class="{dark: isDark}">
-        <div class="btn-container__hover" @click="onClick"></div>
+        <div v-if="!loading" class="btn-container__hover" @click="onClick"></div>
         <div class="btn-overlay horizontal" />
         <div class="btn-overlay vertical" />
-        <AppParagraph :class="textClasses" :text=text size="big" class="btn rounded-medium kurale-regular" />
+        <AppParagraph v-if="!loading" :class="textClasses" :text="text" class="btn rounded-medium kurale-regular" />
+        <AppLoader class="loader" v-else="loading" />
     </component>
 </template>
 
@@ -13,7 +14,8 @@ const props = defineProps<{
     text: string,
     to?: string,
     smallText?: boolean,
-    isDark?: boolean
+    isDark?: boolean,
+    loading?: boolean
 }>()
 
 const emits = defineEmits<{
@@ -48,7 +50,7 @@ function onClick() {
 }
 
 .btn-container.dark .btn-overlay,
-.btn-container.dark .btn-container__hover:hover ~ .btn-overlay {
+.btn-container .btn-container__hover:hover ~ .btn-overlay {
     border-color: var(--gray-lightest);
 }
 
@@ -129,5 +131,13 @@ function onClick() {
     border-right: 1px solid var(--gray-darkest);
     height: 0;
     top: calc(50% - 5px);
+}
+
+.loader {
+    width: 100px;
+    height: 50px;
+    border: 1px solid var(--gray-darkest);
+    padding: 8px 24px;
+    border-radius: 10px;
 }
 </style>
