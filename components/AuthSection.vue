@@ -2,12 +2,12 @@
     <div class="flex justify-center">
         <div class="login-section flex flex-column gap-2">
             <div class="img-section">
-                <TitleDynamic class="mb-1" :title="title.title" :heading="title.heading" />
+                <TitleDynamic class="mb-1" :title="$t(title.title)" :heading="title.heading" />
                 <AppImageContainer :img="img" columns="split"/>
             </div>
             <div class="input-container flex flex-column items-center gap-1">
                 <InputBlock :value="email" id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
-                <AppButton :loading="status === 'loading'" :text="activeText" @click="onSubmit"/>
+                <AppButton :loading="status === 'loading'" :text="$t(activeText)" @click="onSubmit"/>
             </div>
         </div>
     </div>
@@ -30,8 +30,8 @@ const img = {
 }
 
 const btnTxt = {
-    login: 'login',
-    create: 'create',
+    login: 'LOGIN',
+    create: 'CREATE',
 }
 
 const activeText = btnTxt[props.page]

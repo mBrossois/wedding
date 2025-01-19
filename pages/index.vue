@@ -7,13 +7,13 @@
 
         <div class="flex gap-1 flex-column">
             <fieldset class="attendance-field flex flex-column gap-1">
-                <legend class="mb-1"><TitleDynamic title="Will you be attending our wedding?" heading="h2" /></legend>
+                <legend class="mb-1"><TitleDynamic :title="$t('ATTENDING_WEDDING')" heading="h2" /></legend>
                 <div class="flex justify-center gap-1">
-                    <AppRadioBtn :checked="!!getIsComing" :is-light="false" value="yes" label="yes" name="attend_wedding" @onclick="updateAttendance" />
-                    <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" label="no" name="attend_wedding" @onclick="updateAttendance" />
+                    <AppRadioBtn :checked="!!getIsComing" :is-light="false" value="yes" :label="$t('YES')" name="attend_wedding" @onclick="updateAttendance" />
+                    <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" :label="$t('NO')" name="attend_wedding" @onclick="updateAttendance" />
                 </div>
             </fieldset>
-            <AppLink class="transition-300 m-auto" :class="[`opacity-${!!getIsComing ? 1 : 0}`, {'no-events': !!getIsComing}]" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/my-info')"/>
+            <AppLink class="transition-300 m-auto" :class="[`opacity-${!!getIsComing ? 1 : 0}`, {'no-events': !getIsComing}]" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/my-info')"/>
         </div>
 
         <div class="flex gap-1 flex-column">

@@ -11,7 +11,7 @@
             <AppParagraph :text="$t('LIST_OF_PLACES')" />
             <ul class="list-inside">
                 <li v-for="city of cities" :key="city.title">
-                    <AppSpan :text="city.title" />
+                    <AppSpan :text="$t(city.title)" />
                 </li>
             </ul>
         </div>
@@ -98,7 +98,7 @@ import type { Img } from '~/types/image';
 
 const cities: Record<string, {title: string, img: Img, distance: string }> = {
     maastricht: {
-        title: 'Maastricht',
+        title: 'MAASTRICHT',
         img: {
             src: '/assets/img/maastricht.jpeg',
             alt: 'Maastricht city',
@@ -108,7 +108,7 @@ const cities: Record<string, {title: string, img: Img, distance: string }> = {
         distance: 'MAASSTRICHT_DISTANCE'
     },
     valkenburg: {
-        title: 'Valkenburg',
+        title: 'VALKENBURG',
         img: {
             src: '/assets/img/valkenburg.jpg',
             alt: 'Valkenburg city',
@@ -118,7 +118,7 @@ const cities: Record<string, {title: string, img: Img, distance: string }> = {
         distance: 'VALKENBURG_DISTANCE'
     },
     denBosch: {
-        title: 'Den Bosch',
+        title: 'DEN_BOSCH',
         img: {
             src: '/assets/img/den-bosch.jpg',
             alt: 'Den Bosch city',
@@ -128,7 +128,7 @@ const cities: Record<string, {title: string, img: Img, distance: string }> = {
         distance: 'DEN_BOSCH_DISTANCE'
     },
     utrecht: {
-        title: 'Utrecht',
+        title: 'UTRECHT',
         img: {
             src: '/assets/img/utrecht.jpg',
             alt: 'Utrecht city',

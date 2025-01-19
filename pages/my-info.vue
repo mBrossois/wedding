@@ -1,7 +1,7 @@
 <template>
     <TitleDynamic heading="h1" :title="$t('MY_INFO')" />
 
-    <div class="flex justify-between wrap gap-2">
+    <div class="top-block flex justify-between wrap gap-2">
         <div>
             <TitleDynamic class="mb-1" heading="h2" :is-large="true" :title="$t('IMPORTANT_INFO')" />
             <AppTextArea :value="getImportantInformation || ''" :placeholder="$t('IMPORTANT_INFO_PLACEHOLDER')" @input="updateImportantInfo" />
@@ -101,5 +101,11 @@ async function updateImportantInfo(value: string) {
 
 .last-name {
     width: 112px;
+}
+
+@media screen and (min-width: 768px) {
+    .top-block {
+        flex-direction: row-reverse;
+    }
 }
 </style>

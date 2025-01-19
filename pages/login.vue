@@ -12,7 +12,7 @@ const { locale } = useI18n()
 const page = useRoute().query.type
 
 const title = {
-    title: page === 'account-creation' ? 'Create account' : 'Login',
+    title: page === 'account-creation' ? 'CREATE_ACCOUNT' : 'LOGIN',
     heading: 'h1'
 }
 

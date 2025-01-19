@@ -63,6 +63,7 @@ function copyToClipboard() {
 
 .btn {
     border: none;
+    background-color: transparent;
 }
 
 .btn:hover {
