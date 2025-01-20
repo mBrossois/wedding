@@ -57,6 +57,10 @@ import type { Ref } from 'vue';
 import { ref } from 'vue';
 import { useToasterStore } from '~/store/toaster';
 
+const emits = defineEmits<{
+    (e: 'done'): void
+}>()
+
 const activePage = ref(0);
 
 const { data: pages, refresh: refresPage } = await useFetch('/api/guest-pages', {
@@ -72,7 +76,7 @@ const { data: guests, status, refresh: refresGuests } = await useFetch('/api/gue
     headers: useRequestHeaders(['cookie'])
 })
 
-const { data: rooms, refresh: refreshRooms } = await useFetch('/api/rooms-available', {
+const { data: rooms } = await useFetch('/api/rooms-available', {
     method: 'get',
     headers: useRequestHeaders(['cookie'])
 })
@@ -372,6 +376,8 @@ function showLettercodes() {
         ]
     }
 }
+
+emits('done')
 </script>
 
 <style scoped>
