@@ -10,6 +10,7 @@ function setOverviewDone() {
 
 const guestsDone = ref(false)
 function setGuestsDone() {
+    console.log('done')
     guestsDone.value = true
 }
 
@@ -18,7 +19,7 @@ function setRoomsDone() {
     roomsDone.value = true
 }
 
-const isLoading = computed(() => !overviewDone.value && !guestsDone.value && !roomsDone.value)
+const isLoading = computed(() => !overviewDone.value || !guestsDone.value || !roomsDone.value)
 const startLoading = ref(false)
 
 onMounted(() => {

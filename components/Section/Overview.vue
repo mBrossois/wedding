@@ -123,3 +123,10 @@ async function downloadExcel() {
     anchor.click();
 }
 </script>
+
+<style scoped>
+canvas {
+    width: 281px!important;
+    height: 281px!important;
+}
+</style>
