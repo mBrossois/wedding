@@ -40,7 +40,7 @@ export default defineI18nConfig(() => ({
         MORE_INFO: "More info",
         BOOK_ROOM: "Book a room",
         AVAILABLE: "Available",
-        NETHERLAND: "Nederland",
+        NETHERLAND: "Netherlands",
         COMING: "Who is coming?",
         ADD_GUEST: "Add guest",
         ADD_ROOM: "Add room",

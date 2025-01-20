@@ -23,7 +23,11 @@
 import { Bar, Doughnut } from 'vue-chartjs';
 import { Chart, ArcElement } from 'chart.js'
 
-const { data: insights, refresh: refresPage } = await useFetch<{coming: number, notComing: number, notAnswered: number, adults: number, children: number, roomsBooked: number, roomsAvailable: number}>('/api/insights', {
+const emits = defineEmits<{
+    (e: 'done'): void
+}>()
+
+const { data: insights } = await useFetch<{coming: number, notComing: number, notAnswered: number, adults: number, children: number, roomsBooked: number, roomsAvailable: number}>('/api/insights', {
     method: 'get',
     headers: useRequestHeaders(['cookie'])
 })
@@ -98,6 +102,8 @@ const dataRooms = computed(() => {
 const optionsDoughnut = {
     responsive: true,
 };
+
+emits('done')
 
 async function downloadExcel() {
     const result = await $fetch('/api/booking-guests', {

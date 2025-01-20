@@ -47,6 +47,10 @@
 <script setup lang="ts">
 import { useToasterStore } from '~/store/toaster';
 
+const emits = defineEmits<{
+    (e: 'done'): void
+}>()
+
 const activePage = ref(0);
 
 const { data: pages, refresh: refresPage } = await useFetch('/api/room-pages', {
@@ -253,6 +257,8 @@ async function deleteRoom() {
         return 'success'
     }
 }
+
+emits('done')
 </script>
 
 <style scoped>

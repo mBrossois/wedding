@@ -30,7 +30,7 @@ const hideHeader = ref(false)
 function handleScroll() {
         setTimeout(() => {
             if(currentPos.value !== window.scrollY && open.value === false) {
-                hideHeader.value = currentPos.value < window.scrollY
+                hideHeader.value = currentPos.value < window.scrollY && window.scrollY > 16
                 currentPos.value = window.scrollY
             }
     }, 100)
