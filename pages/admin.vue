@@ -10,7 +10,6 @@ function setOverviewDone() {
 
 const guestsDone = ref(false)
 function setGuestsDone() {
-    console.log('done')
     guestsDone.value = true
 }
 

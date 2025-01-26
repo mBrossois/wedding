@@ -1,4 +1,4 @@
-import type { Roles } from "~/types/users"
+import { RoleEnum, type Roles } from "~/types/users"
 
 export const useUsersStore = defineStore('users', () => {
     const lettercode = ref('')
@@ -9,8 +9,16 @@ export const useUsersStore = defineStore('users', () => {
 
     const role: Ref<Roles> = ref(undefined)
     const getRole = computed(() => role.value)
-    function setRole(value: Roles) {
-      role.value = value
+    async function setRole() {
+      const { data } = await useFetch('/api/role', {
+        method: 'get'
+      })
+      if(data.value && data.value === 'guest') {
+          role.value = RoleEnum.loggedIn
+      } 
+      else if(data.value === 'admin') {
+          role.value = RoleEnum.admin
+      }
     }
 
     return { getLettercode, setLettercode, getRole, setRole }
