@@ -5,7 +5,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   if (!usersStore.getRole && to.path.includes('/admin')) {
     await usersStore.setRole()
-    console.log(usersStore.getRole)
     if(usersStore.getRole !== 'admin') {
       return navigateTo('/')
     }
