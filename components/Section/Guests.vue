@@ -1,5 +1,5 @@
 <template>
-    <table cellspacing="0" class="kurale-regular page-width table">
+    <table cellspacing="0" class="kurale-regular table">
         <thead>
             <tr class="align-left">
                 <th>Name</th>
@@ -410,6 +410,7 @@ td, .add span {
 }
 
 .table {
+    width: calc(var(--page-width) - 2rem);
     border-color: var(--gray-darkest);
 }
 

@@ -5,10 +5,26 @@ export default defineEventHandler(async (event) => {
 
     const client = await serverSupabaseClient(event)
 
+    async function genRandomnId() {
+        let randomnId = Math.floor(Math.random() * 1000000)
+
+        const {data: authId, status: authStatus} = await client
+            .from('Authentication')
+            .select('letter_code')
+            .eq('letter_code', randomnId)
+            .limit(1)
+        if(authId?.length === 1) {
+            randomnId++;
+            genRandomnId()
+        }
+        return randomnId
+    }
+
     try {
+        const randomnId = await genRandomnId()
         const {data: auth, status: authStatus} = await client
             .from('Authentication')
-            .insert([{}])
+            .insert([{letter_code: randomnId}])
             .select()
 
         const {data: guestBook, status: guestBookStatus} = await client

@@ -25,7 +25,7 @@ const title = typeTitels[props.type]
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
 
-    max-width: var(--page-width);
+    max-width: calc(var(--page-width) - 2rem);
 
     color: var(--gray-light);
 }
