@@ -41,7 +41,7 @@ function emitClick(action: string) {
 .modal {
     position: fixed;
     height: calc(100svh - 2rem);
-    width: var(--page-width);
+    width: calc(var(--page-width) - 2rem);
     top: 1rem;
     bottom: 1rem;
     z-index: 1000;
@@ -83,7 +83,7 @@ function emitClick(action: string) {
 
 .bottom-section {
     background-color: var(--gray-darkest);
-    width: calc(var(--page-width) - 2rem);
+    width: calc(var(--page-width) - 4rem);
 }
 
 .middle-section {

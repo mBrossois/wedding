@@ -31,7 +31,7 @@ onMounted(() => {
         <AppLoader />
     </div>
     <div v-if="startLoading">
-        <div v-show="!isLoading" class="page">
+        <div v-show="!isLoading" class="page page-width">
             <div class="stats section">
                 <TitleDynamic title="Overview" heading="h1" />
                 <SectionOverview @done="setOverviewDone()" />
@@ -54,6 +54,6 @@ onMounted(() => {
 }
 
 .section {
-    padding: 1rem calc((100vw - var(--page-width)) / 2);
+    padding: 1rem calc((100vw - var(--page-width) + 2rem) / 2);
 }
 </style>
