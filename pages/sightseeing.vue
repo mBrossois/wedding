@@ -100,7 +100,7 @@ const cities: Record<string, {title: string, img: Img, distance: string }> = {
     maastricht: {
         title: 'MAASTRICHT',
         img: {
-            src: '/assets/img/maastricht.jpeg',
+            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/maastricht',
             alt: 'Maastricht city',
             height: '270',
             width: '505',
@@ -110,7 +110,7 @@ const cities: Record<string, {title: string, img: Img, distance: string }> = {
     valkenburg: {
         title: 'VALKENBURG',
         img: {
-            src: '/assets/img/valkenburg.jpg',
+            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/valkenburg',
             alt: 'Valkenburg city',
             height: '309',
             width: '464',
@@ -120,7 +120,7 @@ const cities: Record<string, {title: string, img: Img, distance: string }> = {
     denBosch: {
         title: 'DEN_BOSCH',
         img: {
-            src: '/assets/img/den-bosch.jpg',
+            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/den-bosch',
             alt: 'Den Bosch city',
             height: '309',
             width: '464',
@@ -130,7 +130,7 @@ const cities: Record<string, {title: string, img: Img, distance: string }> = {
     utrecht: {
         title: 'UTRECHT',
         img: {
-            src: '/assets/img/utrecht.jpg',
+            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/utrecht',
             alt: 'Utrecht city',
             height: '307',
             width: '464',
@@ -143,7 +143,7 @@ const food: Record<string, {title: string, img: Img }> = {
     breakfast: {
         title: 'BREAKFAST',
         img: {
-            src: '/assets/img/hagelslag.jpg',
+            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/hagelslag',
             alt: 'Chocolade hageslag op brood',
             height: '309',
             width: '464',
@@ -152,7 +152,7 @@ const food: Record<string, {title: string, img: Img }> = {
     lunch: {
         title: 'LUNCH',
         img: {
-            src: '/assets/img/bitterganituur.jpg',
+            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/bittergarnituur',
             alt: 'Bittergarnituur',
             height: '270',
             width: '480',
@@ -161,7 +161,7 @@ const food: Record<string, {title: string, img: Img }> = {
     dinner: {
         title: 'DINNER',
         img: {
-            src: '/assets/img/satesaus.jpg',
+            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/satesaus',
             alt: 'Friet met satesaus',
             height: '270',
             width: '479',
@@ -170,7 +170,7 @@ const food: Record<string, {title: string, img: Img }> = {
     snacks: {
         title: 'SNACKS',
         img: {
-            src: '/assets/img/poffertjes.jpg',
+            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/poffertjes',
             alt: 'Poffertjes',
             height: '309',
             width: '464',
