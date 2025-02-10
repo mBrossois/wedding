@@ -1,7 +1,7 @@
 <template>
     <div class="img-block flex flex-centered">
         <div class="img-container relative">
-            <img class="intro-img absolute" loading="lazy" :src="imgSrc" height="4032" width="3024" :alt="img.alt"/>
+            <img class="intro-img absolute" loading="lazy" :src="img.src" height="4032" width="3024" :alt="img.alt"/>
         </div>
     </div>
 </template>
@@ -10,9 +10,6 @@
 import type { Img } from '~/types/image'
 
 const props = defineProps<{img: Img}>()
-const images = import.meta.glob('@/assets/img/*.jpg', { eager: true })
-
-const imgSrc = (images[props.img.src] as {default: string, type: string}).default
 </script>
 
 <style scoped>

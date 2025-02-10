@@ -23,7 +23,7 @@ const emits = defineEmits<{
 }>()
 
 const img = {
-    src: '/assets/img/PXL_20230610_230519215.jpg',
+    src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/us_ny',
     alt: 'Emma & Mark in NY',
     width: '744',
     height: '992'
