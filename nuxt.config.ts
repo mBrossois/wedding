@@ -35,6 +35,11 @@ export default defineNuxtConfig({
       { code: 'nl', name: 'Dutch'}],
     detectBrowserLanguage: false
   },
+  image: {
+    cloudinary: {
+      baseURL: 'https://res.cloudinary.com/dt7uhy7jv/image/image/upload/wedding'
+    }
+  },
   runtimeConfig: {
     public: {
       url: ''
