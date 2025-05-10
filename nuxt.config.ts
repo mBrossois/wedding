@@ -37,8 +37,8 @@ export default defineNuxtConfig({
   },
   image: {
     cloudinary: {
-      baseURL: 'https://res.cloudinary.com/dt7uhy7jv/image/image/upload/wedding'
-    }
+      baseURL: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/'
+    },
   },
   runtimeConfig: {
     public: {
