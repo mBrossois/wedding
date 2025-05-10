@@ -13,7 +13,7 @@
             <tr>
                 <td class="full-cell" colspan="4">
                     <button class="add btn kurale-regular py-1 flex justify-center items-center gap-0_5" @click="openAddModal">
-                        <img src="~/assets/img/add.svg" /> 
+                        <NuxtImg src="~/assets/img/add.svg" /> 
                         <span>Add rooms</span>
                     </button>
                 </td>

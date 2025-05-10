@@ -2,10 +2,17 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+  ssr: false,
   css: [
     "@/assets/css/main.css"
   ],
-  modules: ['@pinia/nuxt', "@nuxtjs/supabase", '@nuxtjs/i18n', '@nuxtjs/leaflet'],
+  modules: [
+    '@pinia/nuxt',
+    "@nuxtjs/supabase",
+    '@nuxtjs/i18n',
+    '@nuxtjs/leaflet',
+    '@nuxt/image',
+  ],
   supabase: {
     redirectOptions: {
       login: '/en/login',
