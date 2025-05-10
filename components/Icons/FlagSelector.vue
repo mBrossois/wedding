@@ -1,13 +1,17 @@
 <template>
   <NuxtLink v-for="localeItem in locales" :key="localeItem.code" :to="switchLocalePath(localeItem.code)" :class="{open}" class="locale" :style="`--position: ${localeFlags[localeItem.code].position}`" @click="localeClicked(localeItem.code)">
-    <NuxtPicture class="rounded-small" :src="localeFlags[localeItem.code].flag" alt="Flag" />
+    <NuxtImg class="rounded-small flag" :src="getLocaleFlag(localeItem.code)" alt="Flag" />
   </NuxtLink>
 </template>
 
 <script setup lang="ts">
-import DutchFlag from '~/assets/img/Dutch-flag.svg'
-import EnglishFlag from '~/assets/img/English-flag.svg'
-import FrenchFlag from '~/assets/img/French-flag.svg'
+// import DutchFlag from '~/assets/img/Dutch-flag.svg'
+// import EnglishFlag from '~/assets/img/'
+// import FrenchFlag from '~/assets/img/French-flag.svg'
+
+const DutchFlag = "/img/Dutch-flag.svg"
+const EnglishFlag = "/img/English-flag.svg"
+const FrenchFlag = "/img/French-flag.svg"
 
 defineProps<{open: boolean}>()
 const emits = defineEmits<{
@@ -26,6 +30,11 @@ function localeClicked(item: string) {
 }
 
 const localeFlags: Ref<{[key: string]: {flag: string, position: number}}> = ref({ nl: {flag: DutchFlag, position: 1}, en: {flag: EnglishFlag, position: 0}, fr: {flag: FrenchFlag, position: 2}})
+function getLocaleFlag(code: string) {
+  return localeFlags.value[code].flag
+}
+
+
 function updateLocalePosition(item: string) {
   let counter = 1;
   for(const localeItem in localeFlags.value) {
@@ -58,5 +67,9 @@ onMounted(() => {
 
 .locale.router-link-active {
   z-index: 1000;
+}
+
+.locale .flag {
+  width: 20px;
 }
 </style>
