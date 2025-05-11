@@ -2,7 +2,7 @@
     <TitleDynamic :title="$t('LOCATION')" heading="h1" />
     <AppParagraph :text="$t('LOCATION_DESCRIPTION')" />
     <div class="tablet-double-column">
-        <NuxtImg class="image castle" loading="lazy" src="https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/vaeshartelt-castle" alt="Castle Vaeshartelt" height="677" width="1000"/>
+        <NuxtImg class="image castle" provider="cloudinary" loading="lazy" src="/f_auto,q_auto/v1/wedding/vaeshartelt-castle" alt="Castle Vaeshartelt" sizes="326"/>
         <div>
             <AppParagraph :text="$t('LOCATION_TO_SEE')" />
             <ul class="list-inside">
@@ -27,12 +27,12 @@
         
         <div class="flex flex-column gap-2">
             <TitleDynamic :title="$t('MAP_TERAIN')" heading="h2" />
-            <NuxtImg class="image terrain" loading="lazy" src="https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/map-terrain" alt="Map terrain" height="723" width="1000" @click="openModal()"/>
+            <NuxtImg class="image terrain" provider="cloudinary" loading="lazy" src="/f_auto,q_auto/v1/wedding/map-terrain" alt="Map terrain" sizes="326" @click="openModal()"/>
         </div>
     </div>
 
     <AppModal class="modal-container" :isOpen="modalOpen" :title="$t('MAP_TERAIN')" :buttons="[]" size="full" @onClose="closeModal()">
-        <NuxtImg class="image terrain full" loading="lazy" src="https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/map-terrain" alt="Map terrain" height="723" width="1000"/>
+        <NuxtImg class="image terrain full" provider="cloudinary" loading="lazy" src="/f_auto,q_auto/v1/wedding/map-terrain" alt="Map terrain" sizes="294 md:769 lg:928"/>
     </AppModal>
 </template>
 

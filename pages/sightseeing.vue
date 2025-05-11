@@ -100,40 +100,36 @@ const cities: Record<string, {title: string, img: Img, distance: string }> = {
     maastricht: {
         title: 'MAASTRICHT',
         img: {
-            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/maastricht',
+            src: '/f_auto,q_auto/v1/wedding/maastricht',
             alt: 'Maastricht city',
-            height: '270',
-            width: '505',
+            sizes: '505'
         },
         distance: 'MAASSTRICHT_DISTANCE'
     },
     valkenburg: {
         title: 'VALKENBURG',
         img: {
-            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/valkenburg',
+            src: '/f_auto,q_auto/v1/wedding/valkenburg',
             alt: 'Valkenburg city',
-            height: '309',
-            width: '464',
+            sizes: '464'
         },
         distance: 'VALKENBURG_DISTANCE'
     },
     denBosch: {
         title: 'DEN_BOSCH',
         img: {
-            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/den-bosch',
+            src: '/f_auto,q_auto/v1/wedding/den-bosch',
             alt: 'Den Bosch city',
-            height: '309',
-            width: '464',
+            sizes: '464'
         },
         distance: 'DEN_BOSCH_DISTANCE'
     },
     utrecht: {
         title: 'UTRECHT',
         img: {
-            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/utrecht',
+            src: '/f_auto,q_auto/v1/wedding/utrecht',
             alt: 'Utrecht city',
-            height: '307',
-            width: '464',
+            sizes: '464'
         },
         distance: 'UTRECHT_DISTANCE'
     }
@@ -143,37 +139,33 @@ const food: Record<string, {title: string, img: Img }> = {
     breakfast: {
         title: 'BREAKFAST',
         img: {
-            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/hagelslag',
+            src: '/f_auto,q_auto/v1/wedding/hagelslag',
             alt: 'Chocolade hageslag op brood',
-            height: '309',
-            width: '464',
+            sizes: '464'
         },
     },
     lunch: {
         title: 'LUNCH',
         img: {
-            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/bittergarnituur',
+            src: '/f_auto,q_auto/v1/wedding/bittergarnituur',
             alt: 'Bittergarnituur',
-            height: '270',
-            width: '480',
+            sizes: '480'
         },
     },
     dinner: {
         title: 'DINNER',
         img: {
-            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/satesaus',
+            src: '/f_auto,q_auto/v1/wedding/satesaus',
             alt: 'Friet met satesaus',
-            height: '270',
-            width: '479',
+            sizes: '479'
         },
     },
     snacks: {
         title: 'SNACKS',
         img: {
-            src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/poffertjes',
+            src: '/f_auto,q_auto/v1/wedding/poffertjes',
             alt: 'Poffertjes',
-            height: '309',
-            width: '464',
+            sizes: '464'
         },
     }
 }

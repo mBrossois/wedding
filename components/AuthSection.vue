@@ -25,7 +25,7 @@ const emits = defineEmits<{
 const img = {
     src: '/f_auto,q_auto/v1/wedding/us_ny',
     alt: 'Emma & Mark in NY',
-    sizes: '458 md:421'
+    sizes: '421 md:458'
 }
 
 const btnTxt = {

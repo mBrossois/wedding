@@ -1,14 +1,11 @@
 <template>
     <div class="image-container">
         <IconsArch class="absolute arch" />
-        <ImageBlock :img="img" />
+        <ImageBlock />
     </div>
 </template>
 
 <script setup lang="ts">
-import type { Img } from '~/types/image';
-
-defineProps<{img: Img}>()
 </script>
 
 <style scoped>

@@ -1,15 +1,12 @@
 <template>
     <div class="img-block flex flex-centered">
         <div class="img-container relative">
-            <NuxtImg class="intro-img absolute" loading="lazy" :src="img.src" height="4032" width="3024" :alt="img.alt"/>
+            <NuxtImg class="intro-img absolute" provider="cloudinary" loading="lazy" src="/v1/wedding/us_ny" sizes="789" alt="Mark & Emma in NY"/>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import type { Img } from '~/types/image'
-
-const props = defineProps<{img: Img}>()
 </script>
 
 <style scoped>

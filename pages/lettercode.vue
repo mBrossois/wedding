@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="img-section">
-            <ImageAltar :img="img"/>
+            <ImageAltar/>
         </div>
         <div class="input-section">
             <div class="flex flex-centered">
@@ -16,11 +16,6 @@
 
 <script setup lang="ts">
 import { useUsersStore } from '~/store/users';
-
-const img = {
-    src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/us_ny',
-    alt: 'Emma & Mark in NY'
-}
 
 const lettercode = ref('');
 

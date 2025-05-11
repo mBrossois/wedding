@@ -83,10 +83,9 @@ const firstNames = computed(() => getGuests.value?.map(guest => { return guest.f
 const localePath = useLocalePath()
 
 const img = {
-    src: 'https://res.cloudinary.com/dt7uhy7jv/image/upload/f_auto,q_auto/v1/wedding/us_bridge',
+    src: '/f_auto,q_auto/v1/wedding/us_bridge',
     alt: 'Emma & Mark on bridge',
-    width: '344',
-    height: '229'
+    sizes: '344'
 }
 
 const firstDay = [
