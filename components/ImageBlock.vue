@@ -1,7 +1,7 @@
 <template>
     <div class="img-block flex flex-centered">
         <div class="img-container relative">
-            <NuxtImg class="intro-img absolute" provider="cloudinary" src="/v1/wedding/us_ny" sizes="789" alt="Mark & Emma in NY"/>
+            <NuxtImg class="intro-img absolute" provider="cloudinary" src="/v1/wedding/us_ny" sizes="395" alt="Mark & Emma in NY"/>
         </div>
     </div>
 </template>
