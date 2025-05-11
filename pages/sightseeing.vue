@@ -47,8 +47,8 @@
 
             <AppDescriptionWithImage :title="cities.denBosch.title" :img="cities.denBosch.img" :distance="cities.denBosch.distance">
                 <AppParagraph :text="$t('DEN_BOSCH_DESCRIPTION_1')" />
-                <AppParagraph :text="$t('DEN_BOSCH_DESCRIPTION_2')" />
-                <AppLink text="Jan de Groot" to="https://www.google.com/maps/place/Banketbakkerij+Jan+de+Groot/@51.6902138,5.2940371,17z/data=!3m1!4b1!4m6!3m5!1s0x47c6ee8aa547950d:0x1116b304215810!8m2!3d51.6902138!4d5.296612!16s%2Fg%2F1tgz9l0q?entry=tts&g_ep=EgoyMDI1MDEwOC4wIPu8ASoASAFQAw%3D%3D" />
+                <AppSpan :text="$t('DEN_BOSCH_DESCRIPTION_2')" />
+                <AppLink :noArrow="true" text="Jan de Groot" to="https://www.google.com/maps/place/Banketbakkerij+Jan+de+Groot/@51.6902138,5.2940371,17z/data=!3m1!4b1!4m6!3m5!1s0x47c6ee8aa547950d:0x1116b304215810!8m2!3d51.6902138!4d5.296612!16s%2Fg%2F1tgz9l0q?entry=tts&g_ep=EgoyMDI1MDEwOC4wIPu8ASoASAFQAw%3D%3D" />
                 <AppSpan text="." />
             </AppDescriptionWithImage>
 

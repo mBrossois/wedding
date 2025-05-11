@@ -1,16 +1,15 @@
 <template>
     <TitleDynamic :title="$t('SCHEDULE')" heading="h1" />
     <div>
-        <AppSpan :text="$t('SCHEDULE_INTRO_ONE')" /> <br>
-        <AppSpan :text="$t('SCHEDULE_INTRO_TWO')" />
+        <AppSpan :text="$t('SCHEDULE_INTRO_ONE')" />
         <div class="icon-container relative inline-block">
             <IconsSun class="icon absolute" />
         </div>
-        <AppSpan :text="$t('SCHEDULE_INTRO_THREE')" />
+        <AppSpan :text="$t('SCHEDULE_INTRO_TWO')" />
         <div class="icon-container relative inline-block">
             <IconsRain class="icon absolute" />
         </div>
-        <AppSpan :text="$t('SCHEDULE_INTRO_FOUR')" />
+        <AppSpan :text="$t('SCHEDULE_INTRO_THREE')" />
     </div>
 
     <div class="responsive-grid-custom flex flex-column gap-2">

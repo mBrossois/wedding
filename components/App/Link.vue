@@ -1,7 +1,6 @@
 <template>
     <component :is="to ? NuxtLink : 'button'" :class="classes" class="link kurale-regular" :to="to" :target="target" @click="onClick">
-        {{ text }} 
-        <IconsArrow />
+        {{ text }}<IconsArrow v-if="!noArrow"/>
     </component>
 </template>
 
