@@ -16,22 +16,24 @@
         <AppButton :text="$t('ADD_ROOM')" @click="addRoom" />
         <AppParagraph v-if="getRoomsAvailable.length == 0 " :text="$t('NO_ROOMS_AVAILABE')" />
 
-        <table class="mb-1 w-fit">
-            <thead>
-                <tr>
-                    <th class="primary-cell"><AppParagraph size="large" :text="$t('ROOM_NAME')" /></th>
-                    <th class="tw-s"><AppParagraph size="large" :text="$t('CHILDBED')" /></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="room in getGuestRooms" :key="room.id">
-                    <td><AppSelect :is-dark="true" :options="showRooms(room)" @onChange="updateRoom($event, room.id)"/></td>
-                    <td><AppRadioBtn class="pl-1" :value="room.id.toString()" :name="room.id.toString()" :checked="!!room.childBed" @onclick="updateRoomChildbed(room.id)"  /></td>
-                    <td><IconsDelete class="icon" @click="deleteRoom(room.id)"/></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="rooms-table_container">
+            <table class="rooms-table mb-1">
+                <thead>
+                    <tr>
+                        <th class="primary-cell"><AppParagraph size="large" :text="$t('ROOM_NAME')" /></th>
+                        <th class="tw-s"><AppParagraph size="large" :text="$t('CHILDBED')" /></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="room in getGuestRooms" :key="room.id">
+                        <td><AppSelect :is-dark="true" :options="showRooms(room)" @onChange="updateRoom($event, room.id)"/></td>
+                        <td><AppRadioBtn class="pl-1" :value="room.id.toString()" :name="room.id.toString()" :checked="!!room.childBed" @onclick="updateRoomChildbed(room.id)"  /></td>
+                        <td><IconsDelete class="icon" @click="deleteRoom(room.id)"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div v-else class="flex justify-center">
@@ -124,4 +126,15 @@ function deleteRoom(roomId: number) {
 .primary-cell {
     width: 217px;
 }
+
+.rooms-table_container {
+    overflow: scroll;
+}
+
+@media screen and (max-width: 768px) {
+    .rooms-table {
+        width: 400px;
+    }
+}
+
 </style>

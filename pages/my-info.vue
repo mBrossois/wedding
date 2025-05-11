@@ -12,24 +12,26 @@
         </div>
     </div>
 
-    <table class="w-fit">
-        <thead>
-            <tr>
-                <th class="tw-l" ><AppParagraph size="large" :text="$t('FIRSTNAME')" /></th>
-                <th class="tw-l"><AppParagraph size="large" :text="$t('LASTNAME')" /></th>
-                <th class="tw-s"><AppParagraph size="large" :text="$t('AGE')" /></th>
-                <th class="tw-s"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="guest in getGuests" :key="guest.id">
-                <td><InputBlock variant="secondary" placeholder="John" :id="guest.firstName" :value="guest.firstName" @input="updateGuest($event, 'firstName', guest.id)" /></td>
-                <td><InputBlock variant="secondary" placeholder="Doe" :id="guest.lastName" :value="guest.lastName" @input="updateGuest($event, 'lastName', guest.id)" /></td>
-                <td><AppRadioBtn :value="guest.id.toString()" :name="guest.id.toString()" :checked="!!guest.isAdult" @onclick="updateGuest($event, 'isAdult', guest.id)"  /></td>
-                <td><IconsDelete class="icon" @click="deleteGuest(guest.id)"/></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="info-table_container">
+        <table class="info-table">
+            <thead>
+                <tr>
+                    <th class="tw-l" ><AppParagraph size="large" :text="$t('FIRSTNAME')" /></th>
+                    <th class="tw-l"><AppParagraph size="large" :text="$t('LASTNAME')" /></th>
+                    <th class="tw-s"><AppParagraph size="large" :text="$t('AGE')" /></th>
+                    <th class="tw-s"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="guest in getGuests" :key="guest.id">
+                    <td><InputBlock variant="secondary" placeholder="John" :id="guest.firstName" :value="guest.firstName" @input="updateGuest($event, 'firstName', guest.id)" /></td>
+                    <td><InputBlock variant="secondary" placeholder="Doe" :id="guest.lastName" :value="guest.lastName" @input="updateGuest($event, 'lastName', guest.id)" /></td>
+                    <td><AppRadioBtn :value="guest.id.toString()" :name="guest.id.toString()" :checked="!!guest.isAdult" @onclick="updateGuest($event, 'isAdult', guest.id)"  /></td>
+                    <td><IconsDelete class="icon" @click="deleteGuest(guest.id)"/></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -101,6 +103,16 @@ async function updateImportantInfo(value: string) {
 
 .last-name {
     width: 112px;
+}
+
+.info-table_container {
+    overflow: scroll;
+}
+
+@media screen and (max-width: 768px) {
+    .info-table {
+        width: 500px;
+    }
 }
 
 @media screen and (min-width: 768px) {
