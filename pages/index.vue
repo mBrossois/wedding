@@ -2,19 +2,17 @@
     <TitleDynamic :title="`${$t('WELCOME')} ${firstNames}!`" heading="h1" />
     <AppParagraph :text="$t('WEDDING_INVITATION')" />
 
+    <fieldset class="attendance-field flex flex-column gap-1">
+        <legend class="mb-1"><TitleDynamic :title="$t('ATTENDING_WEDDING')" heading="h2" /></legend>
+        <div class="flex gap-1">
+            <AppRadioBtn :checked="!!getIsComing" :is-light="false" value="yes" :label="$t('YES')" name="attend_wedding" @onclick="updateAttendance" />
+            <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" :label="$t('NO')" name="attend_wedding" @onclick="updateAttendance" />
+        </div>
+    </fieldset>
+    <AppLink class="transition-300 m-auto" :class="[`opacity-${!!getIsComing ? 1 : 0}`, {'no-events': !getIsComing}]" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/my-info')"/>
+
     <div class="responsive-grid flex flex-column gap-2">
         <AppImageContainer :img="img" columns="split" />
-
-        <div class="flex gap-1 flex-column">
-            <fieldset class="attendance-field flex flex-column gap-1">
-                <legend class="mb-1"><TitleDynamic :title="$t('ATTENDING_WEDDING')" heading="h2" /></legend>
-                <div class="flex justify-center gap-1">
-                    <AppRadioBtn :checked="!!getIsComing" :is-light="false" value="yes" :label="$t('YES')" name="attend_wedding" @onclick="updateAttendance" />
-                    <AppRadioBtn :checked="!getIsComing" :is-light="false" value="no" :label="$t('NO')" name="attend_wedding" @onclick="updateAttendance" />
-                </div>
-            </fieldset>
-            <AppLink class="transition-300 m-auto" :class="[`opacity-${!!getIsComing ? 1 : 0}`, {'no-events': !getIsComing}]" :text="$t('SHARE_AVAILABILITY')" :to="localePath('/my-info')"/>
-        </div>
 
         <div class="flex gap-1 flex-column">
             <TitleDynamic :title="$t('ROOMS')" heading="h2" />
@@ -22,14 +20,6 @@
             <AppButton small-text :text="$t('BOOK_ROOM')" :to="localePath('/rooms')" />
         </div>
 
-        <div class="flex gap-1 flex-column">
-            <TitleDynamic :title="$t('LOCATION')" heading="h2" />
-            <SectionVaesharteltMap />
-            <AppButton small-text :text="$t('MORE_INFO')" :to="localePath('/location')" />
-        </div>
-
-        <div class="show-desktop"></div>
-    
         <div class="flex gap-1 flex-column">
             <TitleDynamic :title="$t('SCHEDULE')" heading="h2" />
             <ul class="ml-1">
@@ -54,6 +44,12 @@
             <div class="ml-1">
                 <AppButton small-text :text="$t('MORE_INFO')" :to="localePath('/schedule')" />
             </div>
+        </div>
+
+        <div class="flex gap-1 flex-column">
+            <TitleDynamic :title="$t('LOCATION')" heading="h2" />
+            <SectionVaesharteltMap />
+            <AppButton small-text :text="$t('MORE_INFO')" :to="localePath('/location')" />
         </div>
     </div>
 </template>
