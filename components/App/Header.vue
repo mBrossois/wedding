@@ -1,7 +1,7 @@
 <template>
     <header :class="{'hide': hideHeader}" class="header px-1">
         <div class="header-body flex">
-            <NuxtLink class="lavishly-yours-regular logo" :to="localePath('/')">Mark & Emma's wedding</NuxtLink>
+            <NuxtLink class="lavishly-yours-regular logo flex items-center gap-1" :to="localePath('/')"><NuxtImg provider="cloudinary" src="/v1/wedding/iconLogo" sizes="32" width="32" height="32" alt="Logo"/> Mark & Emma's wedding</NuxtLink>
             <IconsHamburger :open="open" @click="toggleOpen" />
         </div>
         <AppMenu :open="open" @on-close="toggleOpen"/>
@@ -60,9 +60,15 @@ onUnmounted(() => {
 }
 
 .logo {
-    font-size: 32px;
+    font-size: 28px;
     text-decoration: none;
     color: black;
+}
+
+@media screen and (min-width: 768px) {
+    .logo {
+        font-size: 32px;
+    }
 }
 
 .header-body {
