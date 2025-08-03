@@ -1,6 +1,6 @@
 <template>
   <NuxtLink v-for="localeItem in locales" :key="localeItem.code" :to="switchLocalePath(localeItem.code)" :class="{open}" class="locale" :style="`--position: ${localeFlags[localeItem.code].position}`" @click="localeClicked(localeItem.code)">
-    <NuxtImg class="rounded-small flag" :src="getLocaleFlag(localeItem.code)" alt="Flag" />
+    <NuxtImg class="rounded-small flag" :src="getLocaleFlag(localeItem.code)" alt="Flag" preload />
   </NuxtLink>
 </template>
 

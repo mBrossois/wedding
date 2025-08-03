@@ -45,6 +45,16 @@ export default defineNuxtConfig({
       url: ''
     }
   },
+  routeRules: {
+    '/admin': {ssr: false},
+    '/api/**': { cors: true },
+    '/login': {isr: true},
+    '/lettercode': {isr: true},
+    '/location': {isr: true},
+    '/schedule': {isr: true},
+    '/sightseeing': {isr: true},
+    '/confirmation': {prerender: true},
+  },
   app: {
     head: {
       link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
