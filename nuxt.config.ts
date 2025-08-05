@@ -45,6 +45,9 @@ export default defineNuxtConfig({
       url: ''
     }
   },
+  build: {
+      transpile: ['leaflet', '@nuxtjs/leaflet'],
+  },
   routeRules: {
     '/admin': {ssr: false},
     '/api/**': { cors: true },
