@@ -1,7 +1,7 @@
 <template>
     <header :class="{'hide': hideHeader}" class="header px-1">
         <div class="header-body flex">
-            <NuxtLink class="lavishly-yours-regular logo flex items-center gap-1" :to="localePath('/')" preload><NuxtImg provider="cloudinary" src="/v1/wedding/iconLogo" sizes="32" width="32" height="32" alt="Logo"/> Mark & Emma's wedding</NuxtLink>
+            <NuxtLink class="lavishly-yours-regular logo flex items-center gap-1" :to="localePath('/')"><NuxtImg provider="cloudinary" src="/v1/wedding/iconLogo" sizes="32" width="32" height="32" alt="Logo" preload/> Mark & Emma's wedding</NuxtLink>
             <IconsHamburger :open="open" @click="toggleOpen" />
         </div>
         <AppMenu :open="open" @on-close="toggleOpen"/>

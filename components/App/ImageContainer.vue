@@ -1,7 +1,7 @@
 <template>
     <div :class="columns" class="img-block flex flex-centered">
         <div class="img-container flex justify-center items-center relative">
-            <NuxtImg class="img absolute" loading="lazy" provider="cloudinary" :src="img.src" :sizes="img.sizes" :alt="img.alt"/>
+            <NuxtImg class="img absolute" loading="lazy" provider="cloudinary" :src="img.src" :sizes="img.sizes" :alt="img.alt" placeholder/>
         </div>
     </div>
 </template>

@@ -3,7 +3,7 @@
         <div :class="{'small': size === 'small'}" class="modal flex flex-column p-1 rounded-medium">
             <div class="justify-between mb-1">
                 <TitleDynamic :title="title" heading="h1" />
-                <NuxtImg class="clickable" src="/img/close.svg" alt="X" @click="closeModal" />
+                <NuxtImg class="clickable" src="/img/close.svg" alt="X" @click="closeModal" loading="lazy" />
             </div>
             <slot></slot>
             <div class="buttons flex justify-between gap-1 mt-2">
