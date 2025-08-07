@@ -65,8 +65,6 @@ const { getIsComing, getGuests } = storeToRefs(guestsStore)
 
 const rooms = ref({available: 0, total: 0})
 
-console.time('initial-page')
-
 const response = await $fetch('/api/rooms-all-count', {
     method: 'get',
     headers: useRequestHeaders(['cookie'])
@@ -99,8 +97,6 @@ const secondDay = [
     {time: '08:00', activity: 'BREAKFAST'},
     {time: '11:00', activity: 'CHECK_OUT'},
 ]
-
-console.timeEnd('initial page')
 
 async function updateAttendance(value: string) {
     const response = await $fetch('/api/attendance', {
