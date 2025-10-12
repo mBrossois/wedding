@@ -9,6 +9,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
       return navigateTo('/')
     }
   } else if(!usersStore.getRole) {
-    usersStore.setRole()
+    await usersStore.setRole()
   }
 })

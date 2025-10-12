@@ -60,7 +60,7 @@ table {
 }
 
 .page-width {
-    width: var(--page-width);
+    max-width: var(--page-width);
 }
 
 .full-width {

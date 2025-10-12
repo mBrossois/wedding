@@ -17,7 +17,7 @@ export interface Form {
 }
 
 export interface Guest {
-    id?: number,
+    id: number,
     firstName: string,
     lastName: string,
     isAdult?: boolean

@@ -12,7 +12,6 @@ export default defineEventHandler(async (event) => {
     if(response && response.length === 1 ) {
         setResponseStatus(event, 200)
         return response[0].role
-
     }
         
     setResponseStatus(event, 500)
