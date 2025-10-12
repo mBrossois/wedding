@@ -3,21 +3,26 @@ import { serverSupabaseClient } from '#supabase/server'
 export default defineEventHandler(async (event) => {
     const {email} = getQuery(event)
     const client = await serverSupabaseClient(event)
-    
+
+    try {
     if(email) {
         const {data: guestBook} = await client
-            .from('Guest_book')
+            .from('Authentication')
             .select(`
-                id,
-                is_coming,
-                adults,
-                children,
-                free_room,
-                auth_id,
-                important_information,
-                Authentication!inner (email)
+                Guest_book ( 
+                    id, 
+                    is_coming, 
+                    adults, 
+                    children, 
+                    free_room, 
+                    auth_id, 
+                    important_information 
+                    ),
+                email
             `)
-            .eq('Authentication.email', email)
+            .eq('email', email)
+
+            console.log(guestBook[0].Guest_book)
              
         if(guestBook) {
             const {data: guests, status} = await client
@@ -28,7 +33,7 @@ export default defineEventHandler(async (event) => {
                 last_name,
                 is_adult
             `)
-            .eq('guest_id', guestBook[0].id)
+            .eq('guest_id', guestBook[0].Guest_book.id)
             
             setResponseStatus(event, 200)
 
@@ -38,7 +43,8 @@ export default defineEventHandler(async (event) => {
                 }
             })
 
-            const formattedGuestBook = guestBook.map(guestBook => {
+            const formattedGuestBook = guestBook[0].Guest_book.map(guestBook => {
+                console.log('guestBook', guestBook)
                 return {
                     id: guestBook.id,
                     authId: guestBook.auth_id,
@@ -60,7 +66,8 @@ export default defineEventHandler(async (event) => {
 
         
     }
-
-    setResponseStatus(event, 500)
-    return 'Something went wrong'
+    } catch {
+        setResponseStatus(event, 500)
+        return 'Something went wrong'
+    }
   })
