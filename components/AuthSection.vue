@@ -6,7 +6,7 @@
                 <AppImageContainer :img="img" columns="split"/>
             </div>
             <div class="input-container flex flex-column items-center gap-1">
-                <InputBlock :value="email" id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" />
+                <InputBlock :value="email" id="email" label="Email" autocomplete="email" input-type="email" placeholder="example@gmail.com" :error="emailError" @input="setEmail" @enter="onSubmit" />
                 <AppButton :loading="status === 'loading'" :text="$t(activeText)" @click="onSubmit"/>
             </div>
         </div>

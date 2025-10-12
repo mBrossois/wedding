@@ -1,7 +1,7 @@
 <template>
     <div :class="variant" class="input-container">
         <label class="kurale-regular font-20">{{ label }}</label>
-        <input v-model="inputValue" :value="value" class="input-field rounded-medium kurale-regular font-20" :id="id" :autocomplete="autocomplete" :type="inputType" :placeholder="placeholder" @input="onInput"/>
+        <input v-model="inputValue" :value="value" class="input-field rounded-medium kurale-regular font-20" :id="id" :autocomplete="autocomplete" :type="inputType" :placeholder="placeholder" @input="onInput" @keypress.enter="onEnter"/>
         <ErrorLabel class="mt-0_5" :error="error" />
     </div>
 </template>
@@ -12,11 +12,16 @@ import type { Input } from '~/types/input';
 const props = defineProps<Input>()
 const emits = defineEmits<{
   (e: 'input', value: string): void
+  (e: 'enter'): void
 }>()
 
 const inputValue = ref(props.value)
 function onInput() {
     emits('input', inputValue.value as string)
+}
+
+function onEnter() {
+  emits('enter')
 }
 </script>
 
