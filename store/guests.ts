@@ -2,6 +2,7 @@ import type { Guest, GuestList } from "~/types/guests"
 
 export const useGuestsStore = defineStore('guests', () => {
     const guestsBook: Ref<GuestList|undefined> = ref()
+
     const getGuestBookId = computed(() => guestsBook.value?.id)
     const getAuthId = computed(() => guestsBook.value?.authId || -1)
     const getIsComing = computed(() => guestsBook.value?.isComing)
@@ -17,16 +18,16 @@ export const useGuestsStore = defineStore('guests', () => {
     const getGuestAmount = computed(() => guestsBook.value?.amounts)
     async function setInitialGuestsBook(email: string) {
         if(!guestsBook.value) {
-            const { data, status } = await useFetch('/api/guests', {
+            const response = await $fetch<GuestList>('/api/guests', {
                 method: 'get',
                 query: {
-                    email: email
+                    email
                 },
                 headers: useRequestHeaders(['cookie'])
             })
 
-            if(status.value === 'success') {
-                guestsBook.value = data.value as unknown as GuestList
+            if(response) {
+                guestsBook.value = response
             }
         }
     }

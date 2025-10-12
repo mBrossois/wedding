@@ -56,10 +56,11 @@ async function addGuest() {
 
 async function updateGuest(value: string | boolean, variant: keyof Guest, id: number) {
     const guest = guestsStore.updateGuest(value, variant, id)
-    const response = await $fetch('/api/guest-list', {
+    await $fetch('/api/guest-list', {
         method: 'patch',
         body: {
-            guest
+            guest,
+            guestBookId: guestsStore.getGuestBookId
         },
         headers: useRequestHeaders(['cookie'])
     })
@@ -67,10 +68,11 @@ async function updateGuest(value: string | boolean, variant: keyof Guest, id: nu
 
 async function deleteGuest(id: number) {
     guestsStore.deleteGuest(id)
-    const response = await $fetch('/api/guest-list', {
+    await $fetch('/api/guest-list', {
         method: 'delete',
         body: {
-            id
+            id,
+            guestBookId: guestsStore.getGuestBookId
         },
         headers: useRequestHeaders(['cookie'])
     })
