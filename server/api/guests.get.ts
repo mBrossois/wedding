@@ -21,8 +21,6 @@ export default defineEventHandler(async (event) => {
                 email
             `)
             .eq('email', email)
-
-            console.log(guestBook[0].Guest_book)
              
         if(guestBook) {
             const {data: guests, status} = await client
@@ -44,7 +42,6 @@ export default defineEventHandler(async (event) => {
             })
 
             const formattedGuestBook = guestBook[0].Guest_book.map(guestBook => {
-                console.log('guestBook', guestBook)
                 return {
                     id: guestBook.id,
                     authId: guestBook.auth_id,

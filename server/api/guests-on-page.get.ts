@@ -7,21 +7,18 @@ export default defineEventHandler(async (event) => {
     const allGuests = []
     const {data: guestBook} = await client
         .from('Guest_book')
-        .select('*')
+        .select(`
+            *,
+            Guests ( 
+                first_name, 
+                last_name
+                )
+            `)
         .range(20 * page, 20 * page + 19)
             
     if(guestBook) {
         for(const guestGroup of guestBook) {
-            const {data: guest, status} = await client
-            .from('Guests')
-            .select(`
-                first_name,
-                last_name
-            `)
-            .eq('guest_id', guestGroup.id)
-            .limit(1)
-
-            allGuests.push({attendanceData: guestGroup, name: guest[0].first_name + ' ' + guest[0].last_name})
+            allGuests.push({attendanceData: guestGroup, name: guestGroup.Guests[0]?.first_name + ' ' + guestGroup.Guests[0]?.last_name})
         }
         
         setResponseStatus(event, 200)
