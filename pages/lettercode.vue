@@ -5,7 +5,7 @@
         </div>
         <div class="input-section">
             <div class="flex flex-centered">
-                <InputBlock :value="lettercode" id="lettercode" :label="$t('FILL_LETTERCODE')" input-type="text" placeholder="2102912823" :error="error" @input="setLetterkeyValue" />
+                <InputBlock :value="lettercode" id="lettercode" :label="$t('FILL_LETTERCODE')" input-type="text" placeholder="2102912823" :error="error" @input="setLetterkeyValue" @enter="onLetterEntered" />
             </div>
         </div>
         <div class="button-section flex flex-centered">
