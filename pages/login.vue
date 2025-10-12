@@ -38,7 +38,7 @@ async function submit(email: string) {
             const { data, error } = await supabase.auth.signInWithOtp({
                 email: email as string,
                 options: {
-                    emailRedirectTo: `${runtimeConfig.public.url}/${locale.value}${response === 'Login' ? '' : '/confirmation'}`
+                    emailRedirectTo: `${runtimeConfig.public.url}/${locale.value}/confirmation${response === 'Login' ? '?page=logged-in' : ''}`
                 }
             })
             
