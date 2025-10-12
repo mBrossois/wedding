@@ -31,7 +31,7 @@ export default defineEventHandler(async (event) => {
                 last_name,
                 is_adult
             `)
-            .eq('guest_id', guestBook[0].Guest_book.id)
+            .eq('guest_id', guestBook[0].Guest_book[0].id)
             
             setResponseStatus(event, 200)
 
