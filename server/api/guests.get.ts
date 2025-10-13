@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
             `)
             .eq('email', email)
              
-        if(guestBook) {
+        if(guestBook && guestBook[0].Guest_book.length > 0) {
             const {data: guests, status} = await client
             .from('Guests')
             .select(`
@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
                 is_adult
             `)
             .eq('guest_id', guestBook[0].Guest_book[0].id)
-            
+                        
             setResponseStatus(event, 200)
 
             const formattedGuests = guests?.map(guest => {
