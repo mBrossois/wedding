@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
         const {data: response, status} = await client
             .from('Authentication')
             .select('email')
-            .eq('email', email)
+            .eq('email', email.toLowerCase())
 
         if(response && response.length !== 1 ) {
             setResponseStatus(event, 500)

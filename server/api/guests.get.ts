@@ -1,7 +1,7 @@
 import { serverSupabaseClient } from '#supabase/server'
 
 export default defineEventHandler(async (event) => {
-    const {email} = getQuery(event)
+    const {email} = getQuery<{email: string}>(event)
     const client = await serverSupabaseClient(event)
 
     try {
@@ -20,7 +20,7 @@ export default defineEventHandler(async (event) => {
                     ),
                 email
             `)
-            .eq('email', email)
+            .eq('email', email.toLowerCase())
              
         if(guestBook && guestBook[0].Guest_book.length > 0) {
             const {data: guests, status} = await client
