@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import { useGuestsStore } from '~/store/guests';
 import { useRoomsStore } from '~/store/rooms';
+import { useToasterStore } from '~/store/toaster';
 import type { Room } from '~/types/rooms';
 
 const guestStore = useGuestsStore()
@@ -81,10 +82,18 @@ async function updateRoomPatch(newRoom?: Room, oldRoom?: Room) {
     })
 }
 
+const toastStore = useToasterStore()
+const { t: $t} = useI18n({useScope: 'global'})
+
 function addRoom() {
     const room = roomsStore.setGuestToRoom(getAuthId.value)
     if(room) {
         updateRoomPatch(room)
+        setSlide()
+        toastStore.addToast({
+            type: 'success',
+            message: $t('ROOM_ADDED')
+        })
     }
 }
 
@@ -103,6 +112,10 @@ function updateRoomChildbed(roomId: number) {
 function deleteRoom(roomId: number) {
     const {oldRoom} = roomsStore.deleteRoom(roomId)
     updateRoomPatch(undefined, oldRoom)
+    toastStore.addToast({
+        type: 'success',
+        message: $t('ROOM_REMOVED')
+    })
 }
 </script>
 
@@ -132,9 +145,16 @@ function deleteRoom(roomId: number) {
 }
 
 @media screen and (max-width: 768px) {
+    .primary-cell {
+        width: 10rem;
+    }
+
+    .select {
+        max-width: 10rem;
+    }
+
     .rooms-table {
-        width: 400px;
+        width: 300px;
     }
 }
-
 </style>

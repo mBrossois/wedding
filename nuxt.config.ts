@@ -20,7 +20,7 @@ export default defineNuxtConfig({
       exclude: [
         '/en/lettercode', '/fr/lettercode', '/nl/lettercode',
         '/en/login', '/fr/login', '/nl/login', 
-        '/en/confirmation','/fr/confirmation','/nl/confirmation',
+        '/en/confirmation','/fr/confirmation','/nl/confirmation'
       ],
       cookieRedirect: false,
     }
