@@ -89,7 +89,6 @@ function addRoom() {
     const room = roomsStore.setGuestToRoom(getAuthId.value)
     if(room) {
         updateRoomPatch(room)
-        setSlide()
         toastStore.addToast({
             type: 'success',
             message: $t('ROOM_ADDED')
