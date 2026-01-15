@@ -122,6 +122,8 @@ export default defineI18nConfig(() => ({
         VALKENBURG: "Valkenburg",
         DEN_BOSCH: "Den Bosch",
         UTRECHT: "Utrecht",
+        ROOM_ADDED: "You have reserved a room.",
+        ROOM_REMOVED: "You have removed a room.",
       },
       fr: {
         ADMIN: 'Administrateur',
@@ -243,6 +245,8 @@ export default defineI18nConfig(() => ({
         VALKENBURG: "Valkenburg",
         DEN_BOSCH: "Den Bosch",
         UTRECHT: "Utrecht",
+        ROOM_ADDED: "Vous avez réservé une chambre.",
+        ROOM_REMOVED: "Vous avez supprimé une chambre.",
       },
       nl: {
         ADMIN: 'Admin',
@@ -364,6 +368,8 @@ export default defineI18nConfig(() => ({
         VALKENBURG: "Valkenburg",
         DEN_BOSCH: "Den Bosch",
         UTRECHT: "Utrecht",
+        ROOM_ADDED: "Je hebt een kamer gereserveerd",
+        ROOM_REMOVED: "Je hebt een kamer verwijderd",
       }
     }
   }))
