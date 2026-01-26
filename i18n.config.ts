@@ -135,7 +135,7 @@ export default defineI18nConfig(() => ({
         LOG_OUT: 'Se déconnecter',
         FILL_LETTERCODE: "Insérer votre code inscrit sur votre faire-part",
         CONTINUE: "Suivant",
-        CREATE_ACCOUNT: "Créée un compte ",
+        CREATE_ACCOUNT: "Créer un compte ",
         LOGIN: "S'identifier",
         EMAIL: "Email",
         CREATE: "Créer",
