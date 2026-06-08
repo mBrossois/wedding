@@ -4,6 +4,12 @@ import { serverSupabaseUser } from '#supabase/server'
 export default defineEventHandler(async (event) => {
     const client = await serverSupabaseClient(event)
     const user = await serverSupabaseUser(event)
+
+    if (user?.is_anonymous) {
+        setResponseStatus(event, 200)
+        return 'anon'
+    }
+
     const {data: response, status} = await client
         .from('Authentication')
         .select('role')
@@ -13,7 +19,7 @@ export default defineEventHandler(async (event) => {
         setResponseStatus(event, 200)
         return response[0].role
     }
-        
+
     setResponseStatus(event, 500)
     return 'Something went wrong'
 })

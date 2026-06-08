@@ -19,7 +19,8 @@ export default defineNuxtConfig({
       include: undefined,
       exclude: [
         '/en/lettercode', '/fr/lettercode', '/nl/lettercode',
-        '/en/login', '/fr/login', '/nl/login', 
+        '/en/login', '/fr/login', '/nl/login',
+        '/en/login-demo', '/fr/login-demo', '/nl/login-demo',
         '/en/confirmation','/fr/confirmation','/nl/confirmation'
       ],
       cookieRedirect: false,

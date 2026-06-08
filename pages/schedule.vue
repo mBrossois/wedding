@@ -15,7 +15,7 @@
     <div class="responsive-grid-custom flex flex-column gap-2">
         <div class="flex flex-column gap-1_5">
             <div class="flex justify-between">
-                <TitleDynamic heading="h2" :title="`8 ${$t('AUGUST')} 2026`" />
+                <TitleDynamic heading="h2" :title="`${isDemo ? '1' : '8'} ${$t(isDemo ? 'NOVEMBER' : 'AUGUST')} 2026`" />
                 <div class="flex items-center">
                     <IconsRain class="icon-rain" />
                     <AppToggle :checked="checked" @click="onClick" />
@@ -30,7 +30,7 @@
         <hr>
 
         <div class="flex flex-column gap-1_5">
-            <TitleDynamic class="title-second-day" heading="h2" :title="`9 ${$t('AUGUST')} 2026`" />
+            <TitleDynamic class="title-second-day" heading="h2" :title="`${isDemo ? '2' : '9'} ${$t(isDemo ? 'NOVEMBER' : 'AUGUST')} 2026`" />
             <AppTimeTable v-for="event in timeTableDayTwo" :key="event.title" v-bind="event" />
         </div>
     </div>
@@ -38,6 +38,12 @@
 </template>
 
 <script setup lang="ts">
+import { useUsersStore } from '~/store/users';
+import { RoleEnum } from '~/types/users';
+
+const usersStore = useUsersStore()
+const isDemo = computed(() => usersStore.getRole === RoleEnum.anon)
+
 const timeTableDayOne = computed(() => {
     return [
         {

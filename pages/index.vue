@@ -1,6 +1,6 @@
 <template>
     <TitleDynamic :title="`${$t('WELCOME')} ${firstNames}!`" heading="h1" />
-    <AppParagraph :text="$t('WEDDING_INVITATION')" />
+    <AppParagraph :text="$t(isDemo ? 'WEDDING_INVITATION_DEMO' : 'WEDDING_INVITATION')" />
 
     <fieldset class="attendance-field flex flex-column gap-1">
         <legend class="mb-1"><TitleDynamic :title="$t('ATTENDING_WEDDING')" heading="h2" /></legend>
@@ -24,7 +24,7 @@
             <TitleDynamic :title="$t('SCHEDULE')" heading="h2" />
             <ul class="ml-1">
                 <li class="mb-1">
-                    <AppParagraph class="mb-0_5" :text="'8 ' + $t('AUGUST')"/>
+                    <AppParagraph class="mb-0_5" :text="(isDemo ? '1' : '8') + ' ' + $t(isDemo ? 'NOVEMBER' : 'AUGUST')"/>
                     <ul class="pl-1">
                         <li v-for="item in firstDay" :key="item.time">
                             <AppParagraph :text="item.time + ' - ' +$t(item.activity)"/>
@@ -33,7 +33,7 @@
                 </li>
 
                 <li>
-                    <AppParagraph class="mb-0_5" :text="'9 ' + $t('AUGUST')"/>
+                    <AppParagraph class="mb-0_5" :text="(isDemo ? '2' : '9') + ' ' + $t(isDemo ? 'NOVEMBER' : 'AUGUST')"/>
                     <ul class="pl-1">
                         <li v-for="item in secondDay" :key="item.time">
                             <AppParagraph :text="item.time + ' - ' +$t(item.activity)"/>
@@ -57,6 +57,11 @@
 <script setup lang="ts">
 import { useGuestsStore } from '~/store/guests';
 import { useToasterStore } from '~/store/toaster';
+import { useUsersStore } from '~/store/users';
+import { RoleEnum } from '~/types/users';
+
+const usersStore = useUsersStore()
+const isDemo = computed(() => usersStore.getRole === RoleEnum.anon)
 
 const guestsStore = useGuestsStore()
 const toasterStore = useToasterStore()

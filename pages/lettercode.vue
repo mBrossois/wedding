@@ -35,7 +35,6 @@ function onLetterEntered() {
     } else {
         error.value = 'You need to fill something in!'
     }
-    
 }
 </script>
 

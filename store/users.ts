@@ -15,9 +15,12 @@ export const useUsersStore = defineStore('users', () => {
       })
       if(data.value && data.value === 'guest') {
           role.value = RoleEnum.loggedIn
-      } 
+      }
       else if(data.value === 'admin') {
           role.value = RoleEnum.admin
+      }
+      else if(data.value === 'anon') {
+          role.value = RoleEnum.anon
       }
     }
 
